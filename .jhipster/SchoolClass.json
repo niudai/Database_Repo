@@ -1,0 +1,68 @@
+{
+    "name": "SchoolClass",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "teacher",
+            "otherEntityRelationshipName": "schoolClass",
+            "relationshipName": "master",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "student",
+            "otherEntityRelationshipName": "schoolClass",
+            "relationshipName": "students"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "exception",
+            "otherEntityRelationshipName": "originalSchoolClass",
+            "relationshipName": "exception"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "exception",
+            "otherEntityRelationshipName": "newSchoolClass",
+            "relationshipName": "exception"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "grade",
+            "otherEntityRelationshipName": "schoolClass",
+            "relationshipName": "grade",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "major",
+            "otherEntityRelationshipName": "schoolClass",
+            "relationshipName": "major",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200503072100",
+    "entityTableName": "school_class",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

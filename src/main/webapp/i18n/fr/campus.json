@@ -1,0 +1,24 @@
+{
+  "jhipsterApp": {
+    "campus": {
+      "home": {
+        "title": "Campuses",
+        "createLabel": "Créer un nouveau Campus",
+        "createOrEditLabel": "Créer ou éditer un Campus",
+        "notFound": "Aucun Campus trouvé"
+      },
+      "created": "Un nouveau Campus a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Campus avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Campus avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Campus {{ id }} ?"
+      },
+      "detail": {
+        "title": "Campus"
+      },
+      "name": "Name",
+      "address": "Address",
+      "major": "Major"
+    }
+  }
+}

@@ -1,0 +1,107 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jhipsterApp.exception.home.title">Exceptions</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-exception" [routerLink]="['/exception/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="jhipsterApp.exception.home.createLabel">
+            Create a new Exception
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="exceptions?.length === 0">
+        <span jhiTranslate="jhipsterApp.exception.home.notFound">No exceptions found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="exceptions?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.exception.date">Date</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.exception.isYouthLeague">Is Youth League</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.exception.cause">Cause</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.exception.originalMajor">Original Major</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.exception.newMajor">New Major</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.exception.originalGrade">Original Grade</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.exception.newGrade">New Grade</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.exception.student">Student</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.exception.originalSchoolClass">Original School Class</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.exception.newSchoolClass">New School Class</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let exception of exceptions ;trackBy: trackId">
+                    <td><a [routerLink]="['/exception', exception.id, 'view']">{{ exception.id }}</a></td>
+                    <td>{{ exception.date | date:'medium' }}</td>
+                    <td>{{ exception.isYouthLeague }}</td>
+                    <td>{{ exception.cause }}</td>
+                    <td>
+                        <div *ngIf="exception.originalMajor">
+                            <a [routerLink]="['/major', exception.originalMajor?.id, 'view']" >{{ exception.originalMajor?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="exception.newMajor">
+                            <a [routerLink]="['/major', exception.newMajor?.id, 'view']" >{{ exception.newMajor?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="exception.originalGrade">
+                            <a [routerLink]="['/grade', exception.originalGrade?.id, 'view']" >{{ exception.originalGrade?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="exception.newGrade">
+                            <a [routerLink]="['/grade', exception.newGrade?.id, 'view']" >{{ exception.newGrade?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="exception.student">
+                            <a [routerLink]="['/student', exception.student?.id, 'view']" >{{ exception.student?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="exception.originalSchoolClass">
+                            <a [routerLink]="['/school-class', exception.originalSchoolClass?.id, 'view']" >{{ exception.originalSchoolClass?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="exception.newSchoolClass">
+                            <a [routerLink]="['/school-class', exception.newSchoolClass?.id, 'view']" >{{ exception.newSchoolClass?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/exception', exception.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/exception', exception.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(exception)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+{
+    "name": "Major",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "people",
+            "otherEntityRelationshipName": "manageMajor",
+            "relationshipName": "manager",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "schoolClass",
+            "otherEntityRelationshipName": "major",
+            "relationshipName": "schoolClass"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "teacher",
+            "otherEntityRelationshipName": "major",
+            "relationshipName": "teachers"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "exception",
+            "otherEntityRelationshipName": "originalMajor",
+            "relationshipName": "exception"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "exception",
+            "otherEntityRelationshipName": "newMajor",
+            "relationshipName": "exception"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "course",
+            "otherEntityRelationshipName": "major",
+            "relationshipName": "course"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "campus",
+            "otherEntityRelationshipName": "major",
+            "relationshipName": "campus",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200503071900",
+    "entityTableName": "major",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

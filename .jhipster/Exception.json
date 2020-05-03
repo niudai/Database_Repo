@@ -1,0 +1,81 @@
+{
+    "name": "Exception",
+    "fields": [
+        {
+            "fieldName": "date",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "isYouthLeague",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "cause",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "major",
+            "otherEntityRelationshipName": "exception",
+            "relationshipName": "originalMajor",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "major",
+            "otherEntityRelationshipName": "exception",
+            "relationshipName": "newMajor",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "grade",
+            "otherEntityRelationshipName": "exception",
+            "relationshipName": "originalGrade",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "grade",
+            "otherEntityRelationshipName": "exception",
+            "relationshipName": "newGrade",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "student",
+            "otherEntityRelationshipName": "exceptions",
+            "relationshipName": "student",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "schoolClass",
+            "otherEntityRelationshipName": "exception",
+            "relationshipName": "originalSchoolClass",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "schoolClass",
+            "otherEntityRelationshipName": "exception",
+            "relationshipName": "newSchoolClass",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200503072900",
+    "entityTableName": "exception",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

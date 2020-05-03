@@ -1,0 +1,11 @@
+{
+  "jhipsterApp": {
+    "Season": {
+      "null": "",
+      "Spring": "Spring",
+      "Summer": "Summer",
+      "Fall": "Fall",
+      "Winter": "Winter"
+    }
+  }
+}

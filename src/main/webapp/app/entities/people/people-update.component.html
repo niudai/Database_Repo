@@ -1,0 +1,105 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-people-heading" jhiTranslate="jhipsterApp.people.home.createOrEditLabel">Create or edit a People</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.people.idType" for="field_idType">Id Type</label>
+                    <select class="form-control" name="idType" formControlName="idType" id="field_idType">
+                        <option value="IdCard">{{ 'jhipsterApp.IdType.IdCard' | translate }}</option>
+                        <option value="Passport">{{ 'jhipsterApp.IdType.Passport' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.people.chineseName" for="field_chineseName">Chinese Name</label>
+                    <input type="text" class="form-control" name="chineseName" id="field_chineseName"
+                           formControlName="chineseName"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.people.englishName" for="field_englishName">English Name</label>
+                    <input type="text" class="form-control" name="englishName" id="field_englishName"
+                           formControlName="englishName"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.people.gender" for="field_gender">Gender</label>
+                    <input type="number" class="form-control" name="gender" id="field_gender"
+                           formControlName="gender"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.people.birthDate" for="field_birthDate">Birth Date</label>
+                    <div class="d-flex">
+                        <input id="field_birthDate" type="datetime-local" class="form-control" name="birthDate" formControlName="birthDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.people.race" for="field_race">Race</label>
+                    <input type="text" class="form-control" name="race" id="field_race"
+                           formControlName="race"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.people.nation" for="field_nation">Nation</label>
+                    <input type="text" class="form-control" name="nation" id="field_nation"
+                           formControlName="nation"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.people.address" for="field_address">Address</label>
+                    <input type="text" class="form-control" name="address" id="field_address"
+                           formControlName="address"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.people.postcode" for="field_postcode">Postcode</label>
+                    <input type="text" class="form-control" name="postcode" id="field_postcode"
+                           formControlName="postcode"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.people.telephone" for="field_telephone">Telephone</label>
+                    <input type="text" class="form-control" name="telephone" id="field_telephone"
+                           formControlName="telephone"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.people.teacher" for="field_teacher">Teacher</label>
+                    <select class="form-control" id="field_teacher" name="teacher" formControlName="teacher">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="teacherOption.id === editForm.get('teacher')!.value?.id ? editForm.get('teacher')!.value : teacherOption" *ngFor="let teacherOption of teachers; trackBy: trackById">{{ teacherOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.people.student" for="field_student">Student</label>
+                    <select class="form-control" id="field_student" name="student" formControlName="student">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="studentOption.id === editForm.get('student')!.value?.id ? editForm.get('student')!.value : studentOption" *ngFor="let studentOption of students; trackBy: trackById">{{ studentOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

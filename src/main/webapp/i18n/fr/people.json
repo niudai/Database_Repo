@@ -1,0 +1,34 @@
+{
+  "jhipsterApp": {
+    "people": {
+      "home": {
+        "title": "People",
+        "createLabel": "Créer un nouveau People",
+        "createOrEditLabel": "Créer ou éditer un People",
+        "notFound": "Aucun People trouvé"
+      },
+      "created": "Un nouveau People a été créé avec l'identifiant {{ param }}",
+      "updated": "Le People avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le People avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le People {{ id }} ?"
+      },
+      "detail": {
+        "title": "People"
+      },
+      "idType": "Id Type",
+      "chineseName": "Chinese Name",
+      "englishName": "English Name",
+      "gender": "Gender",
+      "birthDate": "Birth Date",
+      "race": "Race",
+      "nation": "Nation",
+      "address": "Address",
+      "postcode": "Postcode",
+      "telephone": "Telephone",
+      "teacher": "Teacher",
+      "student": "Student",
+      "manageMajor": "Manage Major"
+    }
+  }
+}

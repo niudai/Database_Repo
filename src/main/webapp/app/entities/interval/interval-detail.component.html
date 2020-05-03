@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="interval">
+            <h2><span jhiTranslate="jhipsterApp.interval.detail.title">Interval</span> {{ interval.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jhipsterApp.interval.day">Day</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'jhipsterApp.WeekDay.' + interval.day }}">{{ interval.day }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.interval.start">Start</span></dt>
+                <dd>
+                    <span>{{ interval.start }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.interval.end">End</span></dt>
+                <dd>
+                    <span>{{ interval.end }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.interval.course">Course</span></dt>
+                <dd>
+                    <div *ngIf="interval.course">
+                        <a [routerLink]="['/course', interval.course?.id, 'view']">{{ interval.course?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/interval', interval.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

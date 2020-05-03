@@ -1,0 +1,40 @@
+{
+    "name": "Interval",
+    "fields": [
+        {
+            "fieldName": "day",
+            "fieldType": "WeekDay",
+            "fieldValues": "Mon,Tue,Wed,Tur,Fri,Sat,Sun"
+        },
+        {
+            "fieldName": "start",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "end",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "course",
+            "otherEntityRelationshipName": "time",
+            "relationshipName": "course",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200503072700",
+    "entityTableName": "interval",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

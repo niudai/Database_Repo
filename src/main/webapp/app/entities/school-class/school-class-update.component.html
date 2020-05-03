@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-school-class-heading" jhiTranslate="jhipsterApp.schoolClass.home.createOrEditLabel">Create or edit a School Class</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.schoolClass.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.schoolClass.createdDate" for="field_createdDate">Created Date</label>
+                    <div class="d-flex">
+                        <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" formControlName="createdDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.schoolClass.master" for="field_master">Master</label>
+                    <select class="form-control" id="field_master" name="master" formControlName="master">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="teacherOption.id === editForm.get('master')!.value?.id ? editForm.get('master')!.value : teacherOption" *ngFor="let teacherOption of masters; trackBy: trackById">{{ teacherOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.schoolClass.grade" for="field_grade">Grade</label>
+                    <select class="form-control" id="field_grade" name="grade" formControlName="grade">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="gradeOption.id === editForm.get('grade')!.value?.id ? editForm.get('grade')!.value : gradeOption" *ngFor="let gradeOption of grades; trackBy: trackById">{{ gradeOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.schoolClass.major" for="field_major">Major</label>
+                    <select class="form-control" id="field_major" name="major" formControlName="major">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="majorOption.id === editForm.get('major')!.value?.id ? editForm.get('major')!.value : majorOption" *ngFor="let majorOption of majors; trackBy: trackById">{{ majorOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+{
+  "jhipsterApp": {
+    "semaster": {
+      "home": {
+        "title": "Semasters",
+        "createLabel": "Créer un nouveau Semaster",
+        "createOrEditLabel": "Créer ou éditer un Semaster",
+        "notFound": "Aucun Semaster trouvé"
+      },
+      "created": "Un nouveau Semaster a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Semaster avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Semaster avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Semaster {{ id }} ?"
+      },
+      "detail": {
+        "title": "Semaster"
+      },
+      "year": "Year",
+      "season": "Season",
+      "course": "Course",
+      "record": "Record"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "jhipsterApp": {
+    "IdType": {
+      "null": "",
+      "IdCard": "IdCard",
+      "Passport": "Passport"
+    }
+  }
+}

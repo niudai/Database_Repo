@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="record">
+            <h2><span jhiTranslate="jhipsterApp.record.detail.title">Record</span> {{ record.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jhipsterApp.record.date">Date</span></dt>
+                <dd>
+                    <span>{{ record.date }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.record.score">Score</span></dt>
+                <dd>
+                    <span>{{ record.score }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.record.student">Student</span></dt>
+                <dd>
+                    <div *ngIf="record.student">
+                        <a [routerLink]="['/student', record.student?.id, 'view']">{{ record.student?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.record.semaster">Semaster</span></dt>
+                <dd>
+                    <div *ngIf="record.semaster">
+                        <a [routerLink]="['/semaster', record.semaster?.id, 'view']">{{ record.semaster?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/record', record.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

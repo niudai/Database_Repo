@@ -1,0 +1,64 @@
+{
+    "name": "Teacher",
+    "fields": [
+        {
+            "fieldName": "workNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "startDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "title",
+            "fieldType": "Title",
+            "fieldValues": "P,AP"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "course",
+            "otherEntityRelationshipName": "teacher",
+            "relationshipName": "course"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "schoolClass",
+            "otherEntityRelationshipName": "master",
+            "relationshipName": "schoolClass",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "people",
+            "otherEntityRelationshipName": "teacher",
+            "relationshipName": "people",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "major",
+            "otherEntityRelationshipName": "teachers",
+            "relationshipName": "major",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200503072500",
+    "entityTableName": "teacher",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}
