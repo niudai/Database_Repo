@@ -1,0 +1,146 @@
+entity Campus {
+	name String
+    address String
+}
+
+
+entity Major {
+	name String
+    address String
+}
+
+entity Record {
+	student String
+    course String
+    date Instant
+    semaster String
+    score Integer
+}
+
+entity Class {
+	name String
+    createdDate Instant    
+}
+
+entity Grade {
+	grade Integer
+}
+
+entity People {
+	idType IdType
+    chineseName String
+    englishName String
+    gender 	Integer
+    birthDate Instant
+    race String
+    nation String
+    address String
+    postcode String
+    telephone String
+}
+
+entity Student {
+	studentNumber	String
+    startDate String
+    email String
+    major String
+}
+
+entity Teacher {
+	workNumber String
+    startDate Instant
+    email String
+    title Title
+}
+
+entity Course {
+	name String,
+    examType ExamType
+}
+
+entity Interval {
+	day Weekday
+    start Integer
+    end Integer
+}
+
+enum WeekDay {
+	Mon, Tue, Wed, Tur, Fri, Sat, Sun
+}
+
+enum ExamType {
+	EXAM, QA
+}
+
+entity Major {
+	name String
+}
+
+entity Record {
+    date Instant
+    score Integer
+}
+
+entity Semaster {
+	year Integer
+    season Season
+}
+
+enum IdType {
+	IdCard, Passport
+}
+
+enum Season {
+	Spring, Summer, Fall, Winter
+}
+
+entity Exception {
+	date Instant
+    isYouthLeague Boolean
+    cause String
+}
+
+enum Title {
+    // professor and associated professor
+	P, AP
+}
+
+
+relationship OneToOne {
+	Class{master} to Teacher{class},
+    People{teacher} to Teacher{people},
+    People{student} to Student{people},
+    
+}
+
+relationship OneToMany {
+	Campus to Major{campus},
+	Grade to Class{grade},
+    Major to Class{major},
+    Class{students} to Student{class},
+	Major{teachers} to Teacher{major},
+    Major to Exception{originalMajor},
+    Major to Exception{newMajor},
+    Grade to Exception{originalGrade},
+    Grade to Exception{newGrade},
+    Student{exceptions} to Exception{student},
+    Class to Exception{originalClass},
+    Class to Exception{newClass},
+    Major to Course{major},
+    Teacher to Course{teacher},
+    Course{time} to Interval,
+    Semaster to Course{semaster},
+    Student to Record{student},
+    Semaster to Record{Semaster},
+}
+relationship OneToOne {
+	Major{manager} to People{manageMajor}
+}
+
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
