@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="people">
+            <h2><span jhiTranslate="jhipsterApp.people.detail.title">People</span> {{ people.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jhipsterApp.people.idType">Id Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'jhipsterApp.IdType.' + people.idType }}">{{ people.idType }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.people.chineseName">Chinese Name</span></dt>
+                <dd>
+                    <span>{{ people.chineseName }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.people.englishName">English Name</span></dt>
+                <dd>
+                    <span>{{ people.englishName }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.people.gender">Gender</span></dt>
+                <dd>
+                    <span>{{ people.gender }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.people.birthDate">Birth Date</span></dt>
+                <dd>
+                    <span>{{ people.birthDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.people.race">Race</span></dt>
+                <dd>
+                    <span>{{ people.race }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.people.nation">Nation</span></dt>
+                <dd>
+                    <span>{{ people.nation }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.people.address">Address</span></dt>
+                <dd>
+                    <span>{{ people.address }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.people.postcode">Postcode</span></dt>
+                <dd>
+                    <span>{{ people.postcode }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.people.telephone">Telephone</span></dt>
+                <dd>
+                    <span>{{ people.telephone }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.people.teacher">Teacher</span></dt>
+                <dd>
+                    <div *ngIf="people.teacher">
+                        <a [routerLink]="['/teacher', people.teacher?.id, 'view']">{{ people.teacher?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.people.student">Student</span></dt>
+                <dd>
+                    <div *ngIf="people.student">
+                        <a [routerLink]="['/student', people.student?.id, 'view']">{{ people.student?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/people', people.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

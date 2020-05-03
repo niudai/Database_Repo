@@ -1,0 +1,9 @@
+{
+  "jhipsterApp": {
+    "ExamType": {
+      "null": "",
+      "EXAM": "EXAM",
+      "QA": "QA"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "jhipsterApp": {
+    "semaster": {
+      "home": {
+        "title": "Semasters",
+        "createLabel": "Create a new Semaster",
+        "createOrEditLabel": "Create or edit a Semaster",
+        "notFound": "No Semasters found"
+      },
+      "created": "A new Semaster is created with identifier {{ param }}",
+      "updated": "A Semaster is updated with identifier {{ param }}",
+      "deleted": "A Semaster is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Semaster {{ id }}?"
+      },
+      "detail": {
+        "title": "Semaster"
+      },
+      "year": "Year",
+      "season": "Season",
+      "course": "Course",
+      "record": "Record"
+    }
+  }
+}

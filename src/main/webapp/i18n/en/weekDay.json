@@ -1,0 +1,14 @@
+{
+  "jhipsterApp": {
+    "WeekDay": {
+      "null": "",
+      "Mon": "Mon",
+      "Tue": "Tue",
+      "Wed": "Wed",
+      "Tur": "Tur",
+      "Fri": "Fri",
+      "Sat": "Sat",
+      "Sun": "Sun"
+    }
+  }
+}

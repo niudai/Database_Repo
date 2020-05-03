@@ -1,0 +1,25 @@
+{
+  "jhipsterApp": {
+    "interval": {
+      "home": {
+        "title": "Intervals",
+        "createLabel": "Create a new Interval",
+        "createOrEditLabel": "Create or edit a Interval",
+        "notFound": "No Intervals found"
+      },
+      "created": "A new Interval is created with identifier {{ param }}",
+      "updated": "A Interval is updated with identifier {{ param }}",
+      "deleted": "A Interval is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Interval {{ id }}?"
+      },
+      "detail": {
+        "title": "Interval"
+      },
+      "day": "Day",
+      "start": "Start",
+      "end": "End",
+      "course": "Course"
+    }
+  }
+}

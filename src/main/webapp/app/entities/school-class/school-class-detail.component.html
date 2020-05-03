@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="schoolClass">
+            <h2><span jhiTranslate="jhipsterApp.schoolClass.detail.title">School Class</span> {{ schoolClass.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jhipsterApp.schoolClass.name">Name</span></dt>
+                <dd>
+                    <span>{{ schoolClass.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.schoolClass.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{ schoolClass.createdDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.schoolClass.master">Master</span></dt>
+                <dd>
+                    <div *ngIf="schoolClass.master">
+                        <a [routerLink]="['/teacher', schoolClass.master?.id, 'view']">{{ schoolClass.master?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.schoolClass.grade">Grade</span></dt>
+                <dd>
+                    <div *ngIf="schoolClass.grade">
+                        <a [routerLink]="['/grade', schoolClass.grade?.id, 'view']">{{ schoolClass.grade?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.schoolClass.major">Major</span></dt>
+                <dd>
+                    <div *ngIf="schoolClass.major">
+                        <a [routerLink]="['/major', schoolClass.major?.id, 'view']">{{ schoolClass.major?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/school-class', schoolClass.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

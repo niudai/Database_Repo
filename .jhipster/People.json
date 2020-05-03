@@ -1,0 +1,84 @@
+{
+    "name": "People",
+    "fields": [
+        {
+            "fieldName": "idType",
+            "fieldType": "IdType",
+            "fieldValues": "IdCard,Passport"
+        },
+        {
+            "fieldName": "chineseName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "englishName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "gender",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "birthDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "race",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nation",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "postcode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "telephone",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "teacher",
+            "otherEntityRelationshipName": "people",
+            "relationshipName": "teacher",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "student",
+            "otherEntityRelationshipName": "people",
+            "relationshipName": "student",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "major",
+            "otherEntityRelationshipName": "manager",
+            "relationshipName": "manageMajor",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200503072300",
+    "entityTableName": "people",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

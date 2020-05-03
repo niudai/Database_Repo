@@ -1,0 +1,29 @@
+{
+  "jhipsterApp": {
+    "schoolClass": {
+      "home": {
+        "title": "SchoolClasses",
+        "createLabel": "Créer un nouveau School Class",
+        "createOrEditLabel": "Créer ou éditer un School Class",
+        "notFound": "Aucun School Class trouvé"
+      },
+      "created": "Un nouveau School Class a été créé avec l'identifiant {{ param }}",
+      "updated": "Le School Class avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le School Class avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le School Class {{ id }} ?"
+      },
+      "detail": {
+        "title": "School Class"
+      },
+      "name": "Name",
+      "createdDate": "Created Date",
+      "master": "Master",
+      "students": "Students",
+      "exception": "Exception",
+      "exception": "Exception",
+      "grade": "Grade",
+      "major": "Major"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "jhipsterApp": {
+    "major": {
+      "home": {
+        "title": "Majors",
+        "createLabel": "Créer un nouveau Major",
+        "createOrEditLabel": "Créer ou éditer un Major",
+        "notFound": "Aucun Major trouvé"
+      },
+      "created": "Un nouveau Major a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Major avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Major avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Major {{ id }} ?"
+      },
+      "detail": {
+        "title": "Major"
+      },
+      "name": "Name",
+      "manager": "Manager",
+      "schoolClass": "School Class",
+      "teachers": "Teachers",
+      "exception": "Exception",
+      "exception": "Exception",
+      "course": "Course",
+      "campus": "Campus"
+    }
+  }
+}

@@ -1,0 +1,91 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jhipsterApp.people.home.title">People</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-people" [routerLink]="['/people/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="jhipsterApp.people.home.createLabel">
+            Create a new People
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="people?.length === 0">
+        <span jhiTranslate="jhipsterApp.people.home.notFound">No people found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="people?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.people.idType">Id Type</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.people.chineseName">Chinese Name</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.people.englishName">English Name</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.people.gender">Gender</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.people.birthDate">Birth Date</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.people.race">Race</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.people.nation">Nation</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.people.address">Address</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.people.postcode">Postcode</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.people.telephone">Telephone</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.people.teacher">Teacher</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.people.student">Student</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let people of people ;trackBy: trackId">
+                    <td><a [routerLink]="['/people', people.id, 'view']">{{ people.id }}</a></td>
+                    <td jhiTranslate="{{ 'jhipsterApp.IdType.' + people.idType }}">{{ people.idType }}</td>
+                    <td>{{ people.chineseName }}</td>
+                    <td>{{ people.englishName }}</td>
+                    <td>{{ people.gender }}</td>
+                    <td>{{ people.birthDate | date:'medium' }}</td>
+                    <td>{{ people.race }}</td>
+                    <td>{{ people.nation }}</td>
+                    <td>{{ people.address }}</td>
+                    <td>{{ people.postcode }}</td>
+                    <td>{{ people.telephone }}</td>
+                    <td>
+                        <div *ngIf="people.teacher">
+                            <a [routerLink]="['/teacher', people.teacher?.id, 'view']" >{{ people.teacher?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="people.student">
+                            <a [routerLink]="['/student', people.student?.id, 'view']" >{{ people.student?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/people', people.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/people', people.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(people)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

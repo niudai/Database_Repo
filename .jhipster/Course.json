@@ -1,0 +1,56 @@
+{
+    "name": "Course",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "examType",
+            "fieldType": "ExamType",
+            "fieldValues": "EXAM,QA"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "interval",
+            "otherEntityRelationshipName": "course",
+            "relationshipName": "time"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "major",
+            "otherEntityRelationshipName": "course",
+            "relationshipName": "major",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "teacher",
+            "otherEntityRelationshipName": "course",
+            "relationshipName": "teacher",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "semaster",
+            "otherEntityRelationshipName": "course",
+            "relationshipName": "semaster",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200503072600",
+    "entityTableName": "course",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

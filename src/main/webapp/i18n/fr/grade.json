@@ -1,0 +1,25 @@
+{
+  "jhipsterApp": {
+    "grade": {
+      "home": {
+        "title": "Grades",
+        "createLabel": "Créer un nouveau Grade",
+        "createOrEditLabel": "Créer ou éditer un Grade",
+        "notFound": "Aucun Grade trouvé"
+      },
+      "created": "Un nouveau Grade a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Grade avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Grade avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Grade {{ id }} ?"
+      },
+      "detail": {
+        "title": "Grade"
+      },
+      "grade": "Grade",
+      "schoolClass": "School Class",
+      "exception": "Exception",
+      "exception": "Exception"
+    }
+  }
+}

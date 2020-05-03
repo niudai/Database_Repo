@@ -1,0 +1,73 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jhipsterApp.major.home.title">Majors</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-major" [routerLink]="['/major/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="jhipsterApp.major.home.createLabel">
+            Create a new Major
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="majors?.length === 0">
+        <span jhiTranslate="jhipsterApp.major.home.notFound">No majors found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="majors?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.major.name">Name</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.major.manager">Manager</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.major.campus">Campus</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let major of majors ;trackBy: trackId">
+                    <td><a [routerLink]="['/major', major.id, 'view']">{{ major.id }}</a></td>
+                    <td>{{ major.name }}</td>
+                    <td>
+                        <div *ngIf="major.manager">
+                            <a [routerLink]="['/people', major.manager?.id, 'view']" >{{ major.manager?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="major.campus">
+                            <a [routerLink]="['/campus', major.campus?.id, 'view']" >{{ major.campus?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/major', major.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/major', major.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(major)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

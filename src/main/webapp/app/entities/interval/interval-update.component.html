@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-interval-heading" jhiTranslate="jhipsterApp.interval.home.createOrEditLabel">Create or edit a Interval</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.interval.day" for="field_day">Day</label>
+                    <select class="form-control" name="day" formControlName="day" id="field_day">
+                        <option value="Mon">{{ 'jhipsterApp.WeekDay.Mon' | translate }}</option>
+                        <option value="Tue">{{ 'jhipsterApp.WeekDay.Tue' | translate }}</option>
+                        <option value="Wed">{{ 'jhipsterApp.WeekDay.Wed' | translate }}</option>
+                        <option value="Tur">{{ 'jhipsterApp.WeekDay.Tur' | translate }}</option>
+                        <option value="Fri">{{ 'jhipsterApp.WeekDay.Fri' | translate }}</option>
+                        <option value="Sat">{{ 'jhipsterApp.WeekDay.Sat' | translate }}</option>
+                        <option value="Sun">{{ 'jhipsterApp.WeekDay.Sun' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.interval.start" for="field_start">Start</label>
+                    <input type="number" class="form-control" name="start" id="field_start"
+                           formControlName="start"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.interval.end" for="field_end">End</label>
+                    <input type="number" class="form-control" name="end" id="field_end"
+                           formControlName="end"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.interval.course" for="field_course">Course</label>
+                    <select class="form-control" id="field_course" name="course" formControlName="course">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="courseOption.id === editForm.get('course')!.value?.id ? editForm.get('course')!.value : courseOption" *ngFor="let courseOption of courses; trackBy: trackById">{{ courseOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
