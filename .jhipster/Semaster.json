@@ -11,20 +11,7 @@
             "fieldValues": "Spring,Summer,Fall,Winter"
         }
     ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "course",
-            "otherEntityRelationshipName": "semaster",
-            "relationshipName": "course"
-        },
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "record",
-            "otherEntityRelationshipName": "semaster",
-            "relationshipName": "record"
-        }
-    ],
+    "relationships": [],
     "changelogDate": "20200503072800",
     "entityTableName": "semaster",
     "dto": "no",

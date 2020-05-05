@@ -20,6 +20,13 @@
         },
         {
             "relationshipType": "many-to-one",
+            "otherEntityName": "semaster",
+            "otherEntityRelationshipName": "course",
+            "relationshipName": "semaster",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
             "otherEntityName": "major",
             "otherEntityRelationshipName": "course",
             "relationshipName": "major",
@@ -30,13 +37,6 @@
             "otherEntityName": "teacher",
             "otherEntityRelationshipName": "course",
             "relationshipName": "teacher",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "semaster",
-            "otherEntityRelationshipName": "course",
-            "relationshipName": "semaster",
             "otherEntityField": "id"
         }
     ],

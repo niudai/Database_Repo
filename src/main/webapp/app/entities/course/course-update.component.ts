@@ -7,14 +7,14 @@ import { Observable } from 'rxjs';
 
 import { ICourse, Course } from 'app/shared/model/course.model';
 import { CourseService } from './course.service';
+import { ISemaster } from 'app/shared/model/semaster.model';
+import { SemasterService } from 'app/entities/semaster/semaster.service';
 import { IMajor } from 'app/shared/model/major.model';
 import { MajorService } from 'app/entities/major/major.service';
 import { ITeacher } from 'app/shared/model/teacher.model';
 import { TeacherService } from 'app/entities/teacher/teacher.service';
-import { ISemaster } from 'app/shared/model/semaster.model';
-import { SemasterService } from 'app/entities/semaster/semaster.service';
 
-type SelectableEntity = IMajor | ITeacher | ISemaster;
+type SelectableEntity = ISemaster | IMajor | ITeacher;
 
 @Component({
   selector: 'jhi-course-update',
@@ -22,24 +22,24 @@ type SelectableEntity = IMajor | ITeacher | ISemaster;
 })
 export class CourseUpdateComponent implements OnInit {
   isSaving = false;
+  semasters: ISemaster[] = [];
   majors: IMajor[] = [];
   teachers: ITeacher[] = [];
-  semasters: ISemaster[] = [];
 
   editForm = this.fb.group({
     id: [],
     name: [],
     examType: [],
+    semaster: [],
     major: [],
-    teacher: [],
-    semaster: []
+    teacher: []
   });
 
   constructor(
     protected courseService: CourseService,
+    protected semasterService: SemasterService,
     protected majorService: MajorService,
     protected teacherService: TeacherService,
-    protected semasterService: SemasterService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -48,11 +48,11 @@ export class CourseUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ course }) => {
       this.updateForm(course);
 
+      this.semasterService.query().subscribe((res: HttpResponse<ISemaster[]>) => (this.semasters = res.body || []));
+
       this.majorService.query().subscribe((res: HttpResponse<IMajor[]>) => (this.majors = res.body || []));
 
       this.teacherService.query().subscribe((res: HttpResponse<ITeacher[]>) => (this.teachers = res.body || []));
-
-      this.semasterService.query().subscribe((res: HttpResponse<ISemaster[]>) => (this.semasters = res.body || []));
     });
   }
 
@@ -61,9 +61,9 @@ export class CourseUpdateComponent implements OnInit {
       id: course.id,
       name: course.name,
       examType: course.examType,
+      semaster: course.semaster,
       major: course.major,
-      teacher: course.teacher,
-      semaster: course.semaster
+      teacher: course.teacher
     });
   }
 
@@ -87,9 +87,9 @@ export class CourseUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
       examType: this.editForm.get(['examType'])!.value,
+      semaster: this.editForm.get(['semaster'])!.value,
       major: this.editForm.get(['major'])!.value,
-      teacher: this.editForm.get(['teacher'])!.value,
-      semaster: this.editForm.get(['semaster'])!.value
+      teacher: this.editForm.get(['teacher'])!.value
     };
   }
 

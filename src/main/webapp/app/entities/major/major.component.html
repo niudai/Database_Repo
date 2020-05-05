@@ -24,7 +24,6 @@
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.major.name">Name</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.major.manager">Manager</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.major.campus">Campus</span></th>
                     <th scope="col"></th>
                 </tr>
@@ -33,11 +32,6 @@
                 <tr *ngFor="let major of majors ;trackBy: trackId">
                     <td><a [routerLink]="['/major', major.id, 'view']">{{ major.id }}</a></td>
                     <td>{{ major.name }}</td>
-                    <td>
-                        <div *ngIf="major.manager">
-                            <a [routerLink]="['/people', major.manager?.id, 'view']" >{{ major.manager?.id }}</a>
-                        </div>
-                    </td>
                     <td>
                         <div *ngIf="major.campus">
                             <a [routerLink]="['/campus', major.campus?.id, 'view']" >{{ major.campus?.id }}</a>

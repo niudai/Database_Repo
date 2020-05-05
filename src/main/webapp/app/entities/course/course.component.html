@@ -25,9 +25,9 @@
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.course.name">Name</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.course.examType">Exam Type</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.course.semaster">Semaster</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.course.major">Major</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.course.teacher">Teacher</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.course.semaster">Semaster</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -37,6 +37,11 @@
                     <td>{{ course.name }}</td>
                     <td jhiTranslate="{{ 'jhipsterApp.ExamType.' + course.examType }}">{{ course.examType }}</td>
                     <td>
+                        <div *ngIf="course.semaster">
+                            <a [routerLink]="['/semaster', course.semaster?.id, 'view']" >{{ course.semaster?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
                         <div *ngIf="course.major">
                             <a [routerLink]="['/major', course.major?.id, 'view']" >{{ course.major?.id }}</a>
                         </div>
@@ -44,11 +49,6 @@
                     <td>
                         <div *ngIf="course.teacher">
                             <a [routerLink]="['/teacher', course.teacher?.id, 'view']" >{{ course.teacher?.id }}</a>
-                        </div>
-                    </td>
-                    <td>
-                        <div *ngIf="course.semaster">
-                            <a [routerLink]="['/semaster', course.semaster?.id, 'view']" >{{ course.semaster?.id }}</a>
                         </div>
                     </td>
                     <td class="text-right">

@@ -25,8 +25,8 @@
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.record.date">Date</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.record.score">Score</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.record.student">Student</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.record.semaster">Semaster</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.record.student">Student</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -36,13 +36,13 @@
                     <td>{{ record.date | date:'medium' }}</td>
                     <td>{{ record.score }}</td>
                     <td>
-                        <div *ngIf="record.student">
-                            <a [routerLink]="['/student', record.student?.id, 'view']" >{{ record.student?.id }}</a>
+                        <div *ngIf="record.semaster">
+                            <a [routerLink]="['/semaster', record.semaster?.id, 'view']" >{{ record.semaster?.id }}</a>
                         </div>
                     </td>
                     <td>
-                        <div *ngIf="record.semaster">
-                            <a [routerLink]="['/semaster', record.semaster?.id, 'view']" >{{ record.semaster?.id }}</a>
+                        <div *ngIf="record.student">
+                            <a [routerLink]="['/student', record.student?.id, 'view']" >{{ record.student?.id }}</a>
                         </div>
                     </td>
                     <td class="text-right">

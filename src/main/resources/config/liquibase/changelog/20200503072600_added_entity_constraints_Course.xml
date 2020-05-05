@@ -8,6 +8,12 @@
     -->
     <changeSet id="20200503072600-2" author="jhipster">
         
+        <addForeignKeyConstraint baseColumnNames="semaster_id"
+                                 baseTableName="course"
+                                 constraintName="fk_course_semaster_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="semaster"/>
+
         <addForeignKeyConstraint baseColumnNames="major_id"
                                  baseTableName="course"
                                  constraintName="fk_course_major_id"
@@ -19,12 +25,6 @@
                                  constraintName="fk_course_teacher_id"
                                  referencedColumnNames="id"
                                  referencedTableName="teacher"/>
-
-        <addForeignKeyConstraint baseColumnNames="semaster_id"
-                                 baseTableName="course"
-                                 constraintName="fk_course_semaster_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="semaster"/>
 
     </changeSet>
 </databaseChangeLog>

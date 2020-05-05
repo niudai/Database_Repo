@@ -19,9 +19,9 @@
       "name": "Name",
       "examType": "Exam Type",
       "time": "Time",
+      "semaster": "Semaster",
       "major": "Major",
-      "teacher": "Teacher",
-      "semaster": "Semaster"
+      "teacher": "Teacher"
     }
   }
 }

@@ -8,17 +8,17 @@
     -->
     <changeSet id="20200503072000-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="student_id"
-                                 baseTableName="record"
-                                 constraintName="fk_record_student_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="student"/>
-
         <addForeignKeyConstraint baseColumnNames="semaster_id"
                                  baseTableName="record"
                                  constraintName="fk_record_semaster_id"
                                  referencedColumnNames="id"
                                  referencedTableName="semaster"/>
+
+        <addForeignKeyConstraint baseColumnNames="student_id"
+                                 baseTableName="record"
+                                 constraintName="fk_record_student_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="student"/>
 
     </changeSet>
 </databaseChangeLog>

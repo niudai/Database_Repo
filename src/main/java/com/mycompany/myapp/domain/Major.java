@@ -28,10 +28,6 @@ public class Major implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private People manager;
-
     @OneToMany(mappedBy = "major")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<SchoolClass> schoolClasses = new HashSet<>();
@@ -39,14 +35,6 @@ public class Major implements Serializable {
     @OneToMany(mappedBy = "major")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Teacher> teachers = new HashSet<>();
-
-    @OneToMany(mappedBy = "originalMajor")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Exception> exceptions = new HashSet<>();
-
-    @OneToMany(mappedBy = "newMajor")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Exception> exceptions = new HashSet<>();
 
     @OneToMany(mappedBy = "major")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -76,19 +64,6 @@ public class Major implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public People getManager() {
-        return manager;
-    }
-
-    public Major manager(People people) {
-        this.manager = people;
-        return this;
-    }
-
-    public void setManager(People people) {
-        this.manager = people;
     }
 
     public Set<SchoolClass> getSchoolClasses() {
@@ -139,56 +114,6 @@ public class Major implements Serializable {
 
     public void setTeachers(Set<Teacher> teachers) {
         this.teachers = teachers;
-    }
-
-    public Set<Exception> getExceptions() {
-        return exceptions;
-    }
-
-    public Major exceptions(Set<Exception> exceptions) {
-        this.exceptions = exceptions;
-        return this;
-    }
-
-    public Major addException(Exception exception) {
-        this.exceptions.add(exception);
-        exception.setOriginalMajor(this);
-        return this;
-    }
-
-    public Major removeException(Exception exception) {
-        this.exceptions.remove(exception);
-        exception.setOriginalMajor(null);
-        return this;
-    }
-
-    public void setExceptions(Set<Exception> exceptions) {
-        this.exceptions = exceptions;
-    }
-
-    public Set<Exception> getExceptions() {
-        return exceptions;
-    }
-
-    public Major exceptions(Set<Exception> exceptions) {
-        this.exceptions = exceptions;
-        return this;
-    }
-
-    public Major addException(Exception exception) {
-        this.exceptions.add(exception);
-        exception.setNewMajor(this);
-        return this;
-    }
-
-    public Major removeException(Exception exception) {
-        this.exceptions.remove(exception);
-        exception.setNewMajor(null);
-        return this;
-    }
-
-    public void setExceptions(Set<Exception> exceptions) {
-        this.exceptions = exceptions;
     }
 
     public Set<Course> getCourses() {

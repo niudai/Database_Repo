@@ -43,6 +43,14 @@ public class Exception implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("exceptions")
+    private SchoolClass originalSchoolClass;
+
+    @ManyToOne
+    @JsonIgnoreProperties("exceptions")
+    private SchoolClass newSchoolClass;
+
+    @ManyToOne
+    @JsonIgnoreProperties("exceptions")
     private Grade originalGrade;
 
     @ManyToOne
@@ -52,14 +60,6 @@ public class Exception implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("exceptions")
     private Student student;
-
-    @ManyToOne
-    @JsonIgnoreProperties("exceptions")
-    private SchoolClass originalSchoolClass;
-
-    @ManyToOne
-    @JsonIgnoreProperties("exceptions")
-    private SchoolClass newSchoolClass;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -135,6 +135,32 @@ public class Exception implements Serializable {
         this.newMajor = major;
     }
 
+    public SchoolClass getOriginalSchoolClass() {
+        return originalSchoolClass;
+    }
+
+    public Exception originalSchoolClass(SchoolClass schoolClass) {
+        this.originalSchoolClass = schoolClass;
+        return this;
+    }
+
+    public void setOriginalSchoolClass(SchoolClass schoolClass) {
+        this.originalSchoolClass = schoolClass;
+    }
+
+    public SchoolClass getNewSchoolClass() {
+        return newSchoolClass;
+    }
+
+    public Exception newSchoolClass(SchoolClass schoolClass) {
+        this.newSchoolClass = schoolClass;
+        return this;
+    }
+
+    public void setNewSchoolClass(SchoolClass schoolClass) {
+        this.newSchoolClass = schoolClass;
+    }
+
     public Grade getOriginalGrade() {
         return originalGrade;
     }
@@ -172,32 +198,6 @@ public class Exception implements Serializable {
 
     public void setStudent(Student student) {
         this.student = student;
-    }
-
-    public SchoolClass getOriginalSchoolClass() {
-        return originalSchoolClass;
-    }
-
-    public Exception originalSchoolClass(SchoolClass schoolClass) {
-        this.originalSchoolClass = schoolClass;
-        return this;
-    }
-
-    public void setOriginalSchoolClass(SchoolClass schoolClass) {
-        this.originalSchoolClass = schoolClass;
-    }
-
-    public SchoolClass getNewSchoolClass() {
-        return newSchoolClass;
-    }
-
-    public Exception newSchoolClass(SchoolClass schoolClass) {
-        this.newSchoolClass = schoolClass;
-        return this;
-    }
-
-    public void setNewSchoolClass(SchoolClass schoolClass) {
-        this.newSchoolClass = schoolClass;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

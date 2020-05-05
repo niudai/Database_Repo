@@ -13,16 +13,16 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "student",
+            "otherEntityName": "semaster",
             "otherEntityRelationshipName": "record",
-            "relationshipName": "student",
+            "relationshipName": "semaster",
             "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "semaster",
+            "otherEntityName": "student",
             "otherEntityRelationshipName": "record",
-            "relationshipName": "semaster",
+            "relationshipName": "student",
             "otherEntityField": "id"
         }
     ],

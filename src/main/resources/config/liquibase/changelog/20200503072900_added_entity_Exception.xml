@@ -31,6 +31,12 @@
             <column name="new_major_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+            <column name="original_school_class_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="new_school_class_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <column name="original_grade_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -38,12 +44,6 @@
                 <constraints nullable="true" />
             </column>
             <column name="student_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="original_school_class_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="new_school_class_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->

@@ -18,14 +18,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jhipsterApp.major.manager" for="field_manager">Manager</label>
-                    <select class="form-control" id="field_manager" name="manager" formControlName="manager">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="peopleOption.id === editForm.get('manager')!.value?.id ? editForm.get('manager')!.value : peopleOption" *ngFor="let peopleOption of managers; trackBy: trackById">{{ peopleOption.id }}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterApp.major.campus" for="field_campus">Campus</label>
                     <select class="form-control" id="field_campus" name="campus" formControlName="campus">
                         <option [ngValue]="null"></option>

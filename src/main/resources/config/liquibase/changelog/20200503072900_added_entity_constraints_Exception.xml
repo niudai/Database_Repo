@@ -20,6 +20,18 @@
                                  referencedColumnNames="id"
                                  referencedTableName="major"/>
 
+        <addForeignKeyConstraint baseColumnNames="original_school_class_id"
+                                 baseTableName="exception"
+                                 constraintName="fk_exception_original_school_class_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="school_class"/>
+
+        <addForeignKeyConstraint baseColumnNames="new_school_class_id"
+                                 baseTableName="exception"
+                                 constraintName="fk_exception_new_school_class_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="school_class"/>
+
         <addForeignKeyConstraint baseColumnNames="original_grade_id"
                                  baseTableName="exception"
                                  constraintName="fk_exception_original_grade_id"
@@ -37,18 +49,6 @@
                                  constraintName="fk_exception_student_id"
                                  referencedColumnNames="id"
                                  referencedTableName="student"/>
-
-        <addForeignKeyConstraint baseColumnNames="original_school_class_id"
-                                 baseTableName="exception"
-                                 constraintName="fk_exception_original_school_class_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="school_class"/>
-
-        <addForeignKeyConstraint baseColumnNames="new_school_class_id"
-                                 baseTableName="exception"
-                                 constraintName="fk_exception_new_school_class_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="school_class"/>
 
     </changeSet>
 </databaseChangeLog>

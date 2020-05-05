@@ -40,15 +40,15 @@ public class Course implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("courses")
+    private Semaster semaster;
+
+    @ManyToOne
+    @JsonIgnoreProperties("courses")
     private Major major;
 
     @ManyToOne
     @JsonIgnoreProperties("courses")
     private Teacher teacher;
-
-    @ManyToOne
-    @JsonIgnoreProperties("courses")
-    private Semaster semaster;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -110,6 +110,19 @@ public class Course implements Serializable {
         this.times = intervals;
     }
 
+    public Semaster getSemaster() {
+        return semaster;
+    }
+
+    public Course semaster(Semaster semaster) {
+        this.semaster = semaster;
+        return this;
+    }
+
+    public void setSemaster(Semaster semaster) {
+        this.semaster = semaster;
+    }
+
     public Major getMajor() {
         return major;
     }
@@ -134,19 +147,6 @@ public class Course implements Serializable {
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
-    }
-
-    public Semaster getSemaster() {
-        return semaster;
-    }
-
-    public Course semaster(Semaster semaster) {
-        this.semaster = semaster;
-        return this;
-    }
-
-    public void setSemaster(Semaster semaster) {
-        this.semaster = semaster;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

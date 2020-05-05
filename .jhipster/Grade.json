@@ -6,26 +6,7 @@
             "fieldType": "Integer"
         }
     ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "schoolClass",
-            "otherEntityRelationshipName": "grade",
-            "relationshipName": "schoolClass"
-        },
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "exception",
-            "otherEntityRelationshipName": "originalGrade",
-            "relationshipName": "exception"
-        },
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "exception",
-            "otherEntityRelationshipName": "newGrade",
-            "relationshipName": "exception"
-        }
-    ],
+    "relationships": [],
     "changelogDate": "20200503072200",
     "entityTableName": "grade",
     "dto": "no",

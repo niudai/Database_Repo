@@ -26,18 +26,6 @@
             "relationshipName": "students"
         },
         {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "exception",
-            "otherEntityRelationshipName": "originalSchoolClass",
-            "relationshipName": "exception"
-        },
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "exception",
-            "otherEntityRelationshipName": "newSchoolClass",
-            "relationshipName": "exception"
-        },
-        {
             "relationshipType": "many-to-one",
             "otherEntityName": "grade",
             "otherEntityRelationshipName": "schoolClass",
