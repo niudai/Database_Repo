@@ -119,31 +119,30 @@ relationship OneToOne {
 	SchoolClass{master} to Teacher{SchoolClass},
     People{teacher} to Teacher{people},
     People{student} to Student{people},
-    
+}
+
+relationship ManyToOne {
+    Exception{originalMajor} to Major,
+    Exception{newMajor} to Major
+    Exception{originalSchoolClass} to SchoolClass,
+    Exception{newSchoolClass} to SchoolClass,
+    Exception{originalGrade} to Grade,
+    Exception{newGrade} to Grade,
+    Record{semaster} to Semaster,
+	Course{semaster} to Semaster,
+	SchoolClass{grade} to Grade,
 }
 
 relationship OneToMany {
 	Campus to Major{campus},
-	Grade to SchoolClass{grade},
     Major to SchoolClass{major},
     SchoolClass{students} to Student{SchoolClass},
 	Major{teachers} to Teacher{major},
-    Major to Exception{originalMajor},
-    Major to Exception{newMajor},
-    Grade to Exception{originalGrade},
-    Grade to Exception{newGrade},
     Student{exceptions} to Exception{student},
-    SchoolClass to Exception{originalSchoolClass},
-    SchoolClass to Exception{newSchoolClass},
     Major to Course{major},
     Teacher to Course{teacher},
     Course{time} to Interval,
-    Semaster to Course{semaster},
     Student to Record{student},
-    Semaster to Record{Semaster},
-}
-relationship OneToOne {
-	Major{manager} to People{manageMajor}
 }
 
 
