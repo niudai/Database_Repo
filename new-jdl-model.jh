@@ -103,7 +103,7 @@ enum Season {
 	Spring, Summer, Fall, Winter
 }
 
-entity Exception {
+entity JException {
 	date Instant
     isYouthLeague Boolean
     cause String
@@ -122,12 +122,12 @@ relationship OneToOne {
 }
 
 relationship ManyToOne {
-    Exception{originalMajor} to Major,
-    Exception{newMajor} to Major
-    Exception{originalSchoolClass} to SchoolClass,
-    Exception{newSchoolClass} to SchoolClass,
-    Exception{originalGrade} to Grade,
-    Exception{newGrade} to Grade,
+    JException{originalMajor} to Major,
+    JException{newMajor} to Major
+    JException{originalSchoolClass} to SchoolClass,
+    JException{newSchoolClass} to SchoolClass,
+    JException{originalGrade} to Grade,
+    JException{newGrade} to Grade,
     Record{semaster} to Semaster,
 	Course{semaster} to Semaster,
 	SchoolClass{grade} to Grade,
@@ -138,7 +138,7 @@ relationship OneToMany {
     Major to SchoolClass{major},
     SchoolClass{students} to Student{SchoolClass},
 	Major{teachers} to Teacher{major},
-    Student{exceptions} to Exception{student},
+    Student{exceptions} to JException{student},
     Major to Course{major},
     Teacher to Course{teacher},
     Course{time} to Interval,
