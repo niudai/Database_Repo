@@ -1,0 +1,31 @@
+{
+  "jhipsterApp": {
+    "jException": {
+      "home": {
+        "title": "JExceptions",
+        "createLabel": "Créer un nouveau J Exception",
+        "createOrEditLabel": "Créer ou éditer un J Exception",
+        "notFound": "Aucun J Exception trouvé"
+      },
+      "created": "Un nouveau J Exception a été créé avec l'identifiant {{ param }}",
+      "updated": "Le J Exception avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le J Exception avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le J Exception {{ id }} ?"
+      },
+      "detail": {
+        "title": "J Exception"
+      },
+      "date": "Date",
+      "isYouthLeague": "Is Youth League",
+      "cause": "Cause",
+      "originalMajor": "Original Major",
+      "newMajor": "New Major",
+      "originalSchoolClass": "Original School Class",
+      "newSchoolClass": "New School Class",
+      "originalGrade": "Original Grade",
+      "newGrade": "New Grade",
+      "student": "Student"
+    }
+  }
+}

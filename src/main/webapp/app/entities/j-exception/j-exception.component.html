@@ -1,0 +1,107 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jhipsterApp.jException.home.title">J Exceptions</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-j-exception" [routerLink]="['/j-exception/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="jhipsterApp.jException.home.createLabel">
+            Create a new J Exception
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="jExceptions?.length === 0">
+        <span jhiTranslate="jhipsterApp.jException.home.notFound">No jExceptions found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="jExceptions?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.jException.date">Date</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.jException.isYouthLeague">Is Youth League</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.jException.cause">Cause</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.jException.originalMajor">Original Major</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.jException.newMajor">New Major</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.jException.originalSchoolClass">Original School Class</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.jException.newSchoolClass">New School Class</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.jException.originalGrade">Original Grade</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.jException.newGrade">New Grade</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.jException.student">Student</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let jException of jExceptions ;trackBy: trackId">
+                    <td><a [routerLink]="['/j-exception', jException.id, 'view']">{{ jException.id }}</a></td>
+                    <td>{{ jException.date | date:'medium' }}</td>
+                    <td>{{ jException.isYouthLeague }}</td>
+                    <td>{{ jException.cause }}</td>
+                    <td>
+                        <div *ngIf="jException.originalMajor">
+                            <a [routerLink]="['/major', jException.originalMajor?.id, 'view']" >{{ jException.originalMajor?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="jException.newMajor">
+                            <a [routerLink]="['/major', jException.newMajor?.id, 'view']" >{{ jException.newMajor?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="jException.originalSchoolClass">
+                            <a [routerLink]="['/school-class', jException.originalSchoolClass?.id, 'view']" >{{ jException.originalSchoolClass?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="jException.newSchoolClass">
+                            <a [routerLink]="['/school-class', jException.newSchoolClass?.id, 'view']" >{{ jException.newSchoolClass?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="jException.originalGrade">
+                            <a [routerLink]="['/grade', jException.originalGrade?.id, 'view']" >{{ jException.originalGrade?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="jException.newGrade">
+                            <a [routerLink]="['/grade', jException.newGrade?.id, 'view']" >{{ jException.newGrade?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="jException.student">
+                            <a [routerLink]="['/student', jException.student?.id, 'view']" >{{ jException.student?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/j-exception', jException.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/j-exception', jException.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(jException)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

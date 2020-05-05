@@ -21,7 +21,7 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "otherEntityName": "exception",
+            "otherEntityName": "jException",
             "otherEntityRelationshipName": "student",
             "relationshipName": "exceptions"
         },

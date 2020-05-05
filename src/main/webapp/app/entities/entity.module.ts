@@ -51,6 +51,10 @@ import { RouterModule } from '@angular/router';
       {
         path: 'exception',
         loadChildren: () => import('./exception/exception.module').then(m => m.JhipsterExceptionModule)
+      },
+      {
+        path: 'j-exception',
+        loadChildren: () => import('./j-exception/j-exception.module').then(m => m.JhipsterJExceptionModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

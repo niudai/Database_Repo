@@ -1,4 +1,4 @@
-import { IException } from 'app/shared/model/exception.model';
+import { IJException } from 'app/shared/model/j-exception.model';
 import { IRecord } from 'app/shared/model/record.model';
 import { IPeople } from 'app/shared/model/people.model';
 import { ISchoolClass } from 'app/shared/model/school-class.model';
@@ -9,7 +9,7 @@ export interface IStudent {
   startDate?: string;
   email?: string;
   major?: string;
-  exceptions?: IException[];
+  exceptions?: IJException[];
   records?: IRecord[];
   people?: IPeople;
   schoolClass?: ISchoolClass;
@@ -22,7 +22,7 @@ export class Student implements IStudent {
     public startDate?: string,
     public email?: string,
     public major?: string,
-    public exceptions?: IException[],
+    public exceptions?: IJException[],
     public records?: IRecord[],
     public people?: IPeople,
     public schoolClass?: ISchoolClass

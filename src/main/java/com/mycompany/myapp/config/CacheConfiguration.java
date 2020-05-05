@@ -63,6 +63,7 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.Interval.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Semaster.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Exception.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.JException.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
