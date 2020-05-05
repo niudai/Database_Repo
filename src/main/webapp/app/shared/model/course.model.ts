@@ -1,7 +1,7 @@
 import { IInterval } from 'app/shared/model/interval.model';
+import { ISemaster } from 'app/shared/model/semaster.model';
 import { IMajor } from 'app/shared/model/major.model';
 import { ITeacher } from 'app/shared/model/teacher.model';
-import { ISemaster } from 'app/shared/model/semaster.model';
 import { ExamType } from 'app/shared/model/enumerations/exam-type.model';
 
 export interface ICourse {
@@ -9,9 +9,9 @@ export interface ICourse {
   name?: string;
   examType?: ExamType;
   times?: IInterval[];
+  semaster?: ISemaster;
   major?: IMajor;
   teacher?: ITeacher;
-  semaster?: ISemaster;
 }
 
 export class Course implements ICourse {
@@ -20,8 +20,8 @@ export class Course implements ICourse {
     public name?: string,
     public examType?: ExamType,
     public times?: IInterval[],
+    public semaster?: ISemaster,
     public major?: IMajor,
-    public teacher?: ITeacher,
-    public semaster?: ISemaster
+    public teacher?: ITeacher
   ) {}
 }

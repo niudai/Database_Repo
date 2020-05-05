@@ -1,7 +1,6 @@
 import { Moment } from 'moment';
 import { ITeacher } from 'app/shared/model/teacher.model';
 import { IStudent } from 'app/shared/model/student.model';
-import { IMajor } from 'app/shared/model/major.model';
 import { IdType } from 'app/shared/model/enumerations/id-type.model';
 
 export interface IPeople {
@@ -18,7 +17,6 @@ export interface IPeople {
   telephone?: string;
   teacher?: ITeacher;
   student?: IStudent;
-  manageMajor?: IMajor;
 }
 
 export class People implements IPeople {
@@ -35,7 +33,6 @@ export class People implements IPeople {
     public postcode?: string,
     public telephone?: string,
     public teacher?: ITeacher,
-    public student?: IStudent,
-    public manageMajor?: IMajor
+    public student?: IStudent
   ) {}
 }

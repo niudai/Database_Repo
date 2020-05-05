@@ -47,15 +47,11 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.Major.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Major.class.getName() + ".schoolClasses");
             createCache(cm, com.mycompany.myapp.domain.Major.class.getName() + ".teachers");
-            createCache(cm, com.mycompany.myapp.domain.Major.class.getName() + ".exceptions");
             createCache(cm, com.mycompany.myapp.domain.Major.class.getName() + ".courses");
             createCache(cm, com.mycompany.myapp.domain.Record.class.getName());
             createCache(cm, com.mycompany.myapp.domain.SchoolClass.class.getName());
             createCache(cm, com.mycompany.myapp.domain.SchoolClass.class.getName() + ".students");
-            createCache(cm, com.mycompany.myapp.domain.SchoolClass.class.getName() + ".exceptions");
             createCache(cm, com.mycompany.myapp.domain.Grade.class.getName());
-            createCache(cm, com.mycompany.myapp.domain.Grade.class.getName() + ".schoolClasses");
-            createCache(cm, com.mycompany.myapp.domain.Grade.class.getName() + ".exceptions");
             createCache(cm, com.mycompany.myapp.domain.People.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Student.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Student.class.getName() + ".exceptions");
@@ -66,8 +62,6 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.Course.class.getName() + ".times");
             createCache(cm, com.mycompany.myapp.domain.Interval.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Semaster.class.getName());
-            createCache(cm, com.mycompany.myapp.domain.Semaster.class.getName() + ".courses");
-            createCache(cm, com.mycompany.myapp.domain.Semaster.class.getName() + ".records");
             createCache(cm, com.mycompany.myapp.domain.Exception.class.getName());
             // jhipster-needle-ehcache-add-entry
         };

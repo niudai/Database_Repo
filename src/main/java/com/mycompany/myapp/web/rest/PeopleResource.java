@@ -17,8 +17,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing {@link com.mycompany.myapp.domain.People}.
@@ -84,18 +82,10 @@ public class PeopleResource {
     /**
      * {@code GET  /people} : get all the people.
      *
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of people in body.
      */
     @GetMapping("/people")
-    public List<People> getAllPeople(@RequestParam(required = false) String filter) {
-        if ("managemajor-is-null".equals(filter)) {
-            log.debug("REST request to get all Peoples where manageMajor is null");
-            return StreamSupport
-                .stream(peopleRepository.findAll().spliterator(), false)
-                .filter(people -> people.getManageMajor() == null)
-                .collect(Collectors.toList());
-        }
+    public List<People> getAllPeople() {
         log.debug("REST request to get all People");
         return peopleRepository.findAll();
     }

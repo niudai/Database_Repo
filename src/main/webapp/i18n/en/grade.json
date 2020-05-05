@@ -16,10 +16,7 @@
       "detail": {
         "title": "Grade"
       },
-      "grade": "Grade",
-      "schoolClass": "School Class",
-      "exception": "Exception",
-      "exception": "Exception"
+      "grade": "Grade"
     }
   }
 }

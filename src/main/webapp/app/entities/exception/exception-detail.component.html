@@ -32,6 +32,18 @@
                         <a [routerLink]="['/major', exception.newMajor?.id, 'view']">{{ exception.newMajor?.id }}</a>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="jhipsterApp.exception.originalSchoolClass">Original School Class</span></dt>
+                <dd>
+                    <div *ngIf="exception.originalSchoolClass">
+                        <a [routerLink]="['/school-class', exception.originalSchoolClass?.id, 'view']">{{ exception.originalSchoolClass?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.exception.newSchoolClass">New School Class</span></dt>
+                <dd>
+                    <div *ngIf="exception.newSchoolClass">
+                        <a [routerLink]="['/school-class', exception.newSchoolClass?.id, 'view']">{{ exception.newSchoolClass?.id }}</a>
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="jhipsterApp.exception.originalGrade">Original Grade</span></dt>
                 <dd>
                     <div *ngIf="exception.originalGrade">
@@ -48,18 +60,6 @@
                 <dd>
                     <div *ngIf="exception.student">
                         <a [routerLink]="['/student', exception.student?.id, 'view']">{{ exception.student?.id }}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.exception.originalSchoolClass">Original School Class</span></dt>
-                <dd>
-                    <div *ngIf="exception.originalSchoolClass">
-                        <a [routerLink]="['/school-class', exception.originalSchoolClass?.id, 'view']">{{ exception.originalSchoolClass?.id }}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.exception.newSchoolClass">New School Class</span></dt>
-                <dd>
-                    <div *ngIf="exception.newSchoolClass">
-                        <a [routerLink]="['/school-class', exception.newSchoolClass?.id, 'view']">{{ exception.newSchoolClass?.id }}</a>
                     </div>
                 </dd>
             </dl>

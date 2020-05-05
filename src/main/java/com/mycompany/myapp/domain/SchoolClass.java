@@ -40,14 +40,6 @@ public class SchoolClass implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Student> students = new HashSet<>();
 
-    @OneToMany(mappedBy = "originalSchoolClass")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Exception> exceptions = new HashSet<>();
-
-    @OneToMany(mappedBy = "newSchoolClass")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Exception> exceptions = new HashSet<>();
-
     @ManyToOne
     @JsonIgnoreProperties("schoolClasses")
     private Grade grade;
@@ -127,56 +119,6 @@ public class SchoolClass implements Serializable {
 
     public void setStudents(Set<Student> students) {
         this.students = students;
-    }
-
-    public Set<Exception> getExceptions() {
-        return exceptions;
-    }
-
-    public SchoolClass exceptions(Set<Exception> exceptions) {
-        this.exceptions = exceptions;
-        return this;
-    }
-
-    public SchoolClass addException(Exception exception) {
-        this.exceptions.add(exception);
-        exception.setOriginalSchoolClass(this);
-        return this;
-    }
-
-    public SchoolClass removeException(Exception exception) {
-        this.exceptions.remove(exception);
-        exception.setOriginalSchoolClass(null);
-        return this;
-    }
-
-    public void setExceptions(Set<Exception> exceptions) {
-        this.exceptions = exceptions;
-    }
-
-    public Set<Exception> getExceptions() {
-        return exceptions;
-    }
-
-    public SchoolClass exceptions(Set<Exception> exceptions) {
-        this.exceptions = exceptions;
-        return this;
-    }
-
-    public SchoolClass addException(Exception exception) {
-        this.exceptions.add(exception);
-        exception.setNewSchoolClass(this);
-        return this;
-    }
-
-    public SchoolClass removeException(Exception exception) {
-        this.exceptions.remove(exception);
-        exception.setNewSchoolClass(null);
-        return this;
-    }
-
-    public void setExceptions(Set<Exception> exceptions) {
-        this.exceptions = exceptions;
     }
 
     public Grade getGrade() {

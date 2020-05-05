@@ -59,13 +59,6 @@
             "relationshipName": "student",
             "otherEntityField": "id",
             "ownerSide": true
-        },
-        {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "major",
-            "otherEntityRelationshipName": "manager",
-            "relationshipName": "manageMajor",
-            "ownerSide": false
         }
     ],
     "changelogDate": "20200503072300",

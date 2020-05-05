@@ -9,12 +9,12 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IRecord, Record } from 'app/shared/model/record.model';
 import { RecordService } from './record.service';
-import { IStudent } from 'app/shared/model/student.model';
-import { StudentService } from 'app/entities/student/student.service';
 import { ISemaster } from 'app/shared/model/semaster.model';
 import { SemasterService } from 'app/entities/semaster/semaster.service';
+import { IStudent } from 'app/shared/model/student.model';
+import { StudentService } from 'app/entities/student/student.service';
 
-type SelectableEntity = IStudent | ISemaster;
+type SelectableEntity = ISemaster | IStudent;
 
 @Component({
   selector: 'jhi-record-update',
@@ -22,21 +22,21 @@ type SelectableEntity = IStudent | ISemaster;
 })
 export class RecordUpdateComponent implements OnInit {
   isSaving = false;
-  students: IStudent[] = [];
   semasters: ISemaster[] = [];
+  students: IStudent[] = [];
 
   editForm = this.fb.group({
     id: [],
     date: [],
     score: [],
-    student: [],
-    semaster: []
+    semaster: [],
+    student: []
   });
 
   constructor(
     protected recordService: RecordService,
-    protected studentService: StudentService,
     protected semasterService: SemasterService,
+    protected studentService: StudentService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -50,9 +50,9 @@ export class RecordUpdateComponent implements OnInit {
 
       this.updateForm(record);
 
-      this.studentService.query().subscribe((res: HttpResponse<IStudent[]>) => (this.students = res.body || []));
-
       this.semasterService.query().subscribe((res: HttpResponse<ISemaster[]>) => (this.semasters = res.body || []));
+
+      this.studentService.query().subscribe((res: HttpResponse<IStudent[]>) => (this.students = res.body || []));
     });
   }
 
@@ -61,8 +61,8 @@ export class RecordUpdateComponent implements OnInit {
       id: record.id,
       date: record.date ? record.date.format(DATE_TIME_FORMAT) : null,
       score: record.score,
-      student: record.student,
-      semaster: record.semaster
+      semaster: record.semaster,
+      student: record.student
     });
   }
 
@@ -86,8 +86,8 @@ export class RecordUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       date: this.editForm.get(['date'])!.value ? moment(this.editForm.get(['date'])!.value, DATE_TIME_FORMAT) : undefined,
       score: this.editForm.get(['score'])!.value,
-      student: this.editForm.get(['student'])!.value,
-      semaster: this.editForm.get(['semaster'])!.value
+      semaster: this.editForm.get(['semaster'])!.value,
+      student: this.editForm.get(['student'])!.value
     };
   }
 

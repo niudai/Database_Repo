@@ -32,11 +32,11 @@ public class Record implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("records")
-    private Student student;
+    private Semaster semaster;
 
     @ManyToOne
     @JsonIgnoreProperties("records")
-    private Semaster semaster;
+    private Student student;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -73,19 +73,6 @@ public class Record implements Serializable {
         this.score = score;
     }
 
-    public Student getStudent() {
-        return student;
-    }
-
-    public Record student(Student student) {
-        this.student = student;
-        return this;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
     public Semaster getSemaster() {
         return semaster;
     }
@@ -97,6 +84,19 @@ public class Record implements Serializable {
 
     public void setSemaster(Semaster semaster) {
         this.semaster = semaster;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public Record student(Student student) {
+        this.student = student;
+        return this;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -27,8 +27,7 @@
       "postcode": "Postcode",
       "telephone": "Telephone",
       "teacher": "Teacher",
-      "student": "Student",
-      "manageMajor": "Manage Major"
+      "student": "Student"
     }
   }
 }

@@ -17,11 +17,8 @@
         "title": "Major"
       },
       "name": "Name",
-      "manager": "Manager",
       "schoolClass": "School Class",
       "teachers": "Teachers",
-      "exception": "Exception",
-      "exception": "Exception",
       "course": "Course",
       "campus": "Campus"
     }

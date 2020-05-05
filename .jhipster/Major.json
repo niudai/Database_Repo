@@ -8,14 +8,6 @@
     ],
     "relationships": [
         {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "people",
-            "otherEntityRelationshipName": "manageMajor",
-            "relationshipName": "manager",
-            "otherEntityField": "id",
-            "ownerSide": true
-        },
-        {
             "relationshipType": "one-to-many",
             "otherEntityName": "schoolClass",
             "otherEntityRelationshipName": "major",
@@ -26,18 +18,6 @@
             "otherEntityName": "teacher",
             "otherEntityRelationshipName": "major",
             "relationshipName": "teachers"
-        },
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "exception",
-            "otherEntityRelationshipName": "originalMajor",
-            "relationshipName": "exception"
-        },
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "exception",
-            "otherEntityRelationshipName": "newMajor",
-            "relationshipName": "exception"
         },
         {
             "relationshipType": "one-to-many",

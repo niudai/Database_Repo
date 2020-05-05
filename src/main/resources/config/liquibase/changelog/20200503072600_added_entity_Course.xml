@@ -22,13 +22,13 @@
             <column name="exam_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="semaster_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <column name="major_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="teacher_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="semaster_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->

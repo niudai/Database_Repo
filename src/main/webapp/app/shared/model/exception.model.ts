@@ -1,8 +1,8 @@
 import { Moment } from 'moment';
 import { IMajor } from 'app/shared/model/major.model';
+import { ISchoolClass } from 'app/shared/model/school-class.model';
 import { IGrade } from 'app/shared/model/grade.model';
 import { IStudent } from 'app/shared/model/student.model';
-import { ISchoolClass } from 'app/shared/model/school-class.model';
 
 export interface IException {
   id?: number;
@@ -11,11 +11,11 @@ export interface IException {
   cause?: string;
   originalMajor?: IMajor;
   newMajor?: IMajor;
+  originalSchoolClass?: ISchoolClass;
+  newSchoolClass?: ISchoolClass;
   originalGrade?: IGrade;
   newGrade?: IGrade;
   student?: IStudent;
-  originalSchoolClass?: ISchoolClass;
-  newSchoolClass?: ISchoolClass;
 }
 
 export class Exception implements IException {
@@ -26,11 +26,11 @@ export class Exception implements IException {
     public cause?: string,
     public originalMajor?: IMajor,
     public newMajor?: IMajor,
+    public originalSchoolClass?: ISchoolClass,
+    public newSchoolClass?: ISchoolClass,
     public originalGrade?: IGrade,
     public newGrade?: IGrade,
-    public student?: IStudent,
-    public originalSchoolClass?: ISchoolClass,
-    public newSchoolClass?: ISchoolClass
+    public student?: IStudent
   ) {
     this.isYouthLeague = this.isYouthLeague || false;
   }

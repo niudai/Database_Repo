@@ -12,12 +12,6 @@
                 <dd>
                     <span>{{ major.name }}</span>
                 </dd>
-                <dt><span jhiTranslate="jhipsterApp.major.manager">Manager</span></dt>
-                <dd>
-                    <div *ngIf="major.manager">
-                        <a [routerLink]="['/people', major.manager?.id, 'view']">{{ major.manager?.id }}</a>
-                    </div>
-                </dd>
                 <dt><span jhiTranslate="jhipsterApp.major.campus">Campus</span></dt>
                 <dd>
                     <div *ngIf="major.campus">

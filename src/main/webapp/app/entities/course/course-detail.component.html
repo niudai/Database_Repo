@@ -16,6 +16,12 @@
                 <dd>
                     <span jhiTranslate="{{ 'jhipsterApp.ExamType.' + course.examType }}">{{ course.examType }}</span>
                 </dd>
+                <dt><span jhiTranslate="jhipsterApp.course.semaster">Semaster</span></dt>
+                <dd>
+                    <div *ngIf="course.semaster">
+                        <a [routerLink]="['/semaster', course.semaster?.id, 'view']">{{ course.semaster?.id }}</a>
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="jhipsterApp.course.major">Major</span></dt>
                 <dd>
                     <div *ngIf="course.major">
@@ -26,12 +32,6 @@
                 <dd>
                     <div *ngIf="course.teacher">
                         <a [routerLink]="['/teacher', course.teacher?.id, 'view']">{{ course.teacher?.id }}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.course.semaster">Semaster</span></dt>
-                <dd>
-                    <div *ngIf="course.semaster">
-                        <a [routerLink]="['/semaster', course.semaster?.id, 'view']">{{ course.semaster?.id }}</a>
                     </div>
                 </dd>
             </dl>

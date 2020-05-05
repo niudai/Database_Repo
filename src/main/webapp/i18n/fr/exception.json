@@ -21,11 +21,11 @@
       "cause": "Cause",
       "originalMajor": "Original Major",
       "newMajor": "New Major",
+      "originalSchoolClass": "Original School Class",
+      "newSchoolClass": "New School Class",
       "originalGrade": "Original Grade",
       "newGrade": "New Grade",
-      "student": "Student",
-      "originalSchoolClass": "Original School Class",
-      "newSchoolClass": "New School Class"
+      "student": "Student"
     }
   }
 }

@@ -1,6 +1,5 @@
 package com.mycompany.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -64,10 +63,6 @@ public class People implements Serializable {
     @OneToOne
     @JoinColumn(unique = true)
     private Student student;
-
-    @OneToOne(mappedBy = "manager")
-    @JsonIgnore
-    private Major manageMajor;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -232,19 +227,6 @@ public class People implements Serializable {
 
     public void setStudent(Student student) {
         this.student = student;
-    }
-
-    public Major getManageMajor() {
-        return manageMajor;
-    }
-
-    public People manageMajor(Major major) {
-        this.manageMajor = major;
-        return this;
-    }
-
-    public void setManageMajor(Major major) {
-        this.manageMajor = major;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
