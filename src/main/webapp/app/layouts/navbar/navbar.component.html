@@ -99,6 +99,12 @@
                             <span jhiTranslate="global.menu.entities.exception">Exception</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="j-exception" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.jException">J Exception</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>

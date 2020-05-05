@@ -26,6 +26,7 @@
     <include file="config/liquibase/changelog/20200503072700_added_entity_Interval.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200503072800_added_entity_Semaster.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200503072900_added_entity_Exception.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200505101300_added_entity_JException.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20200503071900_added_entity_constraints_Major.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200503072000_added_entity_constraints_Record.xml" relativeToChangelogFile="false"/>
@@ -36,5 +37,6 @@
     <include file="config/liquibase/changelog/20200503072600_added_entity_constraints_Course.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200503072700_added_entity_constraints_Interval.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200503072900_added_entity_constraints_Exception.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200505101300_added_entity_constraints_JException.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

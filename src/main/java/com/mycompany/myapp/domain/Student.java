@@ -40,7 +40,7 @@ public class Student implements Serializable {
 
     @OneToMany(mappedBy = "student")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Exception> exceptions = new HashSet<>();
+    private Set<JException> exceptions = new HashSet<>();
 
     @OneToMany(mappedBy = "student")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -115,29 +115,29 @@ public class Student implements Serializable {
         this.major = major;
     }
 
-    public Set<Exception> getExceptions() {
+    public Set<JException> getExceptions() {
         return exceptions;
     }
 
-    public Student exceptions(Set<Exception> exceptions) {
-        this.exceptions = exceptions;
+    public Student exceptions(Set<JException> jExceptions) {
+        this.exceptions = jExceptions;
         return this;
     }
 
-    public Student addExceptions(Exception exception) {
-        this.exceptions.add(exception);
-        exception.setStudent(this);
+    public Student addExceptions(JException jException) {
+        this.exceptions.add(jException);
+        jException.setStudent(this);
         return this;
     }
 
-    public Student removeExceptions(Exception exception) {
-        this.exceptions.remove(exception);
-        exception.setStudent(null);
+    public Student removeExceptions(JException jException) {
+        this.exceptions.remove(jException);
+        jException.setStudent(null);
         return this;
     }
 
-    public void setExceptions(Set<Exception> exceptions) {
-        this.exceptions = exceptions;
+    public void setExceptions(Set<JException> jExceptions) {
+        this.exceptions = jExceptions;
     }
 
     public Set<Record> getRecords() {
