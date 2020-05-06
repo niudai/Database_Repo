@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IRecord } from 'app/shared/model/record.model';
@@ -50,7 +51,7 @@ export class RecordService {
 
   protected convertDateFromClient(record: IRecord): IRecord {
     const copy: IRecord = Object.assign({}, record, {
-      date: record.date && record.date.isValid() ? record.date.toJSON() : undefined
+      date: record.date && record.date.isValid() ? record.date.format(DATE_FORMAT) : undefined
     });
     return copy;
   }

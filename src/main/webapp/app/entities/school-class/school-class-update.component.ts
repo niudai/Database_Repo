@@ -5,8 +5,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { ISchoolClass, SchoolClass } from 'app/shared/model/school-class.model';
 import { SchoolClassService } from './school-class.service';
@@ -28,6 +26,7 @@ export class SchoolClassUpdateComponent implements OnInit {
   masters: ITeacher[] = [];
   grades: IGrade[] = [];
   majors: IMajor[] = [];
+  createdDateDp: any;
 
   editForm = this.fb.group({
     id: [],
@@ -49,11 +48,6 @@ export class SchoolClassUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ schoolClass }) => {
-      if (!schoolClass.id) {
-        const today = moment().startOf('day');
-        schoolClass.createdDate = today;
-      }
-
       this.updateForm(schoolClass);
 
       this.teacherService
@@ -88,7 +82,7 @@ export class SchoolClassUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: schoolClass.id,
       name: schoolClass.name,
-      createdDate: schoolClass.createdDate ? schoolClass.createdDate.format(DATE_TIME_FORMAT) : null,
+      createdDate: schoolClass.createdDate,
       master: schoolClass.master,
       grade: schoolClass.grade,
       major: schoolClass.major
@@ -114,9 +108,7 @@ export class SchoolClassUpdateComponent implements OnInit {
       ...new SchoolClass(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
-      createdDate: this.editForm.get(['createdDate'])!.value
-        ? moment(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)
-        : undefined,
+      createdDate: this.editForm.get(['createdDate'])!.value,
       master: this.editForm.get(['master'])!.value,
       grade: this.editForm.get(['grade'])!.value,
       major: this.editForm.get(['major'])!.value

@@ -5,8 +5,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IPeople, People } from 'app/shared/model/people.model';
 import { PeopleService } from './people.service';
@@ -25,6 +23,7 @@ export class PeopleUpdateComponent implements OnInit {
   isSaving = false;
   teachers: ITeacher[] = [];
   students: IStudent[] = [];
+  birthDateDp: any;
 
   editForm = this.fb.group({
     id: [],
@@ -52,11 +51,6 @@ export class PeopleUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ people }) => {
-      if (!people.id) {
-        const today = moment().startOf('day');
-        people.birthDate = today;
-      }
-
       this.updateForm(people);
 
       this.teacherService
@@ -112,7 +106,7 @@ export class PeopleUpdateComponent implements OnInit {
       chineseName: people.chineseName,
       englishName: people.englishName,
       gender: people.gender,
-      birthDate: people.birthDate ? people.birthDate.format(DATE_TIME_FORMAT) : null,
+      birthDate: people.birthDate,
       race: people.race,
       nation: people.nation,
       address: people.address,
@@ -145,7 +139,7 @@ export class PeopleUpdateComponent implements OnInit {
       chineseName: this.editForm.get(['chineseName'])!.value,
       englishName: this.editForm.get(['englishName'])!.value,
       gender: this.editForm.get(['gender'])!.value,
-      birthDate: this.editForm.get(['birthDate'])!.value ? moment(this.editForm.get(['birthDate'])!.value, DATE_TIME_FORMAT) : undefined,
+      birthDate: this.editForm.get(['birthDate'])!.value,
       race: this.editForm.get(['race'])!.value,
       nation: this.editForm.get(['nation'])!.value,
       address: this.editForm.get(['address'])!.value,

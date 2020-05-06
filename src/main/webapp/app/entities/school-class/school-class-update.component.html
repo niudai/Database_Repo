@@ -19,8 +19,11 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterApp.schoolClass.createdDate" for="field_createdDate">Created Date</label>
-                    <div class="d-flex">
-                        <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" formControlName="createdDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    <div class="input-group">
+                        <input id="field_createdDate" type="text" class="form-control" name="createdDate" ngbDatepicker #createdDateDp="ngbDatepicker" formControlName="createdDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="createdDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
                     </div>
                 </div>
 

@@ -1,7 +1,7 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { RecordService } from 'app/entities/record/record.service';
 import { IRecord, Record } from 'app/shared/model/record.model';
 
@@ -31,7 +31,7 @@ describe('Service Tests', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            date: currentDate.format(DATE_TIME_FORMAT)
+            date: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -47,7 +47,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            date: currentDate.format(DATE_TIME_FORMAT)
+            date: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -69,7 +69,7 @@ describe('Service Tests', () => {
       it('should update a Record', () => {
         const returnedFromService = Object.assign(
           {
-            date: currentDate.format(DATE_TIME_FORMAT),
+            date: currentDate.format(DATE_FORMAT),
             score: 1
           },
           elemDefault
@@ -92,7 +92,7 @@ describe('Service Tests', () => {
       it('should return a list of Record', () => {
         const returnedFromService = Object.assign(
           {
-            date: currentDate.format(DATE_TIME_FORMAT),
+            date: currentDate.format(DATE_FORMAT),
             score: 1
           },
           elemDefault

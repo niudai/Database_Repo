@@ -4,8 +4,6 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IJException, JException } from 'app/shared/model/j-exception.model';
 import { JExceptionService } from './j-exception.service';
@@ -30,6 +28,7 @@ export class JExceptionUpdateComponent implements OnInit {
   schoolclasses: ISchoolClass[] = [];
   grades: IGrade[] = [];
   students: IStudent[] = [];
+  dateDp: any;
 
   editForm = this.fb.group({
     id: [],
@@ -57,11 +56,6 @@ export class JExceptionUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ jException }) => {
-      if (!jException.id) {
-        const today = moment().startOf('day');
-        jException.date = today;
-      }
-
       this.updateForm(jException);
 
       this.majorService.query().subscribe((res: HttpResponse<IMajor[]>) => (this.majors = res.body || []));
@@ -77,7 +71,7 @@ export class JExceptionUpdateComponent implements OnInit {
   updateForm(jException: IJException): void {
     this.editForm.patchValue({
       id: jException.id,
-      date: jException.date ? jException.date.format(DATE_TIME_FORMAT) : null,
+      date: jException.date,
       isYouthLeague: jException.isYouthLeague,
       cause: jException.cause,
       originalMajor: jException.originalMajor,
@@ -108,7 +102,7 @@ export class JExceptionUpdateComponent implements OnInit {
     return {
       ...new JException(),
       id: this.editForm.get(['id'])!.value,
-      date: this.editForm.get(['date'])!.value ? moment(this.editForm.get(['date'])!.value, DATE_TIME_FORMAT) : undefined,
+      date: this.editForm.get(['date'])!.value,
       isYouthLeague: this.editForm.get(['isYouthLeague'])!.value,
       cause: this.editForm.get(['cause'])!.value,
       originalMajor: this.editForm.get(['originalMajor'])!.value,

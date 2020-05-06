@@ -20,7 +20,7 @@
         },
         {
             "fieldName": "birthDate",
-            "fieldType": "Instant"
+            "fieldType": "LocalDate"
         },
         {
             "fieldName": "race",

@@ -14,8 +14,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,8 +32,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class JExceptionResourceIT {
 
-    private static final Instant DEFAULT_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final Boolean DEFAULT_IS_YOUTH_LEAGUE = false;
     private static final Boolean UPDATED_IS_YOUTH_LEAGUE = true;

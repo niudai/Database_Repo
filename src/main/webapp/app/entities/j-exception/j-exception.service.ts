@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IJException } from 'app/shared/model/j-exception.model';
@@ -50,7 +51,7 @@ export class JExceptionService {
 
   protected convertDateFromClient(jException: IJException): IJException {
     const copy: IJException = Object.assign({}, jException, {
-      date: jException.date && jException.date.isValid() ? jException.date.toJSON() : undefined
+      date: jException.date && jException.date.isValid() ? jException.date.format(DATE_FORMAT) : undefined
     });
     return copy;
   }

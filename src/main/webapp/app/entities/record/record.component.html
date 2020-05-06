@@ -33,7 +33,7 @@
             <tbody>
                 <tr *ngFor="let record of records ;trackBy: trackId">
                     <td><a [routerLink]="['/record', record.id, 'view']">{{ record.id }}</a></td>
-                    <td>{{ record.date | date:'medium' }}</td>
+                    <td>{{ record.date | date:'mediumDate' }}</td>
                     <td>{{ record.score }}</td>
                     <td>
                         <div *ngIf="record.semaster">
