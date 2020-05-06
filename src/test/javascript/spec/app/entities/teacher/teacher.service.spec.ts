@@ -1,7 +1,7 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { TeacherService } from 'app/entities/teacher/teacher.service';
 import { ITeacher, Teacher } from 'app/shared/model/teacher.model';
 import { Title } from 'app/shared/model/enumerations/title.model';
@@ -32,7 +32,7 @@ describe('Service Tests', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            startDate: currentDate.format(DATE_TIME_FORMAT)
+            startDate: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -48,7 +48,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            startDate: currentDate.format(DATE_TIME_FORMAT)
+            startDate: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -71,7 +71,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             workNumber: 'BBBBBB',
-            startDate: currentDate.format(DATE_TIME_FORMAT),
+            startDate: currentDate.format(DATE_FORMAT),
             email: 'BBBBBB',
             title: 'BBBBBB'
           },
@@ -96,7 +96,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             workNumber: 'BBBBBB',
-            startDate: currentDate.format(DATE_TIME_FORMAT),
+            startDate: currentDate.format(DATE_FORMAT),
             email: 'BBBBBB',
             title: 'BBBBBB'
           },

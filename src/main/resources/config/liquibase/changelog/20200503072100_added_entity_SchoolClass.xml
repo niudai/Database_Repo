@@ -19,7 +19,7 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="created_date" type="datetime">
+            <column name="created_date" type="date">
                 <constraints nullable="true" />
             </column>
             <column name="master_id" type="bigint">
@@ -33,7 +33,6 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="school_class" columnName="created_date" columnDataType="datetime"/>
     </changeSet>
 
     <changeSet id="20200503072100-1-relations" author="jhipster">
@@ -56,7 +55,7 @@
                   tableName="school_class">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
-            <column name="created_date" type="datetime"/>
+            <column name="created_date" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

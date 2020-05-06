@@ -1,7 +1,7 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { PeopleService } from 'app/entities/people/people.service';
 import { IPeople, People } from 'app/shared/model/people.model';
 import { IdType } from 'app/shared/model/enumerations/id-type.model';
@@ -44,7 +44,7 @@ describe('Service Tests', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            birthDate: currentDate.format(DATE_TIME_FORMAT)
+            birthDate: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -60,7 +60,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            birthDate: currentDate.format(DATE_TIME_FORMAT)
+            birthDate: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -86,7 +86,7 @@ describe('Service Tests', () => {
             chineseName: 'BBBBBB',
             englishName: 'BBBBBB',
             gender: 1,
-            birthDate: currentDate.format(DATE_TIME_FORMAT),
+            birthDate: currentDate.format(DATE_FORMAT),
             race: 'BBBBBB',
             nation: 'BBBBBB',
             address: 'BBBBBB',
@@ -117,7 +117,7 @@ describe('Service Tests', () => {
             chineseName: 'BBBBBB',
             englishName: 'BBBBBB',
             gender: 1,
-            birthDate: currentDate.format(DATE_TIME_FORMAT),
+            birthDate: currentDate.format(DATE_FORMAT),
             race: 'BBBBBB',
             nation: 'BBBBBB',
             address: 'BBBBBB',

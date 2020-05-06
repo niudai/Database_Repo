@@ -28,7 +28,7 @@
             <column name="gender" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="birth_date" type="datetime">
+            <column name="birth_date" type="date">
                 <constraints nullable="true" />
             </column>
             <column name="race" type="varchar(255)">
@@ -54,7 +54,6 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="people" columnName="birth_date" columnDataType="datetime"/>
     </changeSet>
 
     <changeSet id="20200503072300-1-relations" author="jhipster">
@@ -80,7 +79,7 @@
             <column name="chinese_name" type="string"/>
             <column name="english_name" type="string"/>
             <column name="gender" type="numeric"/>
-            <column name="birth_date" type="datetime"/>
+            <column name="birth_date" type="date"/>
             <column name="race" type="string"/>
             <column name="nation" type="string"/>
             <column name="address" type="string"/>

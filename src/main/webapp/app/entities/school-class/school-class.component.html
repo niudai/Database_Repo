@@ -35,7 +35,7 @@
                 <tr *ngFor="let schoolClass of schoolClasses ;trackBy: trackId">
                     <td><a [routerLink]="['/school-class', schoolClass.id, 'view']">{{ schoolClass.id }}</a></td>
                     <td>{{ schoolClass.name }}</td>
-                    <td>{{ schoolClass.createdDate | date:'medium' }}</td>
+                    <td>{{ schoolClass.createdDate | date:'mediumDate' }}</td>
                     <td>
                         <div *ngIf="schoolClass.master">
                             <a [routerLink]="['/teacher', schoolClass.master?.id, 'view']" >{{ schoolClass.master?.id }}</a>

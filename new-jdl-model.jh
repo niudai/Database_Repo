@@ -20,14 +20,14 @@ entity Major {
 entity Record {
 	student String
     course String
-    date Instant
+    date LocalDate
     semaster String
     score Integer
 }
 
 entity SchoolClass {
 	name String
-    createdDate Instant    
+    createdDate LocalDate    
 }
 
 entity Grade {
@@ -39,7 +39,7 @@ entity People {
     chineseName String
     englishName String
     gender 	Integer
-    birthDate Instant
+    birthDate LocalDate
     race String
     nation String
     address String
@@ -56,7 +56,7 @@ entity Student {
 
 entity Teacher {
 	workNumber String
-    startDate Instant
+    startDate LocalDate
     email String
     title Title
 }
@@ -86,7 +86,7 @@ entity Major {
 }
 
 entity Record {
-    date Instant
+    date LocalDate
     score Integer
 }
 
@@ -104,7 +104,7 @@ enum Season {
 }
 
 entity JException {
-	date Instant
+	date LocalDate
     isYouthLeague Boolean
     cause String
 }

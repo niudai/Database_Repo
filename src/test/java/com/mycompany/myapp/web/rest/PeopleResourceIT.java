@@ -14,8 +14,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,8 +45,8 @@ public class PeopleResourceIT {
     private static final Integer DEFAULT_GENDER = 1;
     private static final Integer UPDATED_GENDER = 2;
 
-    private static final Instant DEFAULT_BIRTH_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_BIRTH_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final LocalDate DEFAULT_BIRTH_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_BIRTH_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final String DEFAULT_RACE = "AAAAAAAAAA";
     private static final String UPDATED_RACE = "BBBBBBBBBB";

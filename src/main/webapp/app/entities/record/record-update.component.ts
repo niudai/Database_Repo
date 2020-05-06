@@ -4,8 +4,6 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IRecord, Record } from 'app/shared/model/record.model';
 import { RecordService } from './record.service';
@@ -24,6 +22,7 @@ export class RecordUpdateComponent implements OnInit {
   isSaving = false;
   semasters: ISemaster[] = [];
   students: IStudent[] = [];
+  dateDp: any;
 
   editForm = this.fb.group({
     id: [],
@@ -43,11 +42,6 @@ export class RecordUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ record }) => {
-      if (!record.id) {
-        const today = moment().startOf('day');
-        record.date = today;
-      }
-
       this.updateForm(record);
 
       this.semasterService.query().subscribe((res: HttpResponse<ISemaster[]>) => (this.semasters = res.body || []));
@@ -59,7 +53,7 @@ export class RecordUpdateComponent implements OnInit {
   updateForm(record: IRecord): void {
     this.editForm.patchValue({
       id: record.id,
-      date: record.date ? record.date.format(DATE_TIME_FORMAT) : null,
+      date: record.date,
       score: record.score,
       semaster: record.semaster,
       student: record.student
@@ -84,7 +78,7 @@ export class RecordUpdateComponent implements OnInit {
     return {
       ...new Record(),
       id: this.editForm.get(['id'])!.value,
-      date: this.editForm.get(['date'])!.value ? moment(this.editForm.get(['date'])!.value, DATE_TIME_FORMAT) : undefined,
+      date: this.editForm.get(['date'])!.value,
       score: this.editForm.get(['score'])!.value,
       semaster: this.editForm.get(['semaster'])!.value,
       student: this.editForm.get(['student'])!.value

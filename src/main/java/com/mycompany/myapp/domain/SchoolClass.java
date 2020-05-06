@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,7 +30,7 @@ public class SchoolClass implements Serializable {
     private String name;
 
     @Column(name = "created_date")
-    private Instant createdDate;
+    private LocalDate createdDate;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -70,16 +70,16 @@ public class SchoolClass implements Serializable {
         this.name = name;
     }
 
-    public Instant getCreatedDate() {
+    public LocalDate getCreatedDate() {
         return createdDate;
     }
 
-    public SchoolClass createdDate(Instant createdDate) {
+    public SchoolClass createdDate(LocalDate createdDate) {
         this.createdDate = createdDate;
         return this;
     }
 
-    public void setCreatedDate(Instant createdDate) {
+    public void setCreatedDate(LocalDate createdDate) {
         this.createdDate = createdDate;
     }
 

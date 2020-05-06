@@ -7,7 +7,7 @@
         },
         {
             "fieldName": "startDate",
-            "fieldType": "Instant"
+            "fieldType": "LocalDate"
         },
         {
             "fieldName": "email",

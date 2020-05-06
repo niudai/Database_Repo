@@ -1,11 +1,11 @@
 id;date;is_youth_league;cause
-1;2020-05-05T07:20:10;false;mindshare
-2;2020-05-04T17:48:16;false;Shoes bypass
-3;2020-05-04T19:13:06;false;capacitor Canadian Dollar
-4;2020-05-04T21:59:57;true;parse
-5;2020-05-04T19:37:27;false;primary Checking Account
-6;2020-05-05T07:35:25;true;cyan white tan
-7;2020-05-05T01:29:36;false;migration policy
-8;2020-05-04T11:21:32;true;Toys
-9;2020-05-04T16:12:35;false;payment ubiquitous Vista
-10;2020-05-04T22:44:08;false;Fords Centers cross-platform
+1;2020-05-05;false;mindshare
+2;2020-05-04;false;Shoes bypass
+3;2020-05-04;false;capacitor Canadian Dollar
+4;2020-05-04;true;parse
+5;2020-05-04;false;primary Checking Account
+6;2020-05-05;true;cyan white tan
+7;2020-05-05;false;migration policy
+8;2020-05-04;true;Toys
+9;2020-05-04;false;payment ubiquitous Vista
+10;2020-05-04;false;Fords Centers cross-platform

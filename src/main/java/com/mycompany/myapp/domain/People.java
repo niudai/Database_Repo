@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.time.Instant;
+import java.time.LocalDate;
 
 import com.mycompany.myapp.domain.enumeration.IdType;
 
@@ -39,7 +39,7 @@ public class People implements Serializable {
     private Integer gender;
 
     @Column(name = "birth_date")
-    private Instant birthDate;
+    private LocalDate birthDate;
 
     @Column(name = "race")
     private String race;
@@ -125,16 +125,16 @@ public class People implements Serializable {
         this.gender = gender;
     }
 
-    public Instant getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public People birthDate(Instant birthDate) {
+    public People birthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
         return this;
     }
 
-    public void setBirthDate(Instant birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

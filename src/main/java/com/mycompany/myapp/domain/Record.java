@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.time.Instant;
+import java.time.LocalDate;
 
 /**
  * A Record.
@@ -25,7 +25,7 @@ public class Record implements Serializable {
     private Long id;
 
     @Column(name = "date")
-    private Instant date;
+    private LocalDate date;
 
     @Column(name = "score")
     private Integer score;
@@ -47,16 +47,16 @@ public class Record implements Serializable {
         this.id = id;
     }
 
-    public Instant getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public Record date(Instant date) {
+    public Record date(LocalDate date) {
         this.date = date;
         return this;
     }
 
-    public void setDate(Instant date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

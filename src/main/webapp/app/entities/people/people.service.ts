@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IPeople } from 'app/shared/model/people.model';
@@ -50,7 +51,7 @@ export class PeopleService {
 
   protected convertDateFromClient(people: IPeople): IPeople {
     const copy: IPeople = Object.assign({}, people, {
-      birthDate: people.birthDate && people.birthDate.isValid() ? people.birthDate.toJSON() : undefined
+      birthDate: people.birthDate && people.birthDate.isValid() ? people.birthDate.format(DATE_FORMAT) : undefined
     });
     return copy;
   }

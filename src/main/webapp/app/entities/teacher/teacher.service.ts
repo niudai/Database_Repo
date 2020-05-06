@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { ITeacher } from 'app/shared/model/teacher.model';
@@ -50,7 +51,7 @@ export class TeacherService {
 
   protected convertDateFromClient(teacher: ITeacher): ITeacher {
     const copy: ITeacher = Object.assign({}, teacher, {
-      startDate: teacher.startDate && teacher.startDate.isValid() ? teacher.startDate.toJSON() : undefined
+      startDate: teacher.startDate && teacher.startDate.isValid() ? teacher.startDate.format(DATE_FORMAT) : undefined
     });
     return copy;
   }

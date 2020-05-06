@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.time.Instant;
+import java.time.LocalDate;
 
 /**
  * A JException.
@@ -25,7 +25,7 @@ public class JException implements Serializable {
     private Long id;
 
     @Column(name = "date")
-    private Instant date;
+    private LocalDate date;
 
     @Column(name = "is_youth_league")
     private Boolean isYouthLeague;
@@ -70,16 +70,16 @@ public class JException implements Serializable {
         this.id = id;
     }
 
-    public Instant getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public JException date(Instant date) {
+    public JException date(LocalDate date) {
         this.date = date;
         return this;
     }
 
-    public void setDate(Instant date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

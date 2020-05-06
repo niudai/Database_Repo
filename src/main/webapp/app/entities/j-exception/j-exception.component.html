@@ -39,7 +39,7 @@
             <tbody>
                 <tr *ngFor="let jException of jExceptions ;trackBy: trackId">
                     <td><a [routerLink]="['/j-exception', jException.id, 'view']">{{ jException.id }}</a></td>
-                    <td>{{ jException.date | date:'medium' }}</td>
+                    <td>{{ jException.date | date:'mediumDate' }}</td>
                     <td>{{ jException.isYouthLeague }}</td>
                     <td>{{ jException.cause }}</td>
                     <td>

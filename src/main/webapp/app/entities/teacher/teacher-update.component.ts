@@ -4,8 +4,6 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { ITeacher, Teacher } from 'app/shared/model/teacher.model';
 import { TeacherService } from './teacher.service';
@@ -19,6 +17,7 @@ import { MajorService } from 'app/entities/major/major.service';
 export class TeacherUpdateComponent implements OnInit {
   isSaving = false;
   majors: IMajor[] = [];
+  startDateDp: any;
 
   editForm = this.fb.group({
     id: [],
@@ -38,11 +37,6 @@ export class TeacherUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ teacher }) => {
-      if (!teacher.id) {
-        const today = moment().startOf('day');
-        teacher.startDate = today;
-      }
-
       this.updateForm(teacher);
 
       this.majorService.query().subscribe((res: HttpResponse<IMajor[]>) => (this.majors = res.body || []));
@@ -53,7 +47,7 @@ export class TeacherUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: teacher.id,
       workNumber: teacher.workNumber,
-      startDate: teacher.startDate ? teacher.startDate.format(DATE_TIME_FORMAT) : null,
+      startDate: teacher.startDate,
       email: teacher.email,
       title: teacher.title,
       major: teacher.major
@@ -79,7 +73,7 @@ export class TeacherUpdateComponent implements OnInit {
       ...new Teacher(),
       id: this.editForm.get(['id'])!.value,
       workNumber: this.editForm.get(['workNumber'])!.value,
-      startDate: this.editForm.get(['startDate'])!.value ? moment(this.editForm.get(['startDate'])!.value, DATE_TIME_FORMAT) : undefined,
+      startDate: this.editForm.get(['startDate'])!.value,
       email: this.editForm.get(['email'])!.value,
       title: this.editForm.get(['title'])!.value,
       major: this.editForm.get(['major'])!.value

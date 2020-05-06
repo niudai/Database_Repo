@@ -35,7 +35,7 @@
                 <tr *ngFor="let teacher of teachers ;trackBy: trackId">
                     <td><a [routerLink]="['/teacher', teacher.id, 'view']">{{ teacher.id }}</a></td>
                     <td>{{ teacher.workNumber }}</td>
-                    <td>{{ teacher.startDate | date:'medium' }}</td>
+                    <td>{{ teacher.startDate | date:'mediumDate' }}</td>
                     <td>{{ teacher.email }}</td>
                     <td jhiTranslate="{{ 'jhipsterApp.Title.' + teacher.title }}">{{ teacher.title }}</td>
                     <td>

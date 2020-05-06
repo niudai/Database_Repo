@@ -16,7 +16,7 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="date" type="datetime">
+            <column name="date" type="date">
                 <constraints nullable="true" />
             </column>
             <column name="is_youth_league" type="boolean">
@@ -48,7 +48,6 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="j_exception" columnName="date" columnDataType="datetime"/>
     </changeSet>
 
     <changeSet id="20200505101300-1-relations" author="jhipster">
@@ -70,7 +69,7 @@
                   separator=";"
                   tableName="j_exception">
             <column name="id" type="numeric"/>
-            <column name="date" type="datetime"/>
+            <column name="date" type="date"/>
             <column name="is_youth_league" type="boolean"/>
             <column name="cause" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
