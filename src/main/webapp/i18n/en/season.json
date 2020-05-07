@@ -2,10 +2,10 @@
   "jhipsterApp": {
     "Season": {
       "null": "",
-      "Spring": "Spring",
-      "Summer": "Summer",
-      "Fall": "Fall",
-      "Winter": "Winter"
+      "Spring": "春季学期",
+      "Summer": "夏季学期",
+      "Fall": "秋季学期",
+      "Winter": "冬季学期"
     }
   }
 }

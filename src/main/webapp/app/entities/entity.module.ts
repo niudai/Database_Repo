@@ -49,10 +49,6 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./semaster/semaster.module').then(m => m.JhipsterSemasterModule)
       },
       {
-        path: 'exception',
-        loadChildren: () => import('./exception/exception.module').then(m => m.JhipsterExceptionModule)
-      },
-      {
         path: 'j-exception',
         loadChildren: () => import('./j-exception/j-exception.module').then(m => m.JhipsterJExceptionModule)
       }
