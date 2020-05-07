@@ -2,10 +2,10 @@
   "jhipsterApp": {
     "campus": {
       "home": {
-        "title": "Campuses",
-        "createLabel": "Create a new Campus",
-        "createOrEditLabel": "Create or edit a Campus",
-        "notFound": "No Campuses found"
+        "title": "校区",
+        "createLabel": "创建新校区",
+        "createOrEditLabel": "编辑校区",
+        "notFound": "未找到校区"
       },
       "created": "A new Campus is created with identifier {{ param }}",
       "updated": "A Campus is updated with identifier {{ param }}",
@@ -14,11 +14,11 @@
         "question": "Are you sure you want to delete Campus {{ id }}?"
       },
       "detail": {
-        "title": "Campus"
+        "title": "校区"
       },
-      "name": "Name",
-      "address": "Address",
-      "major": "Major"
+      "name": "校区名",
+      "address": "地址",
+      "major": "专业"
     }
   }
 }

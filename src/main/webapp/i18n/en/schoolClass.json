@@ -2,26 +2,26 @@
   "jhipsterApp": {
     "schoolClass": {
       "home": {
-        "title": "School Classes",
-        "createLabel": "Create a new School Class",
-        "createOrEditLabel": "Create or edit a School Class",
-        "notFound": "No School Classes found"
+        "title": "班级",
+        "createLabel": "Create a new 班级",
+        "createOrEditLabel": "Create or edit a 班级",
+        "notFound": "No 班级es found"
       },
-      "created": "A new School Class is created with identifier {{ param }}",
-      "updated": "A School Class is updated with identifier {{ param }}",
-      "deleted": "A School Class is deleted with identifier {{ param }}",
+      "created": "A new 班级 is created with identifier {{ param }}",
+      "updated": "A 班级 is updated with identifier {{ param }}",
+      "deleted": "A 班级 is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete School Class {{ id }}?"
+        "question": "Are you sure you want to delete 班级 {{ id }}?"
       },
       "detail": {
-        "title": "School Class"
+        "title": "班级"
       },
-      "name": "Name",
-      "createdDate": "Created Date",
-      "master": "Master",
-      "students": "Students",
-      "grade": "Grade",
-      "major": "Major"
+      "name": "班级名",
+      "createdDate": "创建日期",
+      "master": "班主任",
+      "students": "学生",
+      "grade": "年纪",
+      "major": "专业"
     }
   }
 }

@@ -2,32 +2,32 @@
   "jhipsterApp": {
     "people": {
       "home": {
-        "title": "People",
-        "createLabel": "Create a new People",
-        "createOrEditLabel": "Create or edit a People",
-        "notFound": "No People found"
+        "title": "用户",
+        "createLabel": "Create a new 用户",
+        "createOrEditLabel": "Create or edit a 用户",
+        "notFound": "No 用户 found"
       },
-      "created": "A new People is created with identifier {{ param }}",
-      "updated": "A People is updated with identifier {{ param }}",
-      "deleted": "A People is deleted with identifier {{ param }}",
+      "created": "A new 用户 is created with identifier {{ param }}",
+      "updated": "A 用户 is updated with identifier {{ param }}",
+      "deleted": "A 用户 is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete People {{ id }}?"
+        "question": "Are you sure you want to delete 用户 {{ id }}?"
       },
       "detail": {
-        "title": "People"
+        "title": "用户"
       },
-      "idType": "Id Type",
-      "chineseName": "Chinese Name",
-      "englishName": "English Name",
-      "gender": "Gender",
-      "birthDate": "Birth Date",
-      "race": "Race",
-      "nation": "Nation",
-      "address": "Address",
-      "postcode": "Postcode",
-      "telephone": "Telephone",
-      "teacher": "Teacher",
-      "student": "Student"
+      "idType": "证件类型",
+      "chineseName": "中文名",
+      "englishName": "英文名",
+      "gender": "性别",
+      "birthDate": "出生日期",
+      "race": "名族",
+      "nation": "国籍",
+      "address": "家庭住址",
+      "postcode": "邮编",
+      "telephone": "电话",
+      "teacher": "教职信息",
+      "student": "学生信息"
     }
   }
 }
