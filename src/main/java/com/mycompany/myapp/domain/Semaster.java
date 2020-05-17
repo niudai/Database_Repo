@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -16,6 +17,7 @@ import com.mycompany.myapp.domain.enumeration.Season;
 @Entity
 @Table(name = "semaster")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "semaster")
 public class Semaster implements Serializable {
 
     private static final long serialVersionUID = 1L;

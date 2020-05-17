@@ -5,6 +5,7 @@
         "title": "Teachers",
         "createLabel": "Créer un nouveau Teacher",
         "createOrEditLabel": "Créer ou éditer un Teacher",
+        "search": "Recherche pour Teacher",
         "notFound": "Aucun Teacher trouvé"
       },
       "created": "Un nouveau Teacher a été créé avec l'identifiant {{ param }}",

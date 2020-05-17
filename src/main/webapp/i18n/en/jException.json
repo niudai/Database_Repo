@@ -2,30 +2,31 @@
   "jhipsterApp": {
     "jException": {
       "home": {
-        "title": "学籍异动",
-        "createLabel": "Create a new 学籍异动",
-        "createOrEditLabel": "Create or edit a 学籍异动",
-        "notFound": "No 学籍异动 found"
+        "title": "J Exceptions",
+        "createLabel": "Create a new J Exception",
+        "createOrEditLabel": "Create or edit a J Exception",
+        "search": "Search for J Exception",
+        "notFound": "No J Exceptions found"
       },
-      "created": "A new 学籍异动 is created with identifier {{ param }}",
-      "updated": "A 学籍异动 is updated with identifier {{ param }}",
-      "deleted": "A 学籍异动 is deleted with identifier {{ param }}",
+      "created": "A new J Exception is created with identifier {{ param }}",
+      "updated": "A J Exception is updated with identifier {{ param }}",
+      "deleted": "A J Exception is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete 学籍异动 {{ id }}?"
+        "question": "Are you sure you want to delete J Exception {{ id }}?"
       },
       "detail": {
-        "title": "学籍异动"
+        "title": "J Exception"
       },
-      "date": "日期",
-      "isYouthLeague": "共青团员",
-      "cause": "原因",
-      "originalMajor": "原专业",
-      "newMajor": "新专业",
-      "originalSchoolClass": "原班级",
-      "newSchoolClass": "新班级",
-      "originalGrade": "原年纪",
-      "newGrade": "新年纪",
-      "student": "学生"
+      "date": "Date",
+      "isYouthLeague": "Is Youth League",
+      "cause": "Cause",
+      "originalMajor": "Original Major",
+      "newMajor": "New Major",
+      "originalSchoolClass": "Original School Class",
+      "newSchoolClass": "New School Class",
+      "originalGrade": "Original Grade",
+      "newGrade": "New Grade",
+      "student": "Student"
     }
   }
 }

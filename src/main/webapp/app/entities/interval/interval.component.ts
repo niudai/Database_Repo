@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,11 +16,36 @@ import { IntervalDeleteDialogComponent } from './interval-delete-dialog.componen
 export class IntervalComponent implements OnInit, OnDestroy {
   intervals?: IInterval[];
   eventSubscriber?: Subscription;
+  currentSearch: string;
 
-  constructor(protected intervalService: IntervalService, protected eventManager: JhiEventManager, protected modalService: NgbModal) {}
+  constructor(
+    protected intervalService: IntervalService,
+    protected eventManager: JhiEventManager,
+    protected modalService: NgbModal,
+    protected activatedRoute: ActivatedRoute
+  ) {
+    this.currentSearch =
+      this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams['search']
+        ? this.activatedRoute.snapshot.queryParams['search']
+        : '';
+  }
 
   loadAll(): void {
+    if (this.currentSearch) {
+      this.intervalService
+        .search({
+          query: this.currentSearch
+        })
+        .subscribe((res: HttpResponse<IInterval[]>) => (this.intervals = res.body || []));
+      return;
+    }
+
     this.intervalService.query().subscribe((res: HttpResponse<IInterval[]>) => (this.intervals = res.body || []));
+  }
+
+  search(query: string): void {
+    this.currentSearch = query;
+    this.loadAll();
   }
 
   ngOnInit(): void {

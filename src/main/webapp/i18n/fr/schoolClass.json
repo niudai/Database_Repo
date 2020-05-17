@@ -5,6 +5,7 @@
         "title": "SchoolClasses",
         "createLabel": "Créer un nouveau School Class",
         "createOrEditLabel": "Créer ou éditer un School Class",
+        "search": "Recherche pour School Class",
         "notFound": "Aucun School Class trouvé"
       },
       "created": "Un nouveau School Class a été créé avec l'identifiant {{ param }}",

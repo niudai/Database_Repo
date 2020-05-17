@@ -6,7 +6,7 @@ import * as moment from 'moment';
 
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
-import { createRequestOption } from 'app/shared/util/request-util';
+import { createRequestOption, Search } from 'app/shared/util/request-util';
 import { IPeople } from 'app/shared/model/people.model';
 
 type EntityResponseType = HttpResponse<IPeople>;
@@ -15,6 +15,7 @@ type EntityArrayResponseType = HttpResponse<IPeople[]>;
 @Injectable({ providedIn: 'root' })
 export class PeopleService {
   public resourceUrl = SERVER_API_URL + 'api/people';
+  public resourceSearchUrl = SERVER_API_URL + 'api/_search/people';
 
   constructor(protected http: HttpClient) {}
 
@@ -47,6 +48,13 @@ export class PeopleService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  search(req: Search): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .get<IPeople[]>(this.resourceSearchUrl, { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
   protected convertDateFromClient(people: IPeople): IPeople {

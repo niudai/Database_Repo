@@ -3,9 +3,13 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.JhipsterApp;
 import com.mycompany.myapp.domain.Major;
 import com.mycompany.myapp.repository.MajorRepository;
+import com.mycompany.myapp.repository.search.MajorSearchRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,10 +18,13 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -25,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link MajorResource} REST controller.
  */
 @SpringBootTest(classes = JhipsterApp.class)
-
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class MajorResourceIT {
@@ -35,6 +42,14 @@ public class MajorResourceIT {
 
     @Autowired
     private MajorRepository majorRepository;
+
+    /**
+     * This repository is mocked in the com.mycompany.myapp.repository.search test package.
+     *
+     * @see com.mycompany.myapp.repository.search.MajorSearchRepositoryMockConfiguration
+     */
+    @Autowired
+    private MajorSearchRepository mockMajorSearchRepository;
 
     @Autowired
     private EntityManager em;
@@ -88,6 +103,9 @@ public class MajorResourceIT {
         assertThat(majorList).hasSize(databaseSizeBeforeCreate + 1);
         Major testMajor = majorList.get(majorList.size() - 1);
         assertThat(testMajor.getName()).isEqualTo(DEFAULT_NAME);
+
+        // Validate the Major in Elasticsearch
+        verify(mockMajorSearchRepository, times(1)).save(testMajor);
     }
 
     @Test
@@ -107,6 +125,9 @@ public class MajorResourceIT {
         // Validate the Major in the database
         List<Major> majorList = majorRepository.findAll();
         assertThat(majorList).hasSize(databaseSizeBeforeCreate);
+
+        // Validate the Major in Elasticsearch
+        verify(mockMajorSearchRepository, times(0)).save(major);
     }
 
 
@@ -171,6 +192,9 @@ public class MajorResourceIT {
         assertThat(majorList).hasSize(databaseSizeBeforeUpdate);
         Major testMajor = majorList.get(majorList.size() - 1);
         assertThat(testMajor.getName()).isEqualTo(UPDATED_NAME);
+
+        // Validate the Major in Elasticsearch
+        verify(mockMajorSearchRepository, times(1)).save(testMajor);
     }
 
     @Test
@@ -189,6 +213,9 @@ public class MajorResourceIT {
         // Validate the Major in the database
         List<Major> majorList = majorRepository.findAll();
         assertThat(majorList).hasSize(databaseSizeBeforeUpdate);
+
+        // Validate the Major in Elasticsearch
+        verify(mockMajorSearchRepository, times(0)).save(major);
     }
 
     @Test
@@ -207,5 +234,23 @@ public class MajorResourceIT {
         // Validate the database contains one less item
         List<Major> majorList = majorRepository.findAll();
         assertThat(majorList).hasSize(databaseSizeBeforeDelete - 1);
+
+        // Validate the Major in Elasticsearch
+        verify(mockMajorSearchRepository, times(1)).deleteById(major.getId());
+    }
+
+    @Test
+    @Transactional
+    public void searchMajor() throws Exception {
+        // Initialize the database
+        majorRepository.saveAndFlush(major);
+        when(mockMajorSearchRepository.search(queryStringQuery("id:" + major.getId())))
+            .thenReturn(Collections.singletonList(major));
+        // Search the major
+        restMajorMockMvc.perform(get("/api/_search/majors?query=id:" + major.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(major.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
 }

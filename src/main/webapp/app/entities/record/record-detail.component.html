@@ -22,6 +22,12 @@
                         <a [routerLink]="['/semaster', record.semaster?.id, 'view']">{{ record.semaster?.id }}</a>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="jhipsterApp.record.course">Course</span></dt>
+                <dd>
+                    <div *ngIf="record.course">
+                        <a [routerLink]="['/course', record.course?.id, 'view']">{{ record.course?.id }}</a>
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="jhipsterApp.record.student">Student</span></dt>
                 <dd>
                     <div *ngIf="record.student">

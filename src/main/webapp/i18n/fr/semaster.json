@@ -5,6 +5,7 @@
         "title": "Semasters",
         "createLabel": "Créer un nouveau Semaster",
         "createOrEditLabel": "Créer ou éditer un Semaster",
+        "search": "Recherche pour Semaster",
         "notFound": "Aucun Semaster trouvé"
       },
       "created": "Un nouveau Semaster a été créé avec l'identifiant {{ param }}",

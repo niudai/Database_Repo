@@ -5,6 +5,7 @@
         "title": "Majors",
         "createLabel": "Créer un nouveau Major",
         "createOrEditLabel": "Créer ou éditer un Major",
+        "search": "Recherche pour Major",
         "notFound": "Aucun Major trouvé"
       },
       "created": "Un nouveau Major a été créé avec l'identifiant {{ param }}",

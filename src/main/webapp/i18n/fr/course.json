@@ -5,6 +5,7 @@
         "title": "Courses",
         "createLabel": "Créer un nouveau Course",
         "createOrEditLabel": "Créer ou éditer un Course",
+        "search": "Recherche pour Course",
         "notFound": "Aucun Course trouvé"
       },
       "created": "Un nouveau Course a été créé avec l'identifiant {{ param }}",

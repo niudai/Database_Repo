@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Record;
 import com.mycompany.myapp.repository.RecordRepository;
+import com.mycompany.myapp.repository.search.RecordSearchRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -17,6 +18,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing {@link com.mycompany.myapp.domain.Record}.
@@ -35,8 +40,11 @@ public class RecordResource {
 
     private final RecordRepository recordRepository;
 
-    public RecordResource(RecordRepository recordRepository) {
+    private final RecordSearchRepository recordSearchRepository;
+
+    public RecordResource(RecordRepository recordRepository, RecordSearchRepository recordSearchRepository) {
         this.recordRepository = recordRepository;
+        this.recordSearchRepository = recordSearchRepository;
     }
 
     /**
@@ -53,6 +61,7 @@ public class RecordResource {
             throw new BadRequestAlertException("A new record cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Record result = recordRepository.save(record);
+        recordSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/records/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -74,6 +83,7 @@ public class RecordResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Record result = recordRepository.save(record);
+        recordSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, record.getId().toString()))
             .body(result);
@@ -113,6 +123,22 @@ public class RecordResource {
     public ResponseEntity<Void> deleteRecord(@PathVariable Long id) {
         log.debug("REST request to delete Record : {}", id);
         recordRepository.deleteById(id);
+        recordSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * {@code SEARCH  /_search/records?query=:query} : search for the record corresponding
+     * to the query.
+     *
+     * @param query the query of the record search.
+     * @return the result of the search.
+     */
+    @GetMapping("/_search/records")
+    public List<Record> searchRecords(@RequestParam String query) {
+        log.debug("REST request to search Records for query {}", query);
+        return StreamSupport
+            .stream(recordSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .collect(Collectors.toList());
     }
 }

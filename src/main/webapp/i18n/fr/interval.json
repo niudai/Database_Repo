@@ -5,6 +5,7 @@
         "title": "Intervals",
         "createLabel": "Créer un nouveau Interval",
         "createOrEditLabel": "Créer ou éditer un Interval",
+        "search": "Recherche pour Interval",
         "notFound": "Aucun Interval trouvé"
       },
       "created": "Un nouveau Interval a été créé avec l'identifiant {{ param }}",

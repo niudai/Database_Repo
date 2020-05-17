@@ -3,9 +3,13 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.JhipsterApp;
 import com.mycompany.myapp.domain.Campus;
 import com.mycompany.myapp.repository.CampusRepository;
+import com.mycompany.myapp.repository.search.CampusSearchRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,10 +18,13 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -25,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link CampusResource} REST controller.
  */
 @SpringBootTest(classes = JhipsterApp.class)
-
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class CampusResourceIT {
@@ -38,6 +45,14 @@ public class CampusResourceIT {
 
     @Autowired
     private CampusRepository campusRepository;
+
+    /**
+     * This repository is mocked in the com.mycompany.myapp.repository.search test package.
+     *
+     * @see com.mycompany.myapp.repository.search.CampusSearchRepositoryMockConfiguration
+     */
+    @Autowired
+    private CampusSearchRepository mockCampusSearchRepository;
 
     @Autowired
     private EntityManager em;
@@ -94,6 +109,9 @@ public class CampusResourceIT {
         Campus testCampus = campusList.get(campusList.size() - 1);
         assertThat(testCampus.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testCampus.getAddress()).isEqualTo(DEFAULT_ADDRESS);
+
+        // Validate the Campus in Elasticsearch
+        verify(mockCampusSearchRepository, times(1)).save(testCampus);
     }
 
     @Test
@@ -113,6 +131,9 @@ public class CampusResourceIT {
         // Validate the Campus in the database
         List<Campus> campusList = campusRepository.findAll();
         assertThat(campusList).hasSize(databaseSizeBeforeCreate);
+
+        // Validate the Campus in Elasticsearch
+        verify(mockCampusSearchRepository, times(0)).save(campus);
     }
 
 
@@ -181,6 +202,9 @@ public class CampusResourceIT {
         Campus testCampus = campusList.get(campusList.size() - 1);
         assertThat(testCampus.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCampus.getAddress()).isEqualTo(UPDATED_ADDRESS);
+
+        // Validate the Campus in Elasticsearch
+        verify(mockCampusSearchRepository, times(1)).save(testCampus);
     }
 
     @Test
@@ -199,6 +223,9 @@ public class CampusResourceIT {
         // Validate the Campus in the database
         List<Campus> campusList = campusRepository.findAll();
         assertThat(campusList).hasSize(databaseSizeBeforeUpdate);
+
+        // Validate the Campus in Elasticsearch
+        verify(mockCampusSearchRepository, times(0)).save(campus);
     }
 
     @Test
@@ -217,5 +244,24 @@ public class CampusResourceIT {
         // Validate the database contains one less item
         List<Campus> campusList = campusRepository.findAll();
         assertThat(campusList).hasSize(databaseSizeBeforeDelete - 1);
+
+        // Validate the Campus in Elasticsearch
+        verify(mockCampusSearchRepository, times(1)).deleteById(campus.getId());
+    }
+
+    @Test
+    @Transactional
+    public void searchCampus() throws Exception {
+        // Initialize the database
+        campusRepository.saveAndFlush(campus);
+        when(mockCampusSearchRepository.search(queryStringQuery("id:" + campus.getId())))
+            .thenReturn(Collections.singletonList(campus));
+        // Search the campus
+        restCampusMockMvc.perform(get("/api/_search/campuses?query=id:" + campus.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(campus.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)));
     }
 }

@@ -3,9 +3,13 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.JhipsterApp;
 import com.mycompany.myapp.domain.Semaster;
 import com.mycompany.myapp.repository.SemasterRepository;
+import com.mycompany.myapp.repository.search.SemasterSearchRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,10 +18,13 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -26,7 +33,7 @@ import com.mycompany.myapp.domain.enumeration.Season;
  * Integration tests for the {@link SemasterResource} REST controller.
  */
 @SpringBootTest(classes = JhipsterApp.class)
-
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class SemasterResourceIT {
@@ -39,6 +46,14 @@ public class SemasterResourceIT {
 
     @Autowired
     private SemasterRepository semasterRepository;
+
+    /**
+     * This repository is mocked in the com.mycompany.myapp.repository.search test package.
+     *
+     * @see com.mycompany.myapp.repository.search.SemasterSearchRepositoryMockConfiguration
+     */
+    @Autowired
+    private SemasterSearchRepository mockSemasterSearchRepository;
 
     @Autowired
     private EntityManager em;
@@ -95,6 +110,9 @@ public class SemasterResourceIT {
         Semaster testSemaster = semasterList.get(semasterList.size() - 1);
         assertThat(testSemaster.getYear()).isEqualTo(DEFAULT_YEAR);
         assertThat(testSemaster.getSeason()).isEqualTo(DEFAULT_SEASON);
+
+        // Validate the Semaster in Elasticsearch
+        verify(mockSemasterSearchRepository, times(1)).save(testSemaster);
     }
 
     @Test
@@ -114,6 +132,9 @@ public class SemasterResourceIT {
         // Validate the Semaster in the database
         List<Semaster> semasterList = semasterRepository.findAll();
         assertThat(semasterList).hasSize(databaseSizeBeforeCreate);
+
+        // Validate the Semaster in Elasticsearch
+        verify(mockSemasterSearchRepository, times(0)).save(semaster);
     }
 
 
@@ -182,6 +203,9 @@ public class SemasterResourceIT {
         Semaster testSemaster = semasterList.get(semasterList.size() - 1);
         assertThat(testSemaster.getYear()).isEqualTo(UPDATED_YEAR);
         assertThat(testSemaster.getSeason()).isEqualTo(UPDATED_SEASON);
+
+        // Validate the Semaster in Elasticsearch
+        verify(mockSemasterSearchRepository, times(1)).save(testSemaster);
     }
 
     @Test
@@ -200,6 +224,9 @@ public class SemasterResourceIT {
         // Validate the Semaster in the database
         List<Semaster> semasterList = semasterRepository.findAll();
         assertThat(semasterList).hasSize(databaseSizeBeforeUpdate);
+
+        // Validate the Semaster in Elasticsearch
+        verify(mockSemasterSearchRepository, times(0)).save(semaster);
     }
 
     @Test
@@ -218,5 +245,24 @@ public class SemasterResourceIT {
         // Validate the database contains one less item
         List<Semaster> semasterList = semasterRepository.findAll();
         assertThat(semasterList).hasSize(databaseSizeBeforeDelete - 1);
+
+        // Validate the Semaster in Elasticsearch
+        verify(mockSemasterSearchRepository, times(1)).deleteById(semaster.getId());
+    }
+
+    @Test
+    @Transactional
+    public void searchSemaster() throws Exception {
+        // Initialize the database
+        semasterRepository.saveAndFlush(semaster);
+        when(mockSemasterSearchRepository.search(queryStringQuery("id:" + semaster.getId())))
+            .thenReturn(Collections.singletonList(semaster));
+        // Search the semaster
+        restSemasterMockMvc.perform(get("/api/_search/semasters?query=id:" + semaster.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(semaster.getId().intValue())))
+            .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR)))
+            .andExpect(jsonPath("$.[*].season").value(hasItem(DEFAULT_SEASON.toString())));
     }
 }

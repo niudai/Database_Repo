@@ -5,6 +5,7 @@
         "title": "Records",
         "createLabel": "Créer un nouveau Record",
         "createOrEditLabel": "Créer ou éditer un Record",
+        "search": "Recherche pour Record",
         "notFound": "Aucun Record trouvé"
       },
       "created": "Un nouveau Record a été créé avec l'identifiant {{ param }}",
@@ -19,6 +20,7 @@
       "date": "Date",
       "score": "Score",
       "semaster": "Semaster",
+      "course": "Course",
       "student": "Student"
     }
   }

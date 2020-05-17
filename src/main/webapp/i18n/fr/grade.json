@@ -5,6 +5,7 @@
         "title": "Grades",
         "createLabel": "Créer un nouveau Grade",
         "createOrEditLabel": "Créer ou éditer un Grade",
+        "search": "Recherche pour Grade",
         "notFound": "Aucun Grade trouvé"
       },
       "created": "Un nouveau Grade a été créé avec l'identifiant {{ param }}",

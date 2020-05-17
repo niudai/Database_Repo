@@ -3,9 +3,13 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.JhipsterApp;
 import com.mycompany.myapp.domain.JException;
 import com.mycompany.myapp.repository.JExceptionRepository;
+import com.mycompany.myapp.repository.search.JExceptionSearchRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,10 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -27,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link JExceptionResource} REST controller.
  */
 @SpringBootTest(classes = JhipsterApp.class)
-
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class JExceptionResourceIT {
@@ -43,6 +50,14 @@ public class JExceptionResourceIT {
 
     @Autowired
     private JExceptionRepository jExceptionRepository;
+
+    /**
+     * This repository is mocked in the com.mycompany.myapp.repository.search test package.
+     *
+     * @see com.mycompany.myapp.repository.search.JExceptionSearchRepositoryMockConfiguration
+     */
+    @Autowired
+    private JExceptionSearchRepository mockJExceptionSearchRepository;
 
     @Autowired
     private EntityManager em;
@@ -102,6 +117,9 @@ public class JExceptionResourceIT {
         assertThat(testJException.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testJException.isIsYouthLeague()).isEqualTo(DEFAULT_IS_YOUTH_LEAGUE);
         assertThat(testJException.getCause()).isEqualTo(DEFAULT_CAUSE);
+
+        // Validate the JException in Elasticsearch
+        verify(mockJExceptionSearchRepository, times(1)).save(testJException);
     }
 
     @Test
@@ -121,6 +139,9 @@ public class JExceptionResourceIT {
         // Validate the JException in the database
         List<JException> jExceptionList = jExceptionRepository.findAll();
         assertThat(jExceptionList).hasSize(databaseSizeBeforeCreate);
+
+        // Validate the JException in Elasticsearch
+        verify(mockJExceptionSearchRepository, times(0)).save(jException);
     }
 
 
@@ -193,6 +214,9 @@ public class JExceptionResourceIT {
         assertThat(testJException.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testJException.isIsYouthLeague()).isEqualTo(UPDATED_IS_YOUTH_LEAGUE);
         assertThat(testJException.getCause()).isEqualTo(UPDATED_CAUSE);
+
+        // Validate the JException in Elasticsearch
+        verify(mockJExceptionSearchRepository, times(1)).save(testJException);
     }
 
     @Test
@@ -211,6 +235,9 @@ public class JExceptionResourceIT {
         // Validate the JException in the database
         List<JException> jExceptionList = jExceptionRepository.findAll();
         assertThat(jExceptionList).hasSize(databaseSizeBeforeUpdate);
+
+        // Validate the JException in Elasticsearch
+        verify(mockJExceptionSearchRepository, times(0)).save(jException);
     }
 
     @Test
@@ -229,5 +256,25 @@ public class JExceptionResourceIT {
         // Validate the database contains one less item
         List<JException> jExceptionList = jExceptionRepository.findAll();
         assertThat(jExceptionList).hasSize(databaseSizeBeforeDelete - 1);
+
+        // Validate the JException in Elasticsearch
+        verify(mockJExceptionSearchRepository, times(1)).deleteById(jException.getId());
+    }
+
+    @Test
+    @Transactional
+    public void searchJException() throws Exception {
+        // Initialize the database
+        jExceptionRepository.saveAndFlush(jException);
+        when(mockJExceptionSearchRepository.search(queryStringQuery("id:" + jException.getId())))
+            .thenReturn(Collections.singletonList(jException));
+        // Search the jException
+        restJExceptionMockMvc.perform(get("/api/_search/j-exceptions?query=id:" + jException.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(jException.getId().intValue())))
+            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
+            .andExpect(jsonPath("$.[*].isYouthLeague").value(hasItem(DEFAULT_IS_YOUTH_LEAGUE.booleanValue())))
+            .andExpect(jsonPath("$.[*].cause").value(hasItem(DEFAULT_CAUSE)));
     }
 }

@@ -5,6 +5,7 @@
         "title": "Campuses",
         "createLabel": "Créer un nouveau Campus",
         "createOrEditLabel": "Créer ou éditer un Campus",
+        "search": "Recherche pour Campus",
         "notFound": "Aucun Campus trouvé"
       },
       "created": "Un nouveau Campus a été créé avec l'identifiant {{ param }}",

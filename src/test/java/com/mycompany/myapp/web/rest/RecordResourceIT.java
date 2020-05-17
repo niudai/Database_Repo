@@ -3,9 +3,13 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.JhipsterApp;
 import com.mycompany.myapp.domain.Record;
 import com.mycompany.myapp.repository.RecordRepository;
+import com.mycompany.myapp.repository.search.RecordSearchRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,10 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -27,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link RecordResource} REST controller.
  */
 @SpringBootTest(classes = JhipsterApp.class)
-
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class RecordResourceIT {
@@ -40,6 +47,14 @@ public class RecordResourceIT {
 
     @Autowired
     private RecordRepository recordRepository;
+
+    /**
+     * This repository is mocked in the com.mycompany.myapp.repository.search test package.
+     *
+     * @see com.mycompany.myapp.repository.search.RecordSearchRepositoryMockConfiguration
+     */
+    @Autowired
+    private RecordSearchRepository mockRecordSearchRepository;
 
     @Autowired
     private EntityManager em;
@@ -96,6 +111,9 @@ public class RecordResourceIT {
         Record testRecord = recordList.get(recordList.size() - 1);
         assertThat(testRecord.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testRecord.getScore()).isEqualTo(DEFAULT_SCORE);
+
+        // Validate the Record in Elasticsearch
+        verify(mockRecordSearchRepository, times(1)).save(testRecord);
     }
 
     @Test
@@ -115,6 +133,9 @@ public class RecordResourceIT {
         // Validate the Record in the database
         List<Record> recordList = recordRepository.findAll();
         assertThat(recordList).hasSize(databaseSizeBeforeCreate);
+
+        // Validate the Record in Elasticsearch
+        verify(mockRecordSearchRepository, times(0)).save(record);
     }
 
 
@@ -183,6 +204,9 @@ public class RecordResourceIT {
         Record testRecord = recordList.get(recordList.size() - 1);
         assertThat(testRecord.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testRecord.getScore()).isEqualTo(UPDATED_SCORE);
+
+        // Validate the Record in Elasticsearch
+        verify(mockRecordSearchRepository, times(1)).save(testRecord);
     }
 
     @Test
@@ -201,6 +225,9 @@ public class RecordResourceIT {
         // Validate the Record in the database
         List<Record> recordList = recordRepository.findAll();
         assertThat(recordList).hasSize(databaseSizeBeforeUpdate);
+
+        // Validate the Record in Elasticsearch
+        verify(mockRecordSearchRepository, times(0)).save(record);
     }
 
     @Test
@@ -219,5 +246,24 @@ public class RecordResourceIT {
         // Validate the database contains one less item
         List<Record> recordList = recordRepository.findAll();
         assertThat(recordList).hasSize(databaseSizeBeforeDelete - 1);
+
+        // Validate the Record in Elasticsearch
+        verify(mockRecordSearchRepository, times(1)).deleteById(record.getId());
+    }
+
+    @Test
+    @Transactional
+    public void searchRecord() throws Exception {
+        // Initialize the database
+        recordRepository.saveAndFlush(record);
+        when(mockRecordSearchRepository.search(queryStringQuery("id:" + record.getId())))
+            .thenReturn(Collections.singletonList(record));
+        // Search the record
+        restRecordMockMvc.perform(get("/api/_search/records?query=id:" + record.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(record.getId().intValue())))
+            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
+            .andExpect(jsonPath("$.[*].score").value(hasItem(DEFAULT_SCORE)));
     }
 }

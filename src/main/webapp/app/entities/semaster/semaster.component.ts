@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,11 +16,36 @@ import { SemasterDeleteDialogComponent } from './semaster-delete-dialog.componen
 export class SemasterComponent implements OnInit, OnDestroy {
   semasters?: ISemaster[];
   eventSubscriber?: Subscription;
+  currentSearch: string;
 
-  constructor(protected semasterService: SemasterService, protected eventManager: JhiEventManager, protected modalService: NgbModal) {}
+  constructor(
+    protected semasterService: SemasterService,
+    protected eventManager: JhiEventManager,
+    protected modalService: NgbModal,
+    protected activatedRoute: ActivatedRoute
+  ) {
+    this.currentSearch =
+      this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams['search']
+        ? this.activatedRoute.snapshot.queryParams['search']
+        : '';
+  }
 
   loadAll(): void {
+    if (this.currentSearch) {
+      this.semasterService
+        .search({
+          query: this.currentSearch
+        })
+        .subscribe((res: HttpResponse<ISemaster[]>) => (this.semasters = res.body || []));
+      return;
+    }
+
     this.semasterService.query().subscribe((res: HttpResponse<ISemaster[]>) => (this.semasters = res.body || []));
+  }
+
+  search(query: string): void {
+    this.currentSearch = query;
+    this.loadAll();
   }
 
   ngOnInit(): void {

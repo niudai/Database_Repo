@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,11 +16,36 @@ import { RecordDeleteDialogComponent } from './record-delete-dialog.component';
 export class RecordComponent implements OnInit, OnDestroy {
   records?: IRecord[];
   eventSubscriber?: Subscription;
+  currentSearch: string;
 
-  constructor(protected recordService: RecordService, protected eventManager: JhiEventManager, protected modalService: NgbModal) {}
+  constructor(
+    protected recordService: RecordService,
+    protected eventManager: JhiEventManager,
+    protected modalService: NgbModal,
+    protected activatedRoute: ActivatedRoute
+  ) {
+    this.currentSearch =
+      this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams['search']
+        ? this.activatedRoute.snapshot.queryParams['search']
+        : '';
+  }
 
   loadAll(): void {
+    if (this.currentSearch) {
+      this.recordService
+        .search({
+          query: this.currentSearch
+        })
+        .subscribe((res: HttpResponse<IRecord[]>) => (this.records = res.body || []));
+      return;
+    }
+
     this.recordService.query().subscribe((res: HttpResponse<IRecord[]>) => (this.records = res.body || []));
+  }
+
+  search(query: string): void {
+    this.currentSearch = query;
+    this.loadAll();
   }
 
   ngOnInit(): void {

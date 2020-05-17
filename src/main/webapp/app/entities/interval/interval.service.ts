@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
-import { createRequestOption } from 'app/shared/util/request-util';
+import { createRequestOption, Search } from 'app/shared/util/request-util';
 import { IInterval } from 'app/shared/model/interval.model';
 
 type EntityResponseType = HttpResponse<IInterval>;
@@ -12,6 +12,7 @@ type EntityArrayResponseType = HttpResponse<IInterval[]>;
 @Injectable({ providedIn: 'root' })
 export class IntervalService {
   public resourceUrl = SERVER_API_URL + 'api/intervals';
+  public resourceSearchUrl = SERVER_API_URL + 'api/_search/intervals';
 
   constructor(protected http: HttpClient) {}
 
@@ -34,5 +35,10 @@ export class IntervalService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  search(req: Search): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IInterval[]>(this.resourceSearchUrl, { params: options, observe: 'response' });
   }
 }

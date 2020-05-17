@@ -2,10 +2,11 @@
   "jhipsterApp": {
     "student": {
       "home": {
-        "title": "学生",
+        "title": "Students",
         "createLabel": "Create a new Student",
         "createOrEditLabel": "Create or edit a Student",
-        "notFound": "No 学生 found"
+        "search": "Search for Student",
+        "notFound": "No Students found"
       },
       "created": "A new Student is created with identifier {{ param }}",
       "updated": "A Student is updated with identifier {{ param }}",
@@ -16,13 +17,13 @@
       "detail": {
         "title": "Student"
       },
-      "studentNumber": "学号",
-      "startDate": "入学日期",
-      "email": "邮箱",
-      "major": "专业",
-      "exceptions": "学籍异动",
-      "record": "选课记录",
-      "people": "基本信息",
+      "studentNumber": "Student Number",
+      "startDate": "Start Date",
+      "email": "Email",
+      "major": "Major",
+      "exceptions": "Exceptions",
+      "record": "Record",
+      "people": "People",
       "schoolClass": "School Class"
     }
   }

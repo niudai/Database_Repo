@@ -2,8 +2,8 @@
   "jhipsterApp": {
     "IdType": {
       "null": "",
-      "IdCard": "身份证",
-      "Passport": "护照"
+      "IdCard": "IdCard",
+      "Passport": "Passport"
     }
   }
 }

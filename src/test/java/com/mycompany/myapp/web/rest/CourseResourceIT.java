@@ -3,9 +3,13 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.JhipsterApp;
 import com.mycompany.myapp.domain.Course;
 import com.mycompany.myapp.repository.CourseRepository;
+import com.mycompany.myapp.repository.search.CourseSearchRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,10 +18,13 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -26,7 +33,7 @@ import com.mycompany.myapp.domain.enumeration.ExamType;
  * Integration tests for the {@link CourseResource} REST controller.
  */
 @SpringBootTest(classes = JhipsterApp.class)
-
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class CourseResourceIT {
@@ -39,6 +46,14 @@ public class CourseResourceIT {
 
     @Autowired
     private CourseRepository courseRepository;
+
+    /**
+     * This repository is mocked in the com.mycompany.myapp.repository.search test package.
+     *
+     * @see com.mycompany.myapp.repository.search.CourseSearchRepositoryMockConfiguration
+     */
+    @Autowired
+    private CourseSearchRepository mockCourseSearchRepository;
 
     @Autowired
     private EntityManager em;
@@ -95,6 +110,9 @@ public class CourseResourceIT {
         Course testCourse = courseList.get(courseList.size() - 1);
         assertThat(testCourse.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testCourse.getExamType()).isEqualTo(DEFAULT_EXAM_TYPE);
+
+        // Validate the Course in Elasticsearch
+        verify(mockCourseSearchRepository, times(1)).save(testCourse);
     }
 
     @Test
@@ -114,6 +132,9 @@ public class CourseResourceIT {
         // Validate the Course in the database
         List<Course> courseList = courseRepository.findAll();
         assertThat(courseList).hasSize(databaseSizeBeforeCreate);
+
+        // Validate the Course in Elasticsearch
+        verify(mockCourseSearchRepository, times(0)).save(course);
     }
 
 
@@ -182,6 +203,9 @@ public class CourseResourceIT {
         Course testCourse = courseList.get(courseList.size() - 1);
         assertThat(testCourse.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCourse.getExamType()).isEqualTo(UPDATED_EXAM_TYPE);
+
+        // Validate the Course in Elasticsearch
+        verify(mockCourseSearchRepository, times(1)).save(testCourse);
     }
 
     @Test
@@ -200,6 +224,9 @@ public class CourseResourceIT {
         // Validate the Course in the database
         List<Course> courseList = courseRepository.findAll();
         assertThat(courseList).hasSize(databaseSizeBeforeUpdate);
+
+        // Validate the Course in Elasticsearch
+        verify(mockCourseSearchRepository, times(0)).save(course);
     }
 
     @Test
@@ -218,5 +245,24 @@ public class CourseResourceIT {
         // Validate the database contains one less item
         List<Course> courseList = courseRepository.findAll();
         assertThat(courseList).hasSize(databaseSizeBeforeDelete - 1);
+
+        // Validate the Course in Elasticsearch
+        verify(mockCourseSearchRepository, times(1)).deleteById(course.getId());
+    }
+
+    @Test
+    @Transactional
+    public void searchCourse() throws Exception {
+        // Initialize the database
+        courseRepository.saveAndFlush(course);
+        when(mockCourseSearchRepository.search(queryStringQuery("id:" + course.getId())))
+            .thenReturn(Collections.singletonList(course));
+        // Search the course
+        restCourseMockMvc.perform(get("/api/_search/courses?query=id:" + course.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(course.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].examType").value(hasItem(DEFAULT_EXAM_TYPE.toString())));
     }
 }

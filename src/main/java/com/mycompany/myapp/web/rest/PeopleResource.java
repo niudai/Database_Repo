@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.People;
 import com.mycompany.myapp.repository.PeopleRepository;
+import com.mycompany.myapp.repository.search.PeopleSearchRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -17,6 +18,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing {@link com.mycompany.myapp.domain.People}.
@@ -35,8 +40,11 @@ public class PeopleResource {
 
     private final PeopleRepository peopleRepository;
 
-    public PeopleResource(PeopleRepository peopleRepository) {
+    private final PeopleSearchRepository peopleSearchRepository;
+
+    public PeopleResource(PeopleRepository peopleRepository, PeopleSearchRepository peopleSearchRepository) {
         this.peopleRepository = peopleRepository;
+        this.peopleSearchRepository = peopleSearchRepository;
     }
 
     /**
@@ -53,6 +61,7 @@ public class PeopleResource {
             throw new BadRequestAlertException("A new people cannot already have an ID", ENTITY_NAME, "idexists");
         }
         People result = peopleRepository.save(people);
+        peopleSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/people/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -74,6 +83,7 @@ public class PeopleResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         People result = peopleRepository.save(people);
+        peopleSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, people.getId().toString()))
             .body(result);
@@ -113,6 +123,22 @@ public class PeopleResource {
     public ResponseEntity<Void> deletePeople(@PathVariable Long id) {
         log.debug("REST request to delete People : {}", id);
         peopleRepository.deleteById(id);
+        peopleSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * {@code SEARCH  /_search/people?query=:query} : search for the people corresponding
+     * to the query.
+     *
+     * @param query the query of the people search.
+     * @return the result of the search.
+     */
+    @GetMapping("/_search/people")
+    public List<People> searchPeople(@RequestParam String query) {
+        log.debug("REST request to search People for query {}", query);
+        return StreamSupport
+            .stream(peopleSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .collect(Collectors.toList());
     }
 }

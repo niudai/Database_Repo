@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Campus;
 import com.mycompany.myapp.repository.CampusRepository;
+import com.mycompany.myapp.repository.search.CampusSearchRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -17,6 +18,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing {@link com.mycompany.myapp.domain.Campus}.
@@ -35,8 +40,11 @@ public class CampusResource {
 
     private final CampusRepository campusRepository;
 
-    public CampusResource(CampusRepository campusRepository) {
+    private final CampusSearchRepository campusSearchRepository;
+
+    public CampusResource(CampusRepository campusRepository, CampusSearchRepository campusSearchRepository) {
         this.campusRepository = campusRepository;
+        this.campusSearchRepository = campusSearchRepository;
     }
 
     /**
@@ -53,6 +61,7 @@ public class CampusResource {
             throw new BadRequestAlertException("A new campus cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Campus result = campusRepository.save(campus);
+        campusSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/campuses/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -74,6 +83,7 @@ public class CampusResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Campus result = campusRepository.save(campus);
+        campusSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, campus.getId().toString()))
             .body(result);
@@ -113,6 +123,22 @@ public class CampusResource {
     public ResponseEntity<Void> deleteCampus(@PathVariable Long id) {
         log.debug("REST request to delete Campus : {}", id);
         campusRepository.deleteById(id);
+        campusSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * {@code SEARCH  /_search/campuses?query=:query} : search for the campus corresponding
+     * to the query.
+     *
+     * @param query the query of the campus search.
+     * @return the result of the search.
+     */
+    @GetMapping("/_search/campuses")
+    public List<Campus> searchCampuses(@RequestParam String query) {
+        log.debug("REST request to search Campuses for query {}", query);
+        return StreamSupport
+            .stream(campusSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .collect(Collectors.toList());
     }
 }

@@ -2,22 +2,23 @@
   "jhipsterApp": {
     "semaster": {
       "home": {
-        "title": "学期",
-        "createLabel": "Create a new 学期",
-        "createOrEditLabel": "Create or edit a 学期",
-        "notFound": "No 学期s found"
+        "title": "Semasters",
+        "createLabel": "Create a new Semaster",
+        "createOrEditLabel": "Create or edit a Semaster",
+        "search": "Search for Semaster",
+        "notFound": "No Semasters found"
       },
-      "created": "A new 学期 is created with identifier {{ param }}",
-      "updated": "A 学期 is updated with identifier {{ param }}",
-      "deleted": "A 学期 is deleted with identifier {{ param }}",
+      "created": "A new Semaster is created with identifier {{ param }}",
+      "updated": "A Semaster is updated with identifier {{ param }}",
+      "deleted": "A Semaster is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete 学期 {{ id }}?"
+        "question": "Are you sure you want to delete Semaster {{ id }}?"
       },
       "detail": {
-        "title": "学期"
+        "title": "Semaster"
       },
-      "year": "年份",
-      "season": "季节"
+      "year": "Year",
+      "season": "Season"
     }
   }
 }

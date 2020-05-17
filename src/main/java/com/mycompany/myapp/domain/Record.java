@@ -6,6 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.util.Objects;
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "record")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "record")
 public class Record implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,6 +35,10 @@ public class Record implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("records")
     private Semaster semaster;
+
+    @ManyToOne
+    @JsonIgnoreProperties("records")
+    private Course course;
 
     @ManyToOne
     @JsonIgnoreProperties("records")
@@ -84,6 +90,19 @@ public class Record implements Serializable {
 
     public void setSemaster(Semaster semaster) {
         this.semaster = semaster;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public Record course(Course course) {
+        this.course = course;
+        return this;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public Student getStudent() {

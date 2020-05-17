@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Semaster;
 import com.mycompany.myapp.repository.SemasterRepository;
+import com.mycompany.myapp.repository.search.SemasterSearchRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -17,6 +18,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing {@link com.mycompany.myapp.domain.Semaster}.
@@ -35,8 +40,11 @@ public class SemasterResource {
 
     private final SemasterRepository semasterRepository;
 
-    public SemasterResource(SemasterRepository semasterRepository) {
+    private final SemasterSearchRepository semasterSearchRepository;
+
+    public SemasterResource(SemasterRepository semasterRepository, SemasterSearchRepository semasterSearchRepository) {
         this.semasterRepository = semasterRepository;
+        this.semasterSearchRepository = semasterSearchRepository;
     }
 
     /**
@@ -53,6 +61,7 @@ public class SemasterResource {
             throw new BadRequestAlertException("A new semaster cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Semaster result = semasterRepository.save(semaster);
+        semasterSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/semasters/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -74,6 +83,7 @@ public class SemasterResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Semaster result = semasterRepository.save(semaster);
+        semasterSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, semaster.getId().toString()))
             .body(result);
@@ -113,6 +123,22 @@ public class SemasterResource {
     public ResponseEntity<Void> deleteSemaster(@PathVariable Long id) {
         log.debug("REST request to delete Semaster : {}", id);
         semasterRepository.deleteById(id);
+        semasterSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * {@code SEARCH  /_search/semasters?query=:query} : search for the semaster corresponding
+     * to the query.
+     *
+     * @param query the query of the semaster search.
+     * @return the result of the search.
+     */
+    @GetMapping("/_search/semasters")
+    public List<Semaster> searchSemasters(@RequestParam String query) {
+        log.debug("REST request to search Semasters for query {}", query);
+        return StreamSupport
+            .stream(semasterSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .collect(Collectors.toList());
     }
 }

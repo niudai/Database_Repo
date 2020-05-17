@@ -20,6 +20,13 @@
         },
         {
             "relationshipType": "many-to-one",
+            "otherEntityName": "course",
+            "otherEntityRelationshipName": "record",
+            "relationshipName": "course",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
             "otherEntityName": "student",
             "otherEntityRelationshipName": "record",
             "relationshipName": "student",
