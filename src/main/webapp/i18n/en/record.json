@@ -19,6 +19,7 @@
       "date": "Date",
       "score": "Score",
       "semaster": "Semaster",
+      "course": "Course",
       "student": "Student"
     }
   }

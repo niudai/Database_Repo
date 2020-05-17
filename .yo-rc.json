@@ -23,7 +23,7 @@
     "testFrameworks": [],
     "websocket": false,
     "jhipsterVersion": "6.8.0",
-    "creationTimestamp": 1588732680635,
+    "creationTimestamp": 1589718600435,
     "skipServer": false,
     "packageFolder": "com/mycompany/myapp",
     "packageName": "com.mycompany.myapp",

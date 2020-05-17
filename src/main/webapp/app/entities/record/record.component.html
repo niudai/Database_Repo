@@ -26,6 +26,7 @@
                     <th scope="col" ><span jhiTranslate="jhipsterApp.record.date">Date</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.record.score">Score</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.record.semaster">Semaster</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.record.course">Course</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.record.student">Student</span></th>
                     <th scope="col"></th>
                 </tr>
@@ -38,6 +39,11 @@
                     <td>
                         <div *ngIf="record.semaster">
                             <a [routerLink]="['/semaster', record.semaster?.id, 'view']" >{{ record.semaster?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="record.course">
+                            <a [routerLink]="['/course', record.course?.id, 'view']" >{{ record.course?.id }}</a>
                         </div>
                     </td>
                     <td>

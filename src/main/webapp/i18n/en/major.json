@@ -2,25 +2,25 @@
   "jhipsterApp": {
     "major": {
       "home": {
-        "title": "专业",
-        "createLabel": "创建新专业",
-        "createOrEditLabel": "编辑专业",
-        "notFound": "No 专业s found"
+        "title": "Majors",
+        "createLabel": "Create a new Major",
+        "createOrEditLabel": "Create or edit a Major",
+        "notFound": "No Majors found"
       },
-      "created": "A new 专业 is created with identifier {{ param }}",
-      "updated": "A 专业 is updated with identifier {{ param }}",
-      "deleted": "A 专业 is deleted with identifier {{ param }}",
+      "created": "A new Major is created with identifier {{ param }}",
+      "updated": "A Major is updated with identifier {{ param }}",
+      "deleted": "A Major is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete 专业 {{ id }}?"
+        "question": "Are you sure you want to delete Major {{ id }}?"
       },
       "detail": {
-        "title": "专业"
+        "title": "Major"
       },
-      "name": "专业名称",
-      "schoolClass": "班级",
-      "teachers": "老师",
-      "course": "课程",
-      "campus": "校区"
+      "name": "Name",
+      "schoolClass": "School Class",
+      "teachers": "Teachers",
+      "course": "Course",
+      "campus": "Campus"
     }
   }
 }

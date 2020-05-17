@@ -2,7 +2,7 @@
   "jhipsterApp": {
     "interval": {
       "home": {
-        "title": "开课时间",
+        "title": "Intervals",
         "createLabel": "Create a new Interval",
         "createOrEditLabel": "Create or edit a Interval",
         "notFound": "No Intervals found"
@@ -17,8 +17,8 @@
         "title": "Interval"
       },
       "day": "Day",
-      "start": "开始",
-      "end": "结束",
+      "start": "Start",
+      "end": "End",
       "course": "Course"
     }
   }

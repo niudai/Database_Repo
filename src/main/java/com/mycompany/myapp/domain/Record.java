@@ -36,6 +36,10 @@ public class Record implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("records")
+    private Course course;
+
+    @ManyToOne
+    @JsonIgnoreProperties("records")
     private Student student;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -84,6 +88,19 @@ public class Record implements Serializable {
 
     public void setSemaster(Semaster semaster) {
         this.semaster = semaster;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public Record course(Course course) {
+        this.course = course;
+        return this;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public Student getStudent() {
