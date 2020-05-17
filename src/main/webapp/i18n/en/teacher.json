@@ -5,7 +5,6 @@
         "title": "Teachers",
         "createLabel": "Create a new Teacher",
         "createOrEditLabel": "Create or edit a Teacher",
-        "search": "Search for Teacher",
         "notFound": "No Teachers found"
       },
       "created": "A new Teacher is created with identifier {{ param }}",

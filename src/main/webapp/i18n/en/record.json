@@ -5,7 +5,6 @@
         "title": "Records",
         "createLabel": "Create a new Record",
         "createOrEditLabel": "Create or edit a Record",
-        "search": "Search for Record",
         "notFound": "No Records found"
       },
       "created": "A new Record is created with identifier {{ param }}",
@@ -20,7 +19,6 @@
       "date": "Date",
       "score": "Score",
       "semaster": "Semaster",
-      "course": "Course",
       "student": "Student"
     }
   }

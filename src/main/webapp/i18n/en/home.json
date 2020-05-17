@@ -1,6 +1,6 @@
 {
   "home": {
-    "title": "Welcome, Java Hipster!",
+    "title": "欢迎来到 USTC 信息管理系统!",
     "subtitle": "This is your homepage",
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."
