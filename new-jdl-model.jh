@@ -19,7 +19,6 @@ entity Major {
 
 entity Record {
 	student String
-    course String
     date LocalDate
     semaster String
     score Integer
@@ -129,6 +128,7 @@ relationship ManyToOne {
     JException{originalGrade} to Grade,
     JException{newGrade} to Grade,
     Record{semaster} to Semaster,
+    Record{course} to Course,
 	Course{semaster} to Semaster,
 	SchoolClass{grade} to Grade,
 }
