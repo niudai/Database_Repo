@@ -19,7 +19,7 @@
         "interval": "上课时间",
         "semaster": "学期",
         "exception": "Exception",
-        "jException": "学籍移动",
+        "jException": "学籍异动",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

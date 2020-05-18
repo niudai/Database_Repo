@@ -5,7 +5,8 @@
         "title": "开课时间",
         "createLabel": "Create a new Interval",
         "createOrEditLabel": "Create or edit a Interval",
-        "notFound": "No Intervals found"
+        "notFound": "No Intervals found",
+        "search": "搜索开课时间"
       },
       "created": "A new Interval is created with identifier {{ param }}",
       "updated": "A Interval is updated with identifier {{ param }}",

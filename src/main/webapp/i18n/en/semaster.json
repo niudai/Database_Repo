@@ -5,7 +5,8 @@
         "title": "学期",
         "createLabel": "Create a new 学期",
         "createOrEditLabel": "Create or edit a 学期",
-        "notFound": "No 学期s found"
+        "notFound": "No 学期s found",
+        "search": "搜索学期"
       },
       "created": "A new 学期 is created with identifier {{ param }}",
       "updated": "A 学期 is updated with identifier {{ param }}",

@@ -2,28 +2,29 @@
   "jhipsterApp": {
     "teacher": {
       "home": {
-        "title": "Teachers",
-        "createLabel": "Create a new Teacher",
-        "createOrEditLabel": "Create or edit a Teacher",
-        "notFound": "No Teachers found"
+        "title": "教师",
+        "createLabel": "Create a new 教师",
+        "createOrEditLabel": "Create or edit a 教师",
+        "notFound": "No 教师 found",
+        "search": "搜索教师"
       },
-      "created": "A new Teacher is created with identifier {{ param }}",
-      "updated": "A Teacher is updated with identifier {{ param }}",
-      "deleted": "A Teacher is deleted with identifier {{ param }}",
+      "created": "A new 教师 is created with identifier {{ param }}",
+      "updated": "A 教师 is updated with identifier {{ param }}",
+      "deleted": "A 教师 is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Teacher {{ id }}?"
+        "question": "Are you sure you want to delete 教师 {{ id }}?"
       },
       "detail": {
-        "title": "Teacher"
+        "title": "教师"
       },
-      "workNumber": "Work Number",
-      "startDate": "Start Date",
-      "email": "Email",
-      "title": "Title",
-      "course": "Course",
-      "schoolClass": "School Class",
-      "people": "People",
-      "major": "Major"
+      "workNumber": "工号",
+      "startDate": "注册日期",
+      "email": "邮箱",
+      "title": "职级",
+      "course": "课程",
+      "schoolClass": "班级",
+      "people": "基本信息",
+      "major": "专业"
     }
   }
 }
