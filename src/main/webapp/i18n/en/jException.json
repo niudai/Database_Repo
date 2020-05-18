@@ -5,7 +5,8 @@
         "title": "学籍异动",
         "createLabel": "Create a new 学籍异动",
         "createOrEditLabel": "Create or edit a 学籍异动",
-        "notFound": "No 学籍异动 found"
+        "notFound": "No 学籍异动 found",
+        "search": "搜索学籍异动"
       },
       "created": "A new 学籍异动 is created with identifier {{ param }}",
       "updated": "A 学籍异动 is updated with identifier {{ param }}",

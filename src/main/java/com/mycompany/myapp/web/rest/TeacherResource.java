@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Teacher;
 import com.mycompany.myapp.repository.TeacherRepository;
+import com.mycompany.myapp.repository.search.TeacherSearchRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -20,6 +21,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import static org.elasticsearch.index.query.QueryBuilders.*;
+
 /**
  * REST controller for managing {@link com.mycompany.myapp.domain.Teacher}.
  */
@@ -37,8 +40,11 @@ public class TeacherResource {
 
     private final TeacherRepository teacherRepository;
 
-    public TeacherResource(TeacherRepository teacherRepository) {
+    private final TeacherSearchRepository teacherSearchRepository;
+
+    public TeacherResource(TeacherRepository teacherRepository, TeacherSearchRepository teacherSearchRepository) {
         this.teacherRepository = teacherRepository;
+        this.teacherSearchRepository = teacherSearchRepository;
     }
 
     /**
@@ -55,6 +61,7 @@ public class TeacherResource {
             throw new BadRequestAlertException("A new teacher cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Teacher result = teacherRepository.save(teacher);
+        teacherSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/teachers/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -76,6 +83,7 @@ public class TeacherResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Teacher result = teacherRepository.save(teacher);
+        teacherSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, teacher.getId().toString()))
             .body(result);
@@ -130,6 +138,22 @@ public class TeacherResource {
     public ResponseEntity<Void> deleteTeacher(@PathVariable Long id) {
         log.debug("REST request to delete Teacher : {}", id);
         teacherRepository.deleteById(id);
+        teacherSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * {@code SEARCH  /_search/teachers?query=:query} : search for the teacher corresponding
+     * to the query.
+     *
+     * @param query the query of the teacher search.
+     * @return the result of the search.
+     */
+    @GetMapping("/_search/teachers")
+    public List<Teacher> searchTeachers(@RequestParam String query) {
+        log.debug("REST request to search Teachers for query {}", query);
+        return StreamSupport
+            .stream(teacherSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .collect(Collectors.toList());
     }
 }

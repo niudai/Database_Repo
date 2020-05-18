@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Course;
 import com.mycompany.myapp.repository.CourseRepository;
+import com.mycompany.myapp.repository.search.CourseSearchRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -17,6 +18,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing {@link com.mycompany.myapp.domain.Course}.
@@ -35,8 +40,11 @@ public class CourseResource {
 
     private final CourseRepository courseRepository;
 
-    public CourseResource(CourseRepository courseRepository) {
+    private final CourseSearchRepository courseSearchRepository;
+
+    public CourseResource(CourseRepository courseRepository, CourseSearchRepository courseSearchRepository) {
         this.courseRepository = courseRepository;
+        this.courseSearchRepository = courseSearchRepository;
     }
 
     /**
@@ -53,6 +61,7 @@ public class CourseResource {
             throw new BadRequestAlertException("A new course cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Course result = courseRepository.save(course);
+        courseSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/courses/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -74,6 +83,7 @@ public class CourseResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Course result = courseRepository.save(course);
+        courseSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, course.getId().toString()))
             .body(result);
@@ -113,6 +123,22 @@ public class CourseResource {
     public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
         log.debug("REST request to delete Course : {}", id);
         courseRepository.deleteById(id);
+        courseSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * {@code SEARCH  /_search/courses?query=:query} : search for the course corresponding
+     * to the query.
+     *
+     * @param query the query of the course search.
+     * @return the result of the search.
+     */
+    @GetMapping("/_search/courses")
+    public List<Course> searchCourses(@RequestParam String query) {
+        log.debug("REST request to search Courses for query {}", query);
+        return StreamSupport
+            .stream(courseSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .collect(Collectors.toList());
     }
 }

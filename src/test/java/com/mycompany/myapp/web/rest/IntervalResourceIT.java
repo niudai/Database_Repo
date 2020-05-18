@@ -3,9 +3,13 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.JhipsterApp;
 import com.mycompany.myapp.domain.Interval;
 import com.mycompany.myapp.repository.IntervalRepository;
+import com.mycompany.myapp.repository.search.IntervalSearchRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,10 +18,13 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -26,7 +33,7 @@ import com.mycompany.myapp.domain.enumeration.WeekDay;
  * Integration tests for the {@link IntervalResource} REST controller.
  */
 @SpringBootTest(classes = JhipsterApp.class)
-
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class IntervalResourceIT {
@@ -42,6 +49,14 @@ public class IntervalResourceIT {
 
     @Autowired
     private IntervalRepository intervalRepository;
+
+    /**
+     * This repository is mocked in the com.mycompany.myapp.repository.search test package.
+     *
+     * @see com.mycompany.myapp.repository.search.IntervalSearchRepositoryMockConfiguration
+     */
+    @Autowired
+    private IntervalSearchRepository mockIntervalSearchRepository;
 
     @Autowired
     private EntityManager em;
@@ -101,6 +116,9 @@ public class IntervalResourceIT {
         assertThat(testInterval.getDay()).isEqualTo(DEFAULT_DAY);
         assertThat(testInterval.getStart()).isEqualTo(DEFAULT_START);
         assertThat(testInterval.getEnd()).isEqualTo(DEFAULT_END);
+
+        // Validate the Interval in Elasticsearch
+        verify(mockIntervalSearchRepository, times(1)).save(testInterval);
     }
 
     @Test
@@ -120,6 +138,9 @@ public class IntervalResourceIT {
         // Validate the Interval in the database
         List<Interval> intervalList = intervalRepository.findAll();
         assertThat(intervalList).hasSize(databaseSizeBeforeCreate);
+
+        // Validate the Interval in Elasticsearch
+        verify(mockIntervalSearchRepository, times(0)).save(interval);
     }
 
 
@@ -192,6 +213,9 @@ public class IntervalResourceIT {
         assertThat(testInterval.getDay()).isEqualTo(UPDATED_DAY);
         assertThat(testInterval.getStart()).isEqualTo(UPDATED_START);
         assertThat(testInterval.getEnd()).isEqualTo(UPDATED_END);
+
+        // Validate the Interval in Elasticsearch
+        verify(mockIntervalSearchRepository, times(1)).save(testInterval);
     }
 
     @Test
@@ -210,6 +234,9 @@ public class IntervalResourceIT {
         // Validate the Interval in the database
         List<Interval> intervalList = intervalRepository.findAll();
         assertThat(intervalList).hasSize(databaseSizeBeforeUpdate);
+
+        // Validate the Interval in Elasticsearch
+        verify(mockIntervalSearchRepository, times(0)).save(interval);
     }
 
     @Test
@@ -228,5 +255,25 @@ public class IntervalResourceIT {
         // Validate the database contains one less item
         List<Interval> intervalList = intervalRepository.findAll();
         assertThat(intervalList).hasSize(databaseSizeBeforeDelete - 1);
+
+        // Validate the Interval in Elasticsearch
+        verify(mockIntervalSearchRepository, times(1)).deleteById(interval.getId());
+    }
+
+    @Test
+    @Transactional
+    public void searchInterval() throws Exception {
+        // Initialize the database
+        intervalRepository.saveAndFlush(interval);
+        when(mockIntervalSearchRepository.search(queryStringQuery("id:" + interval.getId())))
+            .thenReturn(Collections.singletonList(interval));
+        // Search the interval
+        restIntervalMockMvc.perform(get("/api/_search/intervals?query=id:" + interval.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(interval.getId().intValue())))
+            .andExpect(jsonPath("$.[*].day").value(hasItem(DEFAULT_DAY.toString())))
+            .andExpect(jsonPath("$.[*].start").value(hasItem(DEFAULT_START)))
+            .andExpect(jsonPath("$.[*].end").value(hasItem(DEFAULT_END)));
     }
 }

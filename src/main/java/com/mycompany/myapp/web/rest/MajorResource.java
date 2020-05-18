@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Major;
 import com.mycompany.myapp.repository.MajorRepository;
+import com.mycompany.myapp.repository.search.MajorSearchRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -17,6 +18,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing {@link com.mycompany.myapp.domain.Major}.
@@ -35,8 +40,11 @@ public class MajorResource {
 
     private final MajorRepository majorRepository;
 
-    public MajorResource(MajorRepository majorRepository) {
+    private final MajorSearchRepository majorSearchRepository;
+
+    public MajorResource(MajorRepository majorRepository, MajorSearchRepository majorSearchRepository) {
         this.majorRepository = majorRepository;
+        this.majorSearchRepository = majorSearchRepository;
     }
 
     /**
@@ -53,6 +61,7 @@ public class MajorResource {
             throw new BadRequestAlertException("A new major cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Major result = majorRepository.save(major);
+        majorSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/majors/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -74,6 +83,7 @@ public class MajorResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Major result = majorRepository.save(major);
+        majorSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, major.getId().toString()))
             .body(result);
@@ -113,6 +123,22 @@ public class MajorResource {
     public ResponseEntity<Void> deleteMajor(@PathVariable Long id) {
         log.debug("REST request to delete Major : {}", id);
         majorRepository.deleteById(id);
+        majorSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * {@code SEARCH  /_search/majors?query=:query} : search for the major corresponding
+     * to the query.
+     *
+     * @param query the query of the major search.
+     * @return the result of the search.
+     */
+    @GetMapping("/_search/majors")
+    public List<Major> searchMajors(@RequestParam String query) {
+        log.debug("REST request to search Majors for query {}", query);
+        return StreamSupport
+            .stream(majorSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .collect(Collectors.toList());
     }
 }

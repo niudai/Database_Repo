@@ -2,24 +2,26 @@
   "jhipsterApp": {
     "record": {
       "home": {
-        "title": "Records",
-        "createLabel": "Create a new Record",
-        "createOrEditLabel": "Create or edit a Record",
-        "notFound": "No Records found"
+        "title": "选课记录",
+        "createLabel": "创建选课记录",
+        "createOrEditLabel": "Create or edit a 选课记录",
+        "notFound": "No 选课记录s found",
+        "search": "搜索选课记录"
       },
-      "created": "A new Record is created with identifier {{ param }}",
-      "updated": "A Record is updated with identifier {{ param }}",
-      "deleted": "A Record is deleted with identifier {{ param }}",
+      "created": "A new 选课记录 is created with identifier {{ param }}",
+      "updated": "A 选课记录 is updated with identifier {{ param }}",
+      "deleted": "A 选课记录 is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Record {{ id }}?"
+        "question": "Are you sure you want to delete 选课记录 {{ id }}?"
       },
       "detail": {
-        "title": "Record"
+        "title": "选课记录"
       },
-      "date": "Date",
-      "score": "Score",
-      "semaster": "Semaster",
-      "student": "Student"
+      "course": "课程",
+      "date": "日期",
+      "score": "分数",
+      "semaster": "学期",
+      "student": "学生"
     }
   }
 }

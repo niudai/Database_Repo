@@ -3,9 +3,13 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.JhipsterApp;
 import com.mycompany.myapp.domain.People;
 import com.mycompany.myapp.repository.PeopleRepository;
+import com.mycompany.myapp.repository.search.PeopleSearchRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,10 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -28,7 +35,7 @@ import com.mycompany.myapp.domain.enumeration.IdType;
  * Integration tests for the {@link PeopleResource} REST controller.
  */
 @SpringBootTest(classes = JhipsterApp.class)
-
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class PeopleResourceIT {
@@ -65,6 +72,14 @@ public class PeopleResourceIT {
 
     @Autowired
     private PeopleRepository peopleRepository;
+
+    /**
+     * This repository is mocked in the com.mycompany.myapp.repository.search test package.
+     *
+     * @see com.mycompany.myapp.repository.search.PeopleSearchRepositoryMockConfiguration
+     */
+    @Autowired
+    private PeopleSearchRepository mockPeopleSearchRepository;
 
     @Autowired
     private EntityManager em;
@@ -145,6 +160,9 @@ public class PeopleResourceIT {
         assertThat(testPeople.getAddress()).isEqualTo(DEFAULT_ADDRESS);
         assertThat(testPeople.getPostcode()).isEqualTo(DEFAULT_POSTCODE);
         assertThat(testPeople.getTelephone()).isEqualTo(DEFAULT_TELEPHONE);
+
+        // Validate the People in Elasticsearch
+        verify(mockPeopleSearchRepository, times(1)).save(testPeople);
     }
 
     @Test
@@ -164,6 +182,9 @@ public class PeopleResourceIT {
         // Validate the People in the database
         List<People> peopleList = peopleRepository.findAll();
         assertThat(peopleList).hasSize(databaseSizeBeforeCreate);
+
+        // Validate the People in Elasticsearch
+        verify(mockPeopleSearchRepository, times(0)).save(people);
     }
 
 
@@ -264,6 +285,9 @@ public class PeopleResourceIT {
         assertThat(testPeople.getAddress()).isEqualTo(UPDATED_ADDRESS);
         assertThat(testPeople.getPostcode()).isEqualTo(UPDATED_POSTCODE);
         assertThat(testPeople.getTelephone()).isEqualTo(UPDATED_TELEPHONE);
+
+        // Validate the People in Elasticsearch
+        verify(mockPeopleSearchRepository, times(1)).save(testPeople);
     }
 
     @Test
@@ -282,6 +306,9 @@ public class PeopleResourceIT {
         // Validate the People in the database
         List<People> peopleList = peopleRepository.findAll();
         assertThat(peopleList).hasSize(databaseSizeBeforeUpdate);
+
+        // Validate the People in Elasticsearch
+        verify(mockPeopleSearchRepository, times(0)).save(people);
     }
 
     @Test
@@ -300,5 +327,32 @@ public class PeopleResourceIT {
         // Validate the database contains one less item
         List<People> peopleList = peopleRepository.findAll();
         assertThat(peopleList).hasSize(databaseSizeBeforeDelete - 1);
+
+        // Validate the People in Elasticsearch
+        verify(mockPeopleSearchRepository, times(1)).deleteById(people.getId());
+    }
+
+    @Test
+    @Transactional
+    public void searchPeople() throws Exception {
+        // Initialize the database
+        peopleRepository.saveAndFlush(people);
+        when(mockPeopleSearchRepository.search(queryStringQuery("id:" + people.getId())))
+            .thenReturn(Collections.singletonList(people));
+        // Search the people
+        restPeopleMockMvc.perform(get("/api/_search/people?query=id:" + people.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(people.getId().intValue())))
+            .andExpect(jsonPath("$.[*].idType").value(hasItem(DEFAULT_ID_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].chineseName").value(hasItem(DEFAULT_CHINESE_NAME)))
+            .andExpect(jsonPath("$.[*].englishName").value(hasItem(DEFAULT_ENGLISH_NAME)))
+            .andExpect(jsonPath("$.[*].gender").value(hasItem(DEFAULT_GENDER)))
+            .andExpect(jsonPath("$.[*].birthDate").value(hasItem(DEFAULT_BIRTH_DATE.toString())))
+            .andExpect(jsonPath("$.[*].race").value(hasItem(DEFAULT_RACE)))
+            .andExpect(jsonPath("$.[*].nation").value(hasItem(DEFAULT_NATION)))
+            .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)))
+            .andExpect(jsonPath("$.[*].postcode").value(hasItem(DEFAULT_POSTCODE)))
+            .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE)));
     }
 }

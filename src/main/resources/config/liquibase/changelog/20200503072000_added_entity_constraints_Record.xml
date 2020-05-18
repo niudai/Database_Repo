@@ -14,6 +14,12 @@
                                  referencedColumnNames="id"
                                  referencedTableName="semaster"/>
 
+        <addForeignKeyConstraint baseColumnNames="course_id"
+                                 baseTableName="record"
+                                 constraintName="fk_record_course_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="course"/>
+
         <addForeignKeyConstraint baseColumnNames="student_id"
                                  baseTableName="record"
                                  constraintName="fk_record_student_id"

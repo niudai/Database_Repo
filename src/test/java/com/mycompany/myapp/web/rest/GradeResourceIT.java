@@ -3,9 +3,13 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.JhipsterApp;
 import com.mycompany.myapp.domain.Grade;
 import com.mycompany.myapp.repository.GradeRepository;
+import com.mycompany.myapp.repository.search.GradeSearchRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,10 +18,13 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -25,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link GradeResource} REST controller.
  */
 @SpringBootTest(classes = JhipsterApp.class)
-
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class GradeResourceIT {
@@ -35,6 +42,14 @@ public class GradeResourceIT {
 
     @Autowired
     private GradeRepository gradeRepository;
+
+    /**
+     * This repository is mocked in the com.mycompany.myapp.repository.search test package.
+     *
+     * @see com.mycompany.myapp.repository.search.GradeSearchRepositoryMockConfiguration
+     */
+    @Autowired
+    private GradeSearchRepository mockGradeSearchRepository;
 
     @Autowired
     private EntityManager em;
@@ -88,6 +103,9 @@ public class GradeResourceIT {
         assertThat(gradeList).hasSize(databaseSizeBeforeCreate + 1);
         Grade testGrade = gradeList.get(gradeList.size() - 1);
         assertThat(testGrade.getGrade()).isEqualTo(DEFAULT_GRADE);
+
+        // Validate the Grade in Elasticsearch
+        verify(mockGradeSearchRepository, times(1)).save(testGrade);
     }
 
     @Test
@@ -107,6 +125,9 @@ public class GradeResourceIT {
         // Validate the Grade in the database
         List<Grade> gradeList = gradeRepository.findAll();
         assertThat(gradeList).hasSize(databaseSizeBeforeCreate);
+
+        // Validate the Grade in Elasticsearch
+        verify(mockGradeSearchRepository, times(0)).save(grade);
     }
 
 
@@ -171,6 +192,9 @@ public class GradeResourceIT {
         assertThat(gradeList).hasSize(databaseSizeBeforeUpdate);
         Grade testGrade = gradeList.get(gradeList.size() - 1);
         assertThat(testGrade.getGrade()).isEqualTo(UPDATED_GRADE);
+
+        // Validate the Grade in Elasticsearch
+        verify(mockGradeSearchRepository, times(1)).save(testGrade);
     }
 
     @Test
@@ -189,6 +213,9 @@ public class GradeResourceIT {
         // Validate the Grade in the database
         List<Grade> gradeList = gradeRepository.findAll();
         assertThat(gradeList).hasSize(databaseSizeBeforeUpdate);
+
+        // Validate the Grade in Elasticsearch
+        verify(mockGradeSearchRepository, times(0)).save(grade);
     }
 
     @Test
@@ -207,5 +234,23 @@ public class GradeResourceIT {
         // Validate the database contains one less item
         List<Grade> gradeList = gradeRepository.findAll();
         assertThat(gradeList).hasSize(databaseSizeBeforeDelete - 1);
+
+        // Validate the Grade in Elasticsearch
+        verify(mockGradeSearchRepository, times(1)).deleteById(grade.getId());
+    }
+
+    @Test
+    @Transactional
+    public void searchGrade() throws Exception {
+        // Initialize the database
+        gradeRepository.saveAndFlush(grade);
+        when(mockGradeSearchRepository.search(queryStringQuery("id:" + grade.getId())))
+            .thenReturn(Collections.singletonList(grade));
+        // Search the grade
+        restGradeMockMvc.perform(get("/api/_search/grades?query=id:" + grade.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(grade.getId().intValue())))
+            .andExpect(jsonPath("$.[*].grade").value(hasItem(DEFAULT_GRADE)));
     }
 }

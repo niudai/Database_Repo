@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.JException;
 import com.mycompany.myapp.repository.JExceptionRepository;
+import com.mycompany.myapp.repository.search.JExceptionSearchRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -17,6 +18,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing {@link com.mycompany.myapp.domain.JException}.
@@ -35,8 +40,11 @@ public class JExceptionResource {
 
     private final JExceptionRepository jExceptionRepository;
 
-    public JExceptionResource(JExceptionRepository jExceptionRepository) {
+    private final JExceptionSearchRepository jExceptionSearchRepository;
+
+    public JExceptionResource(JExceptionRepository jExceptionRepository, JExceptionSearchRepository jExceptionSearchRepository) {
         this.jExceptionRepository = jExceptionRepository;
+        this.jExceptionSearchRepository = jExceptionSearchRepository;
     }
 
     /**
@@ -53,6 +61,7 @@ public class JExceptionResource {
             throw new BadRequestAlertException("A new jException cannot already have an ID", ENTITY_NAME, "idexists");
         }
         JException result = jExceptionRepository.save(jException);
+        jExceptionSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/j-exceptions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -74,6 +83,7 @@ public class JExceptionResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         JException result = jExceptionRepository.save(jException);
+        jExceptionSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, jException.getId().toString()))
             .body(result);
@@ -113,6 +123,22 @@ public class JExceptionResource {
     public ResponseEntity<Void> deleteJException(@PathVariable Long id) {
         log.debug("REST request to delete JException : {}", id);
         jExceptionRepository.deleteById(id);
+        jExceptionSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * {@code SEARCH  /_search/j-exceptions?query=:query} : search for the jException corresponding
+     * to the query.
+     *
+     * @param query the query of the jException search.
+     * @return the result of the search.
+     */
+    @GetMapping("/_search/j-exceptions")
+    public List<JException> searchJExceptions(@RequestParam String query) {
+        log.debug("REST request to search JExceptions for query {}", query);
+        return StreamSupport
+            .stream(jExceptionSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .collect(Collectors.toList());
     }
 }

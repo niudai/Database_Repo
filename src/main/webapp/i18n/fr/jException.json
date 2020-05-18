@@ -5,6 +5,7 @@
         "title": "JExceptions",
         "createLabel": "Créer un nouveau J Exception",
         "createOrEditLabel": "Créer ou éditer un J Exception",
+        "search": "Recherche pour J Exception",
         "notFound": "Aucun J Exception trouvé"
       },
       "created": "Un nouveau J Exception a été créé avec l'identifiant {{ param }}",

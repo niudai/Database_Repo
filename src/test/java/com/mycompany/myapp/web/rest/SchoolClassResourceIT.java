@@ -3,9 +3,13 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.JhipsterApp;
 import com.mycompany.myapp.domain.SchoolClass;
 import com.mycompany.myapp.repository.SchoolClassRepository;
+import com.mycompany.myapp.repository.search.SchoolClassSearchRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,10 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -27,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link SchoolClassResource} REST controller.
  */
 @SpringBootTest(classes = JhipsterApp.class)
-
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class SchoolClassResourceIT {
@@ -40,6 +47,14 @@ public class SchoolClassResourceIT {
 
     @Autowired
     private SchoolClassRepository schoolClassRepository;
+
+    /**
+     * This repository is mocked in the com.mycompany.myapp.repository.search test package.
+     *
+     * @see com.mycompany.myapp.repository.search.SchoolClassSearchRepositoryMockConfiguration
+     */
+    @Autowired
+    private SchoolClassSearchRepository mockSchoolClassSearchRepository;
 
     @Autowired
     private EntityManager em;
@@ -96,6 +111,9 @@ public class SchoolClassResourceIT {
         SchoolClass testSchoolClass = schoolClassList.get(schoolClassList.size() - 1);
         assertThat(testSchoolClass.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testSchoolClass.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
+
+        // Validate the SchoolClass in Elasticsearch
+        verify(mockSchoolClassSearchRepository, times(1)).save(testSchoolClass);
     }
 
     @Test
@@ -115,6 +133,9 @@ public class SchoolClassResourceIT {
         // Validate the SchoolClass in the database
         List<SchoolClass> schoolClassList = schoolClassRepository.findAll();
         assertThat(schoolClassList).hasSize(databaseSizeBeforeCreate);
+
+        // Validate the SchoolClass in Elasticsearch
+        verify(mockSchoolClassSearchRepository, times(0)).save(schoolClass);
     }
 
 
@@ -183,6 +204,9 @@ public class SchoolClassResourceIT {
         SchoolClass testSchoolClass = schoolClassList.get(schoolClassList.size() - 1);
         assertThat(testSchoolClass.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testSchoolClass.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
+
+        // Validate the SchoolClass in Elasticsearch
+        verify(mockSchoolClassSearchRepository, times(1)).save(testSchoolClass);
     }
 
     @Test
@@ -201,6 +225,9 @@ public class SchoolClassResourceIT {
         // Validate the SchoolClass in the database
         List<SchoolClass> schoolClassList = schoolClassRepository.findAll();
         assertThat(schoolClassList).hasSize(databaseSizeBeforeUpdate);
+
+        // Validate the SchoolClass in Elasticsearch
+        verify(mockSchoolClassSearchRepository, times(0)).save(schoolClass);
     }
 
     @Test
@@ -219,5 +246,24 @@ public class SchoolClassResourceIT {
         // Validate the database contains one less item
         List<SchoolClass> schoolClassList = schoolClassRepository.findAll();
         assertThat(schoolClassList).hasSize(databaseSizeBeforeDelete - 1);
+
+        // Validate the SchoolClass in Elasticsearch
+        verify(mockSchoolClassSearchRepository, times(1)).deleteById(schoolClass.getId());
+    }
+
+    @Test
+    @Transactional
+    public void searchSchoolClass() throws Exception {
+        // Initialize the database
+        schoolClassRepository.saveAndFlush(schoolClass);
+        when(mockSchoolClassSearchRepository.search(queryStringQuery("id:" + schoolClass.getId())))
+            .thenReturn(Collections.singletonList(schoolClass));
+        // Search the schoolClass
+        restSchoolClassMockMvc.perform(get("/api/_search/school-classes?query=id:" + schoolClass.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(schoolClass.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())));
     }
 }

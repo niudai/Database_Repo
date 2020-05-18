@@ -5,7 +5,8 @@
         "title": "学生",
         "createLabel": "Create a new Student",
         "createOrEditLabel": "Create or edit a Student",
-        "notFound": "No 学生 found"
+        "notFound": "No 学生 found",
+        "search": "搜索学生"
       },
       "created": "A new Student is created with identifier {{ param }}",
       "updated": "A Student is updated with identifier {{ param }}",
@@ -23,7 +24,7 @@
       "exceptions": "学籍异动",
       "record": "选课记录",
       "people": "基本信息",
-      "schoolClass": "School Class"
+      "schoolClass": "行政班级"
     }
   }
 }

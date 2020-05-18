@@ -5,7 +5,9 @@
         "title": "用户",
         "createLabel": "Create a new 用户",
         "createOrEditLabel": "Create or edit a 用户",
-        "notFound": "No 用户 found"
+        "notFound": "No 用户 found",
+        "people": "搜索在校人员",
+        "search": "搜索用户"
       },
       "created": "A new 用户 is created with identifier {{ param }}",
       "updated": "A 用户 is updated with identifier {{ param }}",

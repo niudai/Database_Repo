@@ -9,10 +9,12 @@ import { IRecord, Record } from 'app/shared/model/record.model';
 import { RecordService } from './record.service';
 import { ISemaster } from 'app/shared/model/semaster.model';
 import { SemasterService } from 'app/entities/semaster/semaster.service';
+import { ICourse } from 'app/shared/model/course.model';
+import { CourseService } from 'app/entities/course/course.service';
 import { IStudent } from 'app/shared/model/student.model';
 import { StudentService } from 'app/entities/student/student.service';
 
-type SelectableEntity = ISemaster | IStudent;
+type SelectableEntity = ISemaster | ICourse | IStudent;
 
 @Component({
   selector: 'jhi-record-update',
@@ -21,6 +23,7 @@ type SelectableEntity = ISemaster | IStudent;
 export class RecordUpdateComponent implements OnInit {
   isSaving = false;
   semasters: ISemaster[] = [];
+  courses: ICourse[] = [];
   students: IStudent[] = [];
   dateDp: any;
 
@@ -29,12 +32,14 @@ export class RecordUpdateComponent implements OnInit {
     date: [],
     score: [],
     semaster: [],
+    course: [],
     student: []
   });
 
   constructor(
     protected recordService: RecordService,
     protected semasterService: SemasterService,
+    protected courseService: CourseService,
     protected studentService: StudentService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -46,6 +51,8 @@ export class RecordUpdateComponent implements OnInit {
 
       this.semasterService.query().subscribe((res: HttpResponse<ISemaster[]>) => (this.semasters = res.body || []));
 
+      this.courseService.query().subscribe((res: HttpResponse<ICourse[]>) => (this.courses = res.body || []));
+
       this.studentService.query().subscribe((res: HttpResponse<IStudent[]>) => (this.students = res.body || []));
     });
   }
@@ -56,6 +63,7 @@ export class RecordUpdateComponent implements OnInit {
       date: record.date,
       score: record.score,
       semaster: record.semaster,
+      course: record.course,
       student: record.student
     });
   }
@@ -81,6 +89,7 @@ export class RecordUpdateComponent implements OnInit {
       date: this.editForm.get(['date'])!.value,
       score: this.editForm.get(['score'])!.value,
       semaster: this.editForm.get(['semaster'])!.value,
+      course: this.editForm.get(['course'])!.value,
       student: this.editForm.get(['student'])!.value
     };
   }

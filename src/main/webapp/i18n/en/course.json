@@ -5,7 +5,8 @@
         "title": "课程",
         "createLabel": "创建新课程",
         "createOrEditLabel": "创建并编辑课程",
-        "notFound": "No Courses found"
+        "notFound": "No Courses found",
+        "search": "搜索课程"
       },
       "created": "A new Course is created with identifier {{ param }}",
       "updated": "A Course is updated with identifier {{ param }}",

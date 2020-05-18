@@ -5,6 +5,7 @@
         "title": "People",
         "createLabel": "Créer un nouveau People",
         "createOrEditLabel": "Créer ou éditer un People",
+        "search": "Recherche pour People",
         "notFound": "Aucun People trouvé"
       },
       "created": "Un nouveau People a été créé avec l'identifiant {{ param }}",

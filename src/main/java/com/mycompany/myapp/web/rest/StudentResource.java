@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Student;
 import com.mycompany.myapp.repository.StudentRepository;
+import com.mycompany.myapp.repository.search.StudentSearchRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -20,6 +21,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import static org.elasticsearch.index.query.QueryBuilders.*;
+
 /**
  * REST controller for managing {@link com.mycompany.myapp.domain.Student}.
  */
@@ -37,8 +40,11 @@ public class StudentResource {
 
     private final StudentRepository studentRepository;
 
-    public StudentResource(StudentRepository studentRepository) {
+    private final StudentSearchRepository studentSearchRepository;
+
+    public StudentResource(StudentRepository studentRepository, StudentSearchRepository studentSearchRepository) {
         this.studentRepository = studentRepository;
+        this.studentSearchRepository = studentSearchRepository;
     }
 
     /**
@@ -55,6 +61,7 @@ public class StudentResource {
             throw new BadRequestAlertException("A new student cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Student result = studentRepository.save(student);
+        studentSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/students/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -76,6 +83,7 @@ public class StudentResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Student result = studentRepository.save(student);
+        studentSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, student.getId().toString()))
             .body(result);
@@ -123,6 +131,22 @@ public class StudentResource {
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
         log.debug("REST request to delete Student : {}", id);
         studentRepository.deleteById(id);
+        studentSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * {@code SEARCH  /_search/students?query=:query} : search for the student corresponding
+     * to the query.
+     *
+     * @param query the query of the student search.
+     * @return the result of the search.
+     */
+    @GetMapping("/_search/students")
+    public List<Student> searchStudents(@RequestParam String query) {
+        log.debug("REST request to search Students for query {}", query);
+        return StreamSupport
+            .stream(studentSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .collect(Collectors.toList());
     }
 }

@@ -5,7 +5,8 @@
         "title": "校区",
         "createLabel": "创建新校区",
         "createOrEditLabel": "编辑校区",
-        "notFound": "未找到校区"
+        "notFound": "未找到校区",
+        "search": "搜索校区"
       },
       "created": "A new Campus is created with identifier {{ param }}",
       "updated": "A Campus is updated with identifier {{ param }}",

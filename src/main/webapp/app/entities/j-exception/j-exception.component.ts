@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,11 +16,36 @@ import { JExceptionDeleteDialogComponent } from './j-exception-delete-dialog.com
 export class JExceptionComponent implements OnInit, OnDestroy {
   jExceptions?: IJException[];
   eventSubscriber?: Subscription;
+  currentSearch: string;
 
-  constructor(protected jExceptionService: JExceptionService, protected eventManager: JhiEventManager, protected modalService: NgbModal) {}
+  constructor(
+    protected jExceptionService: JExceptionService,
+    protected eventManager: JhiEventManager,
+    protected modalService: NgbModal,
+    protected activatedRoute: ActivatedRoute
+  ) {
+    this.currentSearch =
+      this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams['search']
+        ? this.activatedRoute.snapshot.queryParams['search']
+        : '';
+  }
 
   loadAll(): void {
+    if (this.currentSearch) {
+      this.jExceptionService
+        .search({
+          query: this.currentSearch
+        })
+        .subscribe((res: HttpResponse<IJException[]>) => (this.jExceptions = res.body || []));
+      return;
+    }
+
     this.jExceptionService.query().subscribe((res: HttpResponse<IJException[]>) => (this.jExceptions = res.body || []));
+  }
+
+  search(query: string): void {
+    this.currentSearch = query;
+    this.loadAll();
   }
 
   ngOnInit(): void {

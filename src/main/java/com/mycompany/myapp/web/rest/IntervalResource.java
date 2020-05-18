@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Interval;
 import com.mycompany.myapp.repository.IntervalRepository;
+import com.mycompany.myapp.repository.search.IntervalSearchRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -17,6 +18,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing {@link com.mycompany.myapp.domain.Interval}.
@@ -35,8 +40,11 @@ public class IntervalResource {
 
     private final IntervalRepository intervalRepository;
 
-    public IntervalResource(IntervalRepository intervalRepository) {
+    private final IntervalSearchRepository intervalSearchRepository;
+
+    public IntervalResource(IntervalRepository intervalRepository, IntervalSearchRepository intervalSearchRepository) {
         this.intervalRepository = intervalRepository;
+        this.intervalSearchRepository = intervalSearchRepository;
     }
 
     /**
@@ -53,6 +61,7 @@ public class IntervalResource {
             throw new BadRequestAlertException("A new interval cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Interval result = intervalRepository.save(interval);
+        intervalSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/intervals/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -74,6 +83,7 @@ public class IntervalResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Interval result = intervalRepository.save(interval);
+        intervalSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, interval.getId().toString()))
             .body(result);
@@ -113,6 +123,22 @@ public class IntervalResource {
     public ResponseEntity<Void> deleteInterval(@PathVariable Long id) {
         log.debug("REST request to delete Interval : {}", id);
         intervalRepository.deleteById(id);
+        intervalSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * {@code SEARCH  /_search/intervals?query=:query} : search for the interval corresponding
+     * to the query.
+     *
+     * @param query the query of the interval search.
+     * @return the result of the search.
+     */
+    @GetMapping("/_search/intervals")
+    public List<Interval> searchIntervals(@RequestParam String query) {
+        log.debug("REST request to search Intervals for query {}", query);
+        return StreamSupport
+            .stream(intervalSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .collect(Collectors.toList());
     }
 }

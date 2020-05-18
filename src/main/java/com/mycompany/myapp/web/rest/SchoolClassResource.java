@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.SchoolClass;
 import com.mycompany.myapp.repository.SchoolClassRepository;
+import com.mycompany.myapp.repository.search.SchoolClassSearchRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -17,6 +18,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing {@link com.mycompany.myapp.domain.SchoolClass}.
@@ -35,8 +40,11 @@ public class SchoolClassResource {
 
     private final SchoolClassRepository schoolClassRepository;
 
-    public SchoolClassResource(SchoolClassRepository schoolClassRepository) {
+    private final SchoolClassSearchRepository schoolClassSearchRepository;
+
+    public SchoolClassResource(SchoolClassRepository schoolClassRepository, SchoolClassSearchRepository schoolClassSearchRepository) {
         this.schoolClassRepository = schoolClassRepository;
+        this.schoolClassSearchRepository = schoolClassSearchRepository;
     }
 
     /**
@@ -53,6 +61,7 @@ public class SchoolClassResource {
             throw new BadRequestAlertException("A new schoolClass cannot already have an ID", ENTITY_NAME, "idexists");
         }
         SchoolClass result = schoolClassRepository.save(schoolClass);
+        schoolClassSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/school-classes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -74,6 +83,7 @@ public class SchoolClassResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         SchoolClass result = schoolClassRepository.save(schoolClass);
+        schoolClassSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, schoolClass.getId().toString()))
             .body(result);
@@ -113,6 +123,22 @@ public class SchoolClassResource {
     public ResponseEntity<Void> deleteSchoolClass(@PathVariable Long id) {
         log.debug("REST request to delete SchoolClass : {}", id);
         schoolClassRepository.deleteById(id);
+        schoolClassSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * {@code SEARCH  /_search/school-classes?query=:query} : search for the schoolClass corresponding
+     * to the query.
+     *
+     * @param query the query of the schoolClass search.
+     * @return the result of the search.
+     */
+    @GetMapping("/_search/school-classes")
+    public List<SchoolClass> searchSchoolClasses(@RequestParam String query) {
+        log.debug("REST request to search SchoolClasses for query {}", query);
+        return StreamSupport
+            .stream(schoolClassSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .collect(Collectors.toList());
     }
 }
