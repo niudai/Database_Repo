@@ -3,7 +3,7 @@
     "teacher": {
       "home": {
         "title": "教师",
-        "createLabel": "Create a new 教师",
+        "createLabel": "创建新教师",
         "createOrEditLabel": "Create or edit a 教师",
         "notFound": "No 教师 found",
         "search": "搜索教师"

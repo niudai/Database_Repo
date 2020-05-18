@@ -56,17 +56,17 @@
                     <td>{{ schoolClass.createdDate | date:'mediumDate' }}</td>
                     <td>
                         <div *ngIf="schoolClass.master">
-                            <a [routerLink]="['/teacher', schoolClass.master?.id, 'view']" >{{ schoolClass.master?.id }}</a>
+                            <a [routerLink]="['/teacher', schoolClass.master?.id, 'view']" >{{ schoolClass.master?.workNumber }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="schoolClass.grade">
-                            <a [routerLink]="['/grade', schoolClass.grade?.id, 'view']" >{{ schoolClass.grade?.id }}</a>
+                            <a [routerLink]="['/grade', schoolClass.grade?.id, 'view']" >{{ schoolClass.grade?.grade }} 级</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="schoolClass.major">
-                            <a [routerLink]="['/major', schoolClass.major?.id, 'view']" >{{ schoolClass.major?.id }}</a>
+                            <a [routerLink]="['/major', schoolClass.major?.id, 'view']" >{{ schoolClass.major?.name }}</a>
                         </div>
                     </td>
                     <td class="text-right">

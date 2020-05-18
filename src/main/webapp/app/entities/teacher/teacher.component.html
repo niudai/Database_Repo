@@ -58,7 +58,7 @@
                     <td jhiTranslate="{{ 'jhipsterApp.Title.' + teacher.title }}">{{ teacher.title }}</td>
                     <td>
                         <div *ngIf="teacher.major">
-                            <a [routerLink]="['/major', teacher.major?.id, 'view']" >{{ teacher.major?.id }}</a>
+                            <a [routerLink]="['/major', teacher.major?.id, 'view']" >{{ teacher.major?.name }}</a>
                         </div>
                     </td>
                     <td class="text-right">

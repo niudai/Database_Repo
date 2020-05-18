@@ -52,11 +52,11 @@
                 <tr *ngFor="let interval of intervals ;trackBy: trackId">
                     <td><a [routerLink]="['/interval', interval.id, 'view']">{{ interval.id }}</a></td>
                     <td jhiTranslate="{{ 'jhipsterApp.WeekDay.' + interval.day }}">{{ interval.day }}</td>
-                    <td>{{ interval.start }}</td>
-                    <td>{{ interval.end }}</td>
+                    <td>第 {{ interval.start }} 节</td>
+                    <td>第 {{ interval.end }} 节</td>
                     <td>
                         <div *ngIf="interval.course">
-                            <a [routerLink]="['/course', interval.course?.id, 'view']" >{{ interval.course?.id }}</a>
+                            <a [routerLink]="['/course', interval.course?.id, 'view']" >{{ interval.course?.name }}</a>
                         </div>
                     </td>
                     <td class="text-right">

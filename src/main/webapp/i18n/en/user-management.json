@@ -2,7 +2,7 @@
   "userManagement": {
     "home": {
       "title": "Users",
-      "createLabel": "Create a new user",
+      "createLabel": "创建新user",
       "createOrEditLabel": "Create or edit a user"
     },
     "created": "A new user is created with identifier {{ param }}",

@@ -49,7 +49,8 @@ public class Student implements Serializable {
     private Set<Record> records = new HashSet<>();
 
     @OneToOne(mappedBy = "student")
-    @JsonIgnore
+    // @JsonIgnore
+    @JsonIgnoreProperties("student")
     private People people;
 
     @ManyToOne

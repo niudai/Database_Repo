@@ -62,37 +62,37 @@
                     <td>{{ jException.cause }}</td>
                     <td>
                         <div *ngIf="jException.originalMajor">
-                            <a [routerLink]="['/major', jException.originalMajor?.id, 'view']" >{{ jException.originalMajor?.id }}</a>
+                            <a [routerLink]="['/major', jException.originalMajor?.id, 'view']" >{{ jException.originalMajor?.name }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="jException.newMajor">
-                            <a [routerLink]="['/major', jException.newMajor?.id, 'view']" >{{ jException.newMajor?.id }}</a>
+                            <a [routerLink]="['/major', jException.newMajor?.id, 'view']" >{{ jException.newMajor?.name }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="jException.originalSchoolClass">
-                            <a [routerLink]="['/school-class', jException.originalSchoolClass?.id, 'view']" >{{ jException.originalSchoolClass?.id }}</a>
+                            <a [routerLink]="['/school-class', jException.originalSchoolClass?.id, 'view']" >{{ jException.originalSchoolClass?.name }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="jException.newSchoolClass">
-                            <a [routerLink]="['/school-class', jException.newSchoolClass?.id, 'view']" >{{ jException.newSchoolClass?.id }}</a>
+                            <a [routerLink]="['/school-class', jException.newSchoolClass?.id, 'view']" >{{ jException.newSchoolClass?.name }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="jException.originalGrade">
-                            <a [routerLink]="['/grade', jException.originalGrade?.id, 'view']" >{{ jException.originalGrade?.id }}</a>
+                            <a [routerLink]="['/grade', jException.originalGrade?.id, 'view']" >{{ jException.originalGrade?.grade }} 级</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="jException.newGrade">
-                            <a [routerLink]="['/grade', jException.newGrade?.id, 'view']" >{{ jException.newGrade?.id }}</a>
+                            <a [routerLink]="['/grade', jException.newGrade?.id, 'view']" >{{ jException.newGrade?.grade }} 级</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="jException.student">
-                            <a [routerLink]="['/student', jException.student?.id, 'view']" >{{ jException.student?.id }}</a>
+                            <a [routerLink]="['/student', jException.student?.id, 'view']" >{{ jException.student?.studentNumber }} 级</a>
                         </div>
                     </td>
                     <td class="text-right">

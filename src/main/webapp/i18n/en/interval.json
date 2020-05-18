@@ -3,7 +3,7 @@
     "interval": {
       "home": {
         "title": "开课时间",
-        "createLabel": "Create a new Interval",
+        "createLabel": "创建新Interval",
         "createOrEditLabel": "Create or edit a Interval",
         "notFound": "No Intervals found",
         "search": "搜索开课时间"

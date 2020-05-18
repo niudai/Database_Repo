@@ -56,17 +56,17 @@
                     <td jhiTranslate="{{ 'jhipsterApp.ExamType.' + course.examType }}">{{ course.examType }}</td>
                     <td>
                         <div *ngIf="course.semaster">
-                            <a [routerLink]="['/semaster', course.semaster?.id, 'view']" >{{ course.semaster?.id }}</a>
+                            <a [routerLink]="['/semaster', course.semaster?.id, 'view']" >{{ course.semaster?.year }} {{ course.semaster?.season}} </a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="course.major">
-                            <a [routerLink]="['/major', course.major?.id, 'view']" >{{ course.major?.id }}</a>
+                            <a [routerLink]="['/major', course.major?.id, 'view']" >{{ course.major?.name }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="course.teacher">
-                            <a [routerLink]="['/teacher', course.teacher?.id, 'view']" >{{ course.teacher?.id }}</a>
+                            <a [routerLink]="['/teacher', course.teacher?.id, 'view']" >{{ course.teacher?.workNumber }}</a>
                         </div>
                     </td>
                     <td class="text-right">

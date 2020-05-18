@@ -56,17 +56,17 @@
                     <td>{{ record.score }}</td>
                     <td>
                         <div *ngIf="record.semaster">
-                            <a [routerLink]="['/semaster', record.semaster?.id, 'view']" >{{ record.semaster?.id }}</a>
+                            <a [routerLink]="['/semaster', record.semaster?.id, 'view']" >{{ record.semaster?.year }} {{record.semaster?.season }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="record.course">
-                            <a [routerLink]="['/course', record.course?.id, 'view']" >{{ record.course?.id }}</a>
+                            <a [routerLink]="['/course', record.course?.id, 'view']" >{{ record.course?.name }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="record.student">
-                            <a [routerLink]="['/student', record.student?.id, 'view']" >{{ record.student?.id }}</a>
+                            <a [routerLink]="['/student', record.student?.id, 'view']" >{{ record.student?.studentNumber }}</a>
                         </div>
                     </td>
                     <td class="text-right">
