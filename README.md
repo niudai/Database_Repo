@@ -1,6 +1,127 @@
-# jhipster
+# 数据库大作业
 
-This application was generated using JHipster 6.8.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.8.0](https://www.jhipster.tech/documentation-archive/v6.8.0).
+## 项目简介
+
+项目使用 _Spring Boot_ 作为后端开发框架，_Angular_ 作为前端开发框架，_Mysql_ 作为生产环境数据库，_Docker_ 作为生产环境部署方式，是一个全栈 Responsive 的 Web 应用，提供基本 USTC 信息库的增删查改操作。
+
+## 项目文件结构
+
+```
+.
+├── src
+│   ├── main
+│   │   ├── docker // docker 部署代码
+│   │   │   ├── grafana
+│   │   │   │   └── provisioning
+│   │   │   │       ├── dashboards
+│   │   │   │       └── datasources
+│   │   │   └── prometheus
+│   │   ├── java // java 后端代码
+│   │   │   └── com
+│   │   │       └── mycompany
+│   │   │           └── myapp
+│   │   │               ├── aop
+│   │   │               │   └── logging
+│   │   │               ├── config
+│   │   │               │   └── audit
+│   │   │               ├── domain // 实体 pojo 定义
+│   │   │               │   └── enumeration
+│   │   │               ├── repository // 数据库表定义
+│   │   │               │   └── search
+│   │   │               ├── security // 安全
+│   │   │               │   └── jwt
+│   │   │               ├── service // 服务 controller
+│   │   │               │   ├── dto
+│   │   │               │   └── mapper
+│   │   │               └── web
+│   │   │                   └── rest
+│   │   │                       ├── errors
+│   │   │                       └── vm
+│   │   ├── jib
+│   │   ├── resources // 配置数据相关静态资源
+│   │   │   ├── config
+│   │   │   │   ├── liquibase // 数据库重构版本控制
+│   │   │   │   │   ├── changelog
+│   │   │   │   │   ├── data
+│   │   │   │   │   └── fake-data
+│   │   │   │   └── tls // tls 配置
+│   │   │   ├── i18n // 国际化模块
+│   │   │   └── templates // 模板
+│   │   │       └── mail // 邮件模板
+│   │   └── webapp // 前端代码
+│   │       ├── WEB-INF
+│   │       ├── app
+│   │       │   ├── account // 账号相关
+│   │       │   │   ├── activate
+│   │       │   │   ├── password
+│   │       │   │   ├── password-reset
+│   │       │   │   │   ├── finish
+│   │       │   │   │   └── init
+│   │       │   │   ├── register
+│   │       │   │   └── settings
+│   │       │   ├── admin // 管理页面
+│   │       │   │   ├── audits
+│   │       │   │   ├── configuration
+│   │       │   │   ├── docs
+│   │       │   │   ├── health
+│   │       │   │   ├── logs
+│   │       │   │   ├── metrics
+│   │       │   │   └── user-management
+│   │       │   ├── blocks
+│   │       │   │   ├── config
+│   │       │   │   └── interceptor
+│   │       │   ├── core
+│   │       │   │   ├── auth
+│   │       │   │   ├── icons
+│   │       │   │   ├── language
+│   │       │   │   ├── login
+│   │       │   │   └── user
+│   │       │   ├── entities // 实体页面
+│   │       │   │   ├── campus
+│   │       │   │   ├── course
+│   │       │   │   ├── grade
+│   │       │   │   ├── interval
+│   │       │   │   ├── j-exception
+│   │       │   │   ├── major
+│   │       │   │   ├── people
+│   │       │   │   ├── record
+│   │       │   │   ├── school-class
+│   │       │   │   ├── semaster
+│   │       │   │   ├── student
+│   │       │   │   └── teacher
+│   │       │   ├── home // 首页
+│   │       │   ├── layouts // 模板
+│   │       │   │   ├── error
+│   │       │   │   ├── footer
+│   │       │   │   ├── main
+│   │       │   │   ├── navbar
+│   │       │   │   └── profiles
+│   │       │   └── shared // 共享库
+│   │       │       ├── alert
+│   │       │       ├── auth
+│   │       │       ├── constants
+│   │       │       ├── language
+│   │       │       ├── login
+│   │       │       ├── model
+│   │       │       │   └── enumerations
+│   │       │       └── util
+│   │       ├── content
+│   │       │   ├── css
+│   │       │   ├── images
+│   │       │   └── scss
+│   │       ├── i18n
+│   │       │   ├── en
+│   │       │   └── fr
+│   │       └── swagger-ui
+│   │           └── dist
+│   │               └── images
+│  
+└── webpack // webpack 相关配置
+```
+
+## 数据库表设计：
+
+![Image](db-design.png)
 
 ## Development
 
@@ -27,22 +148,6 @@ specifying a newer version in [package.json](package.json). You can also run `np
 Add the `help` flag on any command to see how you can use it. For example, `npm help update`.
 
 The `npm run` command will list all of the scripts available to run for this project.
-
-### PWA Support
-
-JHipster ships with PWA (Progressive Web App) support, and it's turned off by default. One of the main components of a PWA is a service worker.
-
-The service worker initialization code is commented out by default. To enable it, uncomment the following code in `src/main/webapp/index.html`:
-
-```html
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./service-worker.js').then(function() {
-      console.log('Service Worker Registered');
-    });
-  }
-</script>
-```
 
 Note: [Workbox](https://developers.google.com/web/tools/workbox/) powers JHipster's service worker. It dynamically generates the `service-worker.js` file.
 
@@ -172,26 +277,3 @@ Then run:
     docker-compose -f src/main/docker/app.yml up -d
 
 For more information refer to [Using Docker and Docker-Compose][], this page also contains information on the docker-compose sub-generator (`jhipster docker-compose`), which is able to generate docker configurations for one or several JHipster applications.
-
-## Continuous Integration (optional)
-
-To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
-
-[jhipster homepage and latest documentation]: https://www.jhipster.tech
-[jhipster 6.8.0 archive]: https://www.jhipster.tech/documentation-archive/v6.8.0
-[using jhipster in development]: https://www.jhipster.tech/documentation-archive/v6.8.0/development/
-[using docker and docker-compose]: https://www.jhipster.tech/documentation-archive/v6.8.0/docker-compose
-[using jhipster in production]: https://www.jhipster.tech/documentation-archive/v6.8.0/production/
-[running tests page]: https://www.jhipster.tech/documentation-archive/v6.8.0/running-tests/
-[code quality page]: https://www.jhipster.tech/documentation-archive/v6.8.0/code-quality/
-[setting up continuous integration]: https://www.jhipster.tech/documentation-archive/v6.8.0/setting-up-ci/
-[node.js]: https://nodejs.org/
-[yarn]: https://yarnpkg.org/
-[webpack]: https://webpack.github.io/
-[angular cli]: https://cli.angular.io/
-[browsersync]: https://www.browsersync.io/
-[jest]: https://facebook.github.io/jest/
-[jasmine]: https://jasmine.github.io/2.0/introduction.html
-[protractor]: https://angular.github.io/protractor/
-[leaflet]: https://leafletjs.com/
-[definitelytyped]: https://definitelytyped.org/
