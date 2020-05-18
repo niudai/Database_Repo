@@ -36,7 +36,7 @@ public class Course implements Serializable {
     @Column(name = "exam_type")
     private ExamType examType;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "course")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Interval> times = new HashSet<>();
 

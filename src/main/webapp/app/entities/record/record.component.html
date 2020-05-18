@@ -66,7 +66,7 @@
                     </td>
                     <td>
                         <div *ngIf="record.student">
-                            <a [routerLink]="['/student', record.student?.id, 'view']" >{{ record.student?.studentNumber }}</a>
+                            <a [routerLink]="['/student', record.student?.id, 'view']" >{{ record.student?.people?.chineseName }}</a>
                         </div>
                     </td>
                     <td class="text-right">
