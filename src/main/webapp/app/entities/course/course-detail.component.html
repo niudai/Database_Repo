@@ -1,17 +1,17 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="course">
-            <h2><span jhiTranslate="jhipsterApp.course.detail.title">Course</span> {{ course.id }}</h2>
+            <h2> {{ course.name }}</h2>
 
             <hr>
 
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="jhipsterApp.course.name">Name</span></dt>
+                <!-- <dt><span jhiTranslate="jhipsterApp.course.name">Name</span></dt>
                 <dd>
                     <span>{{ course.name }}</span>
-                </dd>
+                </dd> -->
                 <dt><span jhiTranslate="jhipsterApp.course.examType">Exam Type</span></dt>
                 <dd>
                     <span jhiTranslate="{{ 'jhipsterApp.ExamType.' + course.examType }}">{{ course.examType }}</span>
@@ -32,6 +32,12 @@
                 <dd>
                     <div *ngIf="course.teacher">
                         <a [routerLink]="['/teacher', course.teacher?.id, 'view']">{{ course.teacher?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>上课时间</span></dt>
+                <dd>
+                    <div *ngFor="let interval of course.times">
+                        {{ interval?.day }} {{interval.start}} 节 到 {{interval.end}} 节
                     </div>
                 </dd>
             </dl>
