@@ -31,6 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.mycompany.myapp.domain.enumeration.IdType;
+import com.mycompany.myapp.domain.enumeration.Gender;
 /**
  * Integration tests for the {@link PeopleResource} REST controller.
  */
@@ -49,8 +50,8 @@ public class PeopleResourceIT {
     private static final String DEFAULT_ENGLISH_NAME = "AAAAAAAAAA";
     private static final String UPDATED_ENGLISH_NAME = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_GENDER = 1;
-    private static final Integer UPDATED_GENDER = 2;
+    private static final Gender DEFAULT_GENDER = Gender.Male;
+    private static final Gender UPDATED_GENDER = Gender.Female;
 
     private static final LocalDate DEFAULT_BIRTH_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_BIRTH_DATE = LocalDate.now(ZoneId.systemDefault());
@@ -139,7 +140,6 @@ public class PeopleResourceIT {
     @Transactional
     public void createPeople() throws Exception {
         int databaseSizeBeforeCreate = peopleRepository.findAll().size();
-
         // Create the People
         restPeopleMockMvc.perform(post("/api/people")
             .contentType(MediaType.APPLICATION_JSON)
@@ -202,7 +202,7 @@ public class PeopleResourceIT {
             .andExpect(jsonPath("$.[*].idType").value(hasItem(DEFAULT_ID_TYPE.toString())))
             .andExpect(jsonPath("$.[*].chineseName").value(hasItem(DEFAULT_CHINESE_NAME)))
             .andExpect(jsonPath("$.[*].englishName").value(hasItem(DEFAULT_ENGLISH_NAME)))
-            .andExpect(jsonPath("$.[*].gender").value(hasItem(DEFAULT_GENDER)))
+            .andExpect(jsonPath("$.[*].gender").value(hasItem(DEFAULT_GENDER.toString())))
             .andExpect(jsonPath("$.[*].birthDate").value(hasItem(DEFAULT_BIRTH_DATE.toString())))
             .andExpect(jsonPath("$.[*].race").value(hasItem(DEFAULT_RACE)))
             .andExpect(jsonPath("$.[*].nation").value(hasItem(DEFAULT_NATION)))
@@ -225,7 +225,7 @@ public class PeopleResourceIT {
             .andExpect(jsonPath("$.idType").value(DEFAULT_ID_TYPE.toString()))
             .andExpect(jsonPath("$.chineseName").value(DEFAULT_CHINESE_NAME))
             .andExpect(jsonPath("$.englishName").value(DEFAULT_ENGLISH_NAME))
-            .andExpect(jsonPath("$.gender").value(DEFAULT_GENDER))
+            .andExpect(jsonPath("$.gender").value(DEFAULT_GENDER.toString()))
             .andExpect(jsonPath("$.birthDate").value(DEFAULT_BIRTH_DATE.toString()))
             .andExpect(jsonPath("$.race").value(DEFAULT_RACE))
             .andExpect(jsonPath("$.nation").value(DEFAULT_NATION))
@@ -233,7 +233,6 @@ public class PeopleResourceIT {
             .andExpect(jsonPath("$.postcode").value(DEFAULT_POSTCODE))
             .andExpect(jsonPath("$.telephone").value(DEFAULT_TELEPHONE));
     }
-
     @Test
     @Transactional
     public void getNonExistingPeople() throws Exception {
@@ -295,8 +294,6 @@ public class PeopleResourceIT {
     public void updateNonExistingPeople() throws Exception {
         int databaseSizeBeforeUpdate = peopleRepository.findAll().size();
 
-        // Create the People
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPeopleMockMvc.perform(put("/api/people")
             .contentType(MediaType.APPLICATION_JSON)
@@ -335,10 +332,12 @@ public class PeopleResourceIT {
     @Test
     @Transactional
     public void searchPeople() throws Exception {
+        // Configure the mock search repository
         // Initialize the database
         peopleRepository.saveAndFlush(people);
         when(mockPeopleSearchRepository.search(queryStringQuery("id:" + people.getId())))
             .thenReturn(Collections.singletonList(people));
+
         // Search the people
         restPeopleMockMvc.perform(get("/api/_search/people?query=id:" + people.getId()))
             .andExpect(status().isOk())
@@ -347,7 +346,7 @@ public class PeopleResourceIT {
             .andExpect(jsonPath("$.[*].idType").value(hasItem(DEFAULT_ID_TYPE.toString())))
             .andExpect(jsonPath("$.[*].chineseName").value(hasItem(DEFAULT_CHINESE_NAME)))
             .andExpect(jsonPath("$.[*].englishName").value(hasItem(DEFAULT_ENGLISH_NAME)))
-            .andExpect(jsonPath("$.[*].gender").value(hasItem(DEFAULT_GENDER)))
+            .andExpect(jsonPath("$.[*].gender").value(hasItem(DEFAULT_GENDER.toString())))
             .andExpect(jsonPath("$.[*].birthDate").value(hasItem(DEFAULT_BIRTH_DATE.toString())))
             .andExpect(jsonPath("$.[*].race").value(hasItem(DEFAULT_RACE)))
             .andExpect(jsonPath("$.[*].nation").value(hasItem(DEFAULT_NATION)))

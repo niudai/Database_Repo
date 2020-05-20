@@ -2,11 +2,11 @@
   "jhipsterApp": {
     "interval": {
       "home": {
-        "title": "开课时间",
+        "title": "Intervals",
         "createLabel": "Create a new Interval",
         "createOrEditLabel": "Create or edit a Interval",
-        "notFound": "No Intervals found",
-        "search": "搜索开课时间"
+        "search": "Search for Interval",
+        "notFound": "No Intervals found"
       },
       "created": "A new Interval is created with identifier {{ param }}",
       "updated": "A Interval is updated with identifier {{ param }}",
@@ -18,8 +18,8 @@
         "title": "Interval"
       },
       "day": "Day",
-      "start": "开始",
-      "end": "结束",
+      "start": "Start",
+      "end": "End",
       "course": "Course"
     }
   }

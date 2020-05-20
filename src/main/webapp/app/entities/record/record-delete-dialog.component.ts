@@ -6,7 +6,7 @@ import { IRecord } from 'app/shared/model/record.model';
 import { RecordService } from './record.service';
 
 @Component({
-  templateUrl: './record-delete-dialog.component.html'
+  templateUrl: './record-delete-dialog.component.html',
 })
 export class RecordDeleteDialogComponent {
   record?: IRecord;

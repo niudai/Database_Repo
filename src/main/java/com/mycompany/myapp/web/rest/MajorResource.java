@@ -122,6 +122,7 @@ public class MajorResource {
     @DeleteMapping("/majors/{id}")
     public ResponseEntity<Void> deleteMajor(@PathVariable Long id) {
         log.debug("REST request to delete Major : {}", id);
+
         majorRepository.deleteById(id);
         majorSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
@@ -139,6 +140,6 @@ public class MajorResource {
         log.debug("REST request to search Majors for query {}", query);
         return StreamSupport
             .stream(majorSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+        .collect(Collectors.toList());
     }
 }

@@ -40,44 +40,44 @@ export const campusRoute: Routes = [
     component: CampusComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.campus.home.title'
+      pageTitle: 'jhipsterApp.campus.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: CampusDetailComponent,
     resolve: {
-      campus: CampusResolve
+      campus: CampusResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.campus.home.title'
+      pageTitle: 'jhipsterApp.campus.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: CampusUpdateComponent,
     resolve: {
-      campus: CampusResolve
+      campus: CampusResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.campus.home.title'
+      pageTitle: 'jhipsterApp.campus.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: CampusUpdateComponent,
     resolve: {
-      campus: CampusResolve
+      campus: CampusResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.campus.home.title'
+      pageTitle: 'jhipsterApp.campus.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

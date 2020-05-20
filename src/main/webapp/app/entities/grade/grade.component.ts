@@ -11,7 +11,7 @@ import { GradeDeleteDialogComponent } from './grade-delete-dialog.component';
 
 @Component({
   selector: 'jhi-grade',
-  templateUrl: './grade.component.html'
+  templateUrl: './grade.component.html',
 })
 export class GradeComponent implements OnInit, OnDestroy {
   grades?: IGrade[];
@@ -34,7 +34,7 @@ export class GradeComponent implements OnInit, OnDestroy {
     if (this.currentSearch) {
       this.gradeService
         .search({
-          query: this.currentSearch
+          query: this.currentSearch,
         })
         .subscribe((res: HttpResponse<IGrade[]>) => (this.grades = res.body || []));
       return;

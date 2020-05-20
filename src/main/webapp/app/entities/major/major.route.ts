@@ -40,44 +40,44 @@ export const majorRoute: Routes = [
     component: MajorComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.major.home.title'
+      pageTitle: 'jhipsterApp.major.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: MajorDetailComponent,
     resolve: {
-      major: MajorResolve
+      major: MajorResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.major.home.title'
+      pageTitle: 'jhipsterApp.major.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: MajorUpdateComponent,
     resolve: {
-      major: MajorResolve
+      major: MajorResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.major.home.title'
+      pageTitle: 'jhipsterApp.major.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: MajorUpdateComponent,
     resolve: {
-      major: MajorResolve
+      major: MajorResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.major.home.title'
+      pageTitle: 'jhipsterApp.major.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

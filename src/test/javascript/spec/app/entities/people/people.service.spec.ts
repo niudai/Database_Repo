@@ -5,6 +5,7 @@ import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { PeopleService } from 'app/entities/people/people.service';
 import { IPeople, People } from 'app/shared/model/people.model';
 import { IdType } from 'app/shared/model/enumerations/id-type.model';
+import { Gender } from 'app/shared/model/enumerations/gender.model';
 
 describe('Service Tests', () => {
   describe('People Service', () => {
@@ -17,7 +18,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule]
+        imports: [HttpClientTestingModule],
       });
       expectedResult = null;
       injector = getTestBed();
@@ -30,7 +31,7 @@ describe('Service Tests', () => {
         IdType.IdCard,
         'AAAAAAA',
         'AAAAAAA',
-        0,
+        Gender.Male,
         currentDate,
         'AAAAAAA',
         'AAAAAAA',
@@ -44,7 +45,7 @@ describe('Service Tests', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            birthDate: currentDate.format(DATE_FORMAT)
+            birthDate: currentDate.format(DATE_FORMAT),
           },
           elemDefault
         );
@@ -60,14 +61,14 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            birthDate: currentDate.format(DATE_FORMAT)
+            birthDate: currentDate.format(DATE_FORMAT),
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            birthDate: currentDate
+            birthDate: currentDate,
           },
           returnedFromService
         );
@@ -85,20 +86,20 @@ describe('Service Tests', () => {
             idType: 'BBBBBB',
             chineseName: 'BBBBBB',
             englishName: 'BBBBBB',
-            gender: 1,
+            gender: 'BBBBBB',
             birthDate: currentDate.format(DATE_FORMAT),
             race: 'BBBBBB',
             nation: 'BBBBBB',
             address: 'BBBBBB',
             postcode: 'BBBBBB',
-            telephone: 'BBBBBB'
+            telephone: 'BBBBBB',
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            birthDate: currentDate
+            birthDate: currentDate,
           },
           returnedFromService
         );
@@ -116,20 +117,20 @@ describe('Service Tests', () => {
             idType: 'BBBBBB',
             chineseName: 'BBBBBB',
             englishName: 'BBBBBB',
-            gender: 1,
+            gender: 'BBBBBB',
             birthDate: currentDate.format(DATE_FORMAT),
             race: 'BBBBBB',
             nation: 'BBBBBB',
             address: 'BBBBBB',
             postcode: 'BBBBBB',
-            telephone: 'BBBBBB'
+            telephone: 'BBBBBB',
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            birthDate: currentDate
+            birthDate: currentDate,
           },
           returnedFromService
         );

@@ -6,7 +6,7 @@ import { IMajor } from 'app/shared/model/major.model';
 import { MajorService } from './major.service';
 
 @Component({
-  templateUrl: './major-delete-dialog.component.html'
+  templateUrl: './major-delete-dialog.component.html',
 })
 export class MajorDeleteDialogComponent {
   major?: IMajor;

@@ -36,7 +36,7 @@
         <span jhiTranslate="jhipsterApp.student.home.notFound">No students found</span>
     </div>
 
-    <div class="table-responsive" id="entities" *ngIf="students?.length > 0">
+    <div class="table-responsive" id="entities" *ngIf="students && students.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>
@@ -55,7 +55,11 @@
                     <td>{{ student.studentNumber }}</td>
                     <td>{{ student.startDate }}</td>
                     <td>{{ student.email }}</td>
-                    <td>{{ student.major }}</td>
+                    <td>
+                        <div *ngIf="student.major">
+                            <a [routerLink]="['/major', student.major?.id, 'view']" >{{ student.major?.id }}</a>
+                        </div>
+                    </td>
                     <td>
                         <div *ngIf="student.schoolClass">
                             <a [routerLink]="['/school-class', student.schoolClass?.id, 'view']" >{{ student.schoolClass?.id }}</a>

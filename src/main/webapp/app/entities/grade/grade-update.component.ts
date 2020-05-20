@@ -10,14 +10,14 @@ import { GradeService } from './grade.service';
 
 @Component({
   selector: 'jhi-grade-update',
-  templateUrl: './grade-update.component.html'
+  templateUrl: './grade-update.component.html',
 })
 export class GradeUpdateComponent implements OnInit {
   isSaving = false;
 
   editForm = this.fb.group({
     id: [],
-    grade: []
+    grade: [],
   });
 
   constructor(protected gradeService: GradeService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -31,7 +31,7 @@ export class GradeUpdateComponent implements OnInit {
   updateForm(grade: IGrade): void {
     this.editForm.patchValue({
       id: grade.id,
-      grade: grade.grade
+      grade: grade.grade,
     });
   }
 
@@ -53,7 +53,7 @@ export class GradeUpdateComponent implements OnInit {
     return {
       ...new Grade(),
       id: this.editForm.get(['id'])!.value,
-      grade: this.editForm.get(['grade'])!.value
+      grade: this.editForm.get(['grade'])!.value,
     };
   }
 

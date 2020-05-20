@@ -6,7 +6,7 @@ import { IInterval } from 'app/shared/model/interval.model';
 import { IntervalService } from './interval.service';
 
 @Component({
-  templateUrl: './interval-delete-dialog.component.html'
+  templateUrl: './interval-delete-dialog.component.html',
 })
 export class IntervalDeleteDialogComponent {
   interval?: IInterval;

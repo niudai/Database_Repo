@@ -11,7 +11,7 @@ import { SemasterDeleteDialogComponent } from './semaster-delete-dialog.componen
 
 @Component({
   selector: 'jhi-semaster',
-  templateUrl: './semaster.component.html'
+  templateUrl: './semaster.component.html',
 })
 export class SemasterComponent implements OnInit, OnDestroy {
   semasters?: ISemaster[];
@@ -34,7 +34,7 @@ export class SemasterComponent implements OnInit, OnDestroy {
     if (this.currentSearch) {
       this.semasterService
         .search({
-          query: this.currentSearch
+          query: this.currentSearch,
         })
         .subscribe((res: HttpResponse<ISemaster[]>) => (this.semasters = res.body || []));
       return;

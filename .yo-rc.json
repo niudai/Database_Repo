@@ -22,7 +22,7 @@
     "skipClient": false,
     "testFrameworks": [],
     "websocket": false,
-    "jhipsterVersion": "6.8.0",
+    "jhipsterVersion": "6.9.0",
     "creationTimestamp": 1589718960341,
     "skipServer": false,
     "packageFolder": "com/mycompany/myapp",

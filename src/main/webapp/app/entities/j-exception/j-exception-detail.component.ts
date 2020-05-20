@@ -5,7 +5,7 @@ import { IJException } from 'app/shared/model/j-exception.model';
 
 @Component({
   selector: 'jhi-j-exception-detail',
-  templateUrl: './j-exception-detail.component.html'
+  templateUrl: './j-exception-detail.component.html',
 })
 export class JExceptionDetailComponent implements OnInit {
   jException: IJException | null = null;

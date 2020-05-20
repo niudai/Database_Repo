@@ -6,7 +6,7 @@ import { IPeople } from 'app/shared/model/people.model';
 import { PeopleService } from './people.service';
 
 @Component({
-  templateUrl: './people-delete-dialog.component.html'
+  templateUrl: './people-delete-dialog.component.html',
 })
 export class PeopleDeleteDialogComponent {
   people?: IPeople;

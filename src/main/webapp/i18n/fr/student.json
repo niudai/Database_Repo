@@ -20,9 +20,9 @@
       "studentNumber": "Student Number",
       "startDate": "Start Date",
       "email": "Email",
-      "major": "Major",
       "exceptions": "Exceptions",
       "record": "Record",
+      "major": "Major",
       "people": "People",
       "schoolClass": "School Class"
     }

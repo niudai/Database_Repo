@@ -11,6 +11,6 @@ import { peopleRoute } from './people.route';
 @NgModule({
   imports: [JhipsterSharedModule, RouterModule.forChild(peopleRoute)],
   declarations: [PeopleComponent, PeopleDetailComponent, PeopleUpdateComponent, PeopleDeleteDialogComponent],
-  entryComponents: [PeopleDeleteDialogComponent]
+  entryComponents: [PeopleDeleteDialogComponent],
 })
 export class JhipsterPeopleModule {}

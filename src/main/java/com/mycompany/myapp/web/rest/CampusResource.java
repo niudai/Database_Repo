@@ -122,6 +122,7 @@ public class CampusResource {
     @DeleteMapping("/campuses/{id}")
     public ResponseEntity<Void> deleteCampus(@PathVariable Long id) {
         log.debug("REST request to delete Campus : {}", id);
+
         campusRepository.deleteById(id);
         campusSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
@@ -139,6 +140,6 @@ public class CampusResource {
         log.debug("REST request to search Campuses for query {}", query);
         return StreamSupport
             .stream(campusSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+        .collect(Collectors.toList());
     }
 }

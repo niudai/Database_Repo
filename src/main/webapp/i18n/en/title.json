@@ -2,8 +2,8 @@
   "jhipsterApp": {
     "Title": {
       "null": "",
-      "P": "教授",
-      "AP": "副教授"
+      "P": "P",
+      "AP": "AP"
     }
   }
 }

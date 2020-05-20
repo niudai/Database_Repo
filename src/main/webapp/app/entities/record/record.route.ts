@@ -40,44 +40,44 @@ export const recordRoute: Routes = [
     component: RecordComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.record.home.title'
+      pageTitle: 'jhipsterApp.record.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: RecordDetailComponent,
     resolve: {
-      record: RecordResolve
+      record: RecordResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.record.home.title'
+      pageTitle: 'jhipsterApp.record.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: RecordUpdateComponent,
     resolve: {
-      record: RecordResolve
+      record: RecordResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.record.home.title'
+      pageTitle: 'jhipsterApp.record.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: RecordUpdateComponent,
     resolve: {
-      record: RecordResolve
+      record: RecordResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.record.home.title'
+      pageTitle: 'jhipsterApp.record.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

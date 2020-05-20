@@ -12,7 +12,7 @@ import { CourseService } from 'app/entities/course/course.service';
 
 @Component({
   selector: 'jhi-interval-update',
-  templateUrl: './interval-update.component.html'
+  templateUrl: './interval-update.component.html',
 })
 export class IntervalUpdateComponent implements OnInit {
   isSaving = false;
@@ -23,7 +23,7 @@ export class IntervalUpdateComponent implements OnInit {
     day: [],
     start: [],
     end: [],
-    course: []
+    course: [],
   });
 
   constructor(
@@ -47,7 +47,7 @@ export class IntervalUpdateComponent implements OnInit {
       day: interval.day,
       start: interval.start,
       end: interval.end,
-      course: interval.course
+      course: interval.course,
     });
   }
 
@@ -72,7 +72,7 @@ export class IntervalUpdateComponent implements OnInit {
       day: this.editForm.get(['day'])!.value,
       start: this.editForm.get(['start'])!.value,
       end: this.editForm.get(['end'])!.value,
-      course: this.editForm.get(['course'])!.value
+      course: this.editForm.get(['course'])!.value,
     };
   }
 

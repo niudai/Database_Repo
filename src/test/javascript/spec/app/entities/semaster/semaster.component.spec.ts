@@ -16,7 +16,7 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [JhipsterTestModule],
-        declarations: [SemasterComponent]
+        declarations: [SemasterComponent],
       })
         .overrideTemplate(SemasterComponent, '')
         .compileComponents();
@@ -33,7 +33,7 @@ describe('Component Tests', () => {
         of(
           new HttpResponse({
             body: [new Semaster(123)],
-            headers
+            headers,
           })
         )
       );

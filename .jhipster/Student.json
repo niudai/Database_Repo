@@ -1,62 +1,63 @@
 {
-    "name": "Student",
-    "fields": [
-        {
-            "fieldName": "studentNumber",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "startDate",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "email",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "major",
-            "fieldType": "String"
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "jException",
-            "otherEntityRelationshipName": "student",
-            "relationshipName": "exceptions"
-        },
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "record",
-            "otherEntityRelationshipName": "student",
-            "relationshipName": "record"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "people",
-            "otherEntityRelationshipName": "student",
-            "relationshipName": "people",
-            "ownerSide": false
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "schoolClass",
-            "otherEntityRelationshipName": "students",
-            "relationshipName": "schoolClass",
-            "otherEntityField": "id"
-        }
-    ],
-    "changelogDate": "20200503072400",
-    "entityTableName": "student",
-    "dto": "no",
-    "pagination": "no",
-    "service": "no",
-    "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "readOnly": false,
-    "embedded": false,
-    "clientRootFolder": "",
-    "applications": [
-        "jhipster"
-    ]
+  "name": "Student",
+  "fields": [
+    {
+      "fieldName": "studentNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "jException",
+      "otherEntityRelationshipName": "student",
+      "relationshipName": "exceptions"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "record",
+      "otherEntityRelationshipName": "student",
+      "relationshipName": "record"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "major",
+      "otherEntityRelationshipName": "student",
+      "relationshipName": "major",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "people",
+      "otherEntityRelationshipName": "student",
+      "relationshipName": "people",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "schoolClass",
+      "otherEntityRelationshipName": "students",
+      "relationshipName": "schoolClass",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200503072400",
+  "entityTableName": "student",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["jhipster"]
 }

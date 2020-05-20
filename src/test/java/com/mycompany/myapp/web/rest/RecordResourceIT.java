@@ -98,7 +98,6 @@ public class RecordResourceIT {
     @Transactional
     public void createRecord() throws Exception {
         int databaseSizeBeforeCreate = recordRepository.findAll().size();
-
         // Create the Record
         restRecordMockMvc.perform(post("/api/records")
             .contentType(MediaType.APPLICATION_JSON)
@@ -168,7 +167,6 @@ public class RecordResourceIT {
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
             .andExpect(jsonPath("$.score").value(DEFAULT_SCORE));
     }
-
     @Test
     @Transactional
     public void getNonExistingRecord() throws Exception {
@@ -214,8 +212,6 @@ public class RecordResourceIT {
     public void updateNonExistingRecord() throws Exception {
         int databaseSizeBeforeUpdate = recordRepository.findAll().size();
 
-        // Create the Record
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restRecordMockMvc.perform(put("/api/records")
             .contentType(MediaType.APPLICATION_JSON)
@@ -254,10 +250,12 @@ public class RecordResourceIT {
     @Test
     @Transactional
     public void searchRecord() throws Exception {
+        // Configure the mock search repository
         // Initialize the database
         recordRepository.saveAndFlush(record);
         when(mockRecordSearchRepository.search(queryStringQuery("id:" + record.getId())))
             .thenReturn(Collections.singletonList(record));
+
         // Search the record
         restRecordMockMvc.perform(get("/api/_search/records?query=id:" + record.getId()))
             .andExpect(status().isOk())

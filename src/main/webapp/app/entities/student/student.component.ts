@@ -11,7 +11,7 @@ import { StudentDeleteDialogComponent } from './student-delete-dialog.component'
 
 @Component({
   selector: 'jhi-student',
-  templateUrl: './student.component.html'
+  templateUrl: './student.component.html',
 })
 export class StudentComponent implements OnInit, OnDestroy {
   students?: IStudent[];
@@ -34,7 +34,7 @@ export class StudentComponent implements OnInit, OnDestroy {
     if (this.currentSearch) {
       this.studentService
         .search({
-          query: this.currentSearch
+          query: this.currentSearch,
         })
         .subscribe((res: HttpResponse<IStudent[]>) => (this.students = res.body || []));
       return;

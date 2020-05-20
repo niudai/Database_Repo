@@ -13,7 +13,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule]
+        imports: [HttpClientTestingModule],
       });
       expectedResult = null;
       injector = getTestBed();
@@ -37,7 +37,7 @@ describe('Service Tests', () => {
       it('should create a Grade', () => {
         const returnedFromService = Object.assign(
           {
-            id: 0
+            id: 0,
           },
           elemDefault
         );
@@ -54,7 +54,7 @@ describe('Service Tests', () => {
       it('should update a Grade', () => {
         const returnedFromService = Object.assign(
           {
-            grade: 1
+            grade: 1,
           },
           elemDefault
         );
@@ -71,7 +71,7 @@ describe('Service Tests', () => {
       it('should return a list of Grade', () => {
         const returnedFromService = Object.assign(
           {
-            grade: 1
+            grade: 1,
           },
           elemDefault
         );

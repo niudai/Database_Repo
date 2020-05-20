@@ -11,6 +11,6 @@ import { majorRoute } from './major.route';
 @NgModule({
   imports: [JhipsterSharedModule, RouterModule.forChild(majorRoute)],
   declarations: [MajorComponent, MajorDetailComponent, MajorUpdateComponent, MajorDeleteDialogComponent],
-  entryComponents: [MajorDeleteDialogComponent]
+  entryComponents: [MajorDeleteDialogComponent],
 })
 export class JhipsterMajorModule {}

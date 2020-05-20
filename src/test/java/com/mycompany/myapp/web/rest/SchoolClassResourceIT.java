@@ -98,7 +98,6 @@ public class SchoolClassResourceIT {
     @Transactional
     public void createSchoolClass() throws Exception {
         int databaseSizeBeforeCreate = schoolClassRepository.findAll().size();
-
         // Create the SchoolClass
         restSchoolClassMockMvc.perform(post("/api/school-classes")
             .contentType(MediaType.APPLICATION_JSON)
@@ -168,7 +167,6 @@ public class SchoolClassResourceIT {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()));
     }
-
     @Test
     @Transactional
     public void getNonExistingSchoolClass() throws Exception {
@@ -214,8 +212,6 @@ public class SchoolClassResourceIT {
     public void updateNonExistingSchoolClass() throws Exception {
         int databaseSizeBeforeUpdate = schoolClassRepository.findAll().size();
 
-        // Create the SchoolClass
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSchoolClassMockMvc.perform(put("/api/school-classes")
             .contentType(MediaType.APPLICATION_JSON)
@@ -254,10 +250,12 @@ public class SchoolClassResourceIT {
     @Test
     @Transactional
     public void searchSchoolClass() throws Exception {
+        // Configure the mock search repository
         // Initialize the database
         schoolClassRepository.saveAndFlush(schoolClass);
         when(mockSchoolClassSearchRepository.search(queryStringQuery("id:" + schoolClass.getId())))
             .thenReturn(Collections.singletonList(schoolClass));
+
         // Search the schoolClass
         restSchoolClassMockMvc.perform(get("/api/_search/school-classes?query=id:" + schoolClass.getId()))
             .andExpect(status().isOk())

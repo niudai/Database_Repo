@@ -2,8 +2,8 @@
   "jhipsterApp": {
     "ExamType": {
       "null": "",
-      "EXAM": "考试",
-      "QA": "答辩"
+      "EXAM": "EXAM",
+      "QA": "QA"
     }
   }
 }

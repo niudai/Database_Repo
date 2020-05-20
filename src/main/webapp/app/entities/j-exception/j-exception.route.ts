@@ -40,44 +40,44 @@ export const jExceptionRoute: Routes = [
     component: JExceptionComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.jException.home.title'
+      pageTitle: 'jhipsterApp.jException.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: JExceptionDetailComponent,
     resolve: {
-      jException: JExceptionResolve
+      jException: JExceptionResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.jException.home.title'
+      pageTitle: 'jhipsterApp.jException.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: JExceptionUpdateComponent,
     resolve: {
-      jException: JExceptionResolve
+      jException: JExceptionResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.jException.home.title'
+      pageTitle: 'jhipsterApp.jException.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: JExceptionUpdateComponent,
     resolve: {
-      jException: JExceptionResolve
+      jException: JExceptionResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.jException.home.title'
+      pageTitle: 'jhipsterApp.jException.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

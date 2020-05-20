@@ -18,7 +18,7 @@ type SelectableEntity = ISemaster | IMajor | ITeacher;
 
 @Component({
   selector: 'jhi-course-update',
-  templateUrl: './course-update.component.html'
+  templateUrl: './course-update.component.html',
 })
 export class CourseUpdateComponent implements OnInit {
   isSaving = false;
@@ -32,7 +32,7 @@ export class CourseUpdateComponent implements OnInit {
     examType: [],
     semaster: [],
     major: [],
-    teacher: []
+    teacher: [],
   });
 
   constructor(
@@ -63,7 +63,7 @@ export class CourseUpdateComponent implements OnInit {
       examType: course.examType,
       semaster: course.semaster,
       major: course.major,
-      teacher: course.teacher
+      teacher: course.teacher,
     });
   }
 
@@ -89,7 +89,7 @@ export class CourseUpdateComponent implements OnInit {
       examType: this.editForm.get(['examType'])!.value,
       semaster: this.editForm.get(['semaster'])!.value,
       major: this.editForm.get(['major'])!.value,
-      teacher: this.editForm.get(['teacher'])!.value
+      teacher: this.editForm.get(['teacher'])!.value,
     };
   }
 

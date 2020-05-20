@@ -46,9 +46,6 @@ public class StudentResourceIT {
     private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
     private static final String UPDATED_EMAIL = "BBBBBBBBBB";
 
-    private static final String DEFAULT_MAJOR = "AAAAAAAAAA";
-    private static final String UPDATED_MAJOR = "BBBBBBBBBB";
-
     @Autowired
     private StudentRepository studentRepository;
 
@@ -78,8 +75,7 @@ public class StudentResourceIT {
         Student student = new Student()
             .studentNumber(DEFAULT_STUDENT_NUMBER)
             .startDate(DEFAULT_START_DATE)
-            .email(DEFAULT_EMAIL)
-            .major(DEFAULT_MAJOR);
+            .email(DEFAULT_EMAIL);
         return student;
     }
     /**
@@ -92,8 +88,7 @@ public class StudentResourceIT {
         Student student = new Student()
             .studentNumber(UPDATED_STUDENT_NUMBER)
             .startDate(UPDATED_START_DATE)
-            .email(UPDATED_EMAIL)
-            .major(UPDATED_MAJOR);
+            .email(UPDATED_EMAIL);
         return student;
     }
 
@@ -106,7 +101,6 @@ public class StudentResourceIT {
     @Transactional
     public void createStudent() throws Exception {
         int databaseSizeBeforeCreate = studentRepository.findAll().size();
-
         // Create the Student
         restStudentMockMvc.perform(post("/api/students")
             .contentType(MediaType.APPLICATION_JSON)
@@ -120,7 +114,6 @@ public class StudentResourceIT {
         assertThat(testStudent.getStudentNumber()).isEqualTo(DEFAULT_STUDENT_NUMBER);
         assertThat(testStudent.getStartDate()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testStudent.getEmail()).isEqualTo(DEFAULT_EMAIL);
-        assertThat(testStudent.getMajor()).isEqualTo(DEFAULT_MAJOR);
 
         // Validate the Student in Elasticsearch
         verify(mockStudentSearchRepository, times(1)).save(testStudent);
@@ -162,8 +155,7 @@ public class StudentResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(student.getId().intValue())))
             .andExpect(jsonPath("$.[*].studentNumber").value(hasItem(DEFAULT_STUDENT_NUMBER)))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE)))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
-            .andExpect(jsonPath("$.[*].major").value(hasItem(DEFAULT_MAJOR)));
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)));
     }
     
     @Test
@@ -179,10 +171,8 @@ public class StudentResourceIT {
             .andExpect(jsonPath("$.id").value(student.getId().intValue()))
             .andExpect(jsonPath("$.studentNumber").value(DEFAULT_STUDENT_NUMBER))
             .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
-            .andExpect(jsonPath("$.major").value(DEFAULT_MAJOR));
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL));
     }
-
     @Test
     @Transactional
     public void getNonExistingStudent() throws Exception {
@@ -206,8 +196,7 @@ public class StudentResourceIT {
         updatedStudent
             .studentNumber(UPDATED_STUDENT_NUMBER)
             .startDate(UPDATED_START_DATE)
-            .email(UPDATED_EMAIL)
-            .major(UPDATED_MAJOR);
+            .email(UPDATED_EMAIL);
 
         restStudentMockMvc.perform(put("/api/students")
             .contentType(MediaType.APPLICATION_JSON)
@@ -221,7 +210,6 @@ public class StudentResourceIT {
         assertThat(testStudent.getStudentNumber()).isEqualTo(UPDATED_STUDENT_NUMBER);
         assertThat(testStudent.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testStudent.getEmail()).isEqualTo(UPDATED_EMAIL);
-        assertThat(testStudent.getMajor()).isEqualTo(UPDATED_MAJOR);
 
         // Validate the Student in Elasticsearch
         verify(mockStudentSearchRepository, times(1)).save(testStudent);
@@ -231,8 +219,6 @@ public class StudentResourceIT {
     @Transactional
     public void updateNonExistingStudent() throws Exception {
         int databaseSizeBeforeUpdate = studentRepository.findAll().size();
-
-        // Create the Student
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restStudentMockMvc.perform(put("/api/students")
@@ -272,10 +258,12 @@ public class StudentResourceIT {
     @Test
     @Transactional
     public void searchStudent() throws Exception {
+        // Configure the mock search repository
         // Initialize the database
         studentRepository.saveAndFlush(student);
         when(mockStudentSearchRepository.search(queryStringQuery("id:" + student.getId())))
             .thenReturn(Collections.singletonList(student));
+
         // Search the student
         restStudentMockMvc.perform(get("/api/_search/students?query=id:" + student.getId()))
             .andExpect(status().isOk())
@@ -283,7 +271,6 @@ public class StudentResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(student.getId().intValue())))
             .andExpect(jsonPath("$.[*].studentNumber").value(hasItem(DEFAULT_STUDENT_NUMBER)))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE)))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
-            .andExpect(jsonPath("$.[*].major").value(hasItem(DEFAULT_MAJOR)));
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)));
     }
 }

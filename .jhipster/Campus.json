@@ -1,34 +1,32 @@
 {
-    "name": "Campus",
-    "fields": [
-        {
-            "fieldName": "name",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "address",
-            "fieldType": "String"
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "major",
-            "otherEntityRelationshipName": "campus",
-            "relationshipName": "major"
-        }
-    ],
-    "changelogDate": "20200503071800",
-    "entityTableName": "campus",
-    "dto": "no",
-    "pagination": "no",
-    "service": "no",
-    "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "readOnly": false,
-    "embedded": false,
-    "clientRootFolder": "",
-    "applications": [
-        "jhipster"
-    ]
+  "name": "Campus",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "major",
+      "otherEntityRelationshipName": "campus",
+      "relationshipName": "major"
+    }
+  ],
+  "changelogDate": "20200503071800",
+  "entityTableName": "campus",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["jhipster"]
 }

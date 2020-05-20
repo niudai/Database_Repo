@@ -109,7 +109,6 @@ public class TeacherResourceIT {
     @Transactional
     public void createTeacher() throws Exception {
         int databaseSizeBeforeCreate = teacherRepository.findAll().size();
-
         // Create the Teacher
         restTeacherMockMvc.perform(post("/api/teachers")
             .contentType(MediaType.APPLICATION_JSON)
@@ -185,7 +184,6 @@ public class TeacherResourceIT {
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()));
     }
-
     @Test
     @Transactional
     public void getNonExistingTeacher() throws Exception {
@@ -235,8 +233,6 @@ public class TeacherResourceIT {
     public void updateNonExistingTeacher() throws Exception {
         int databaseSizeBeforeUpdate = teacherRepository.findAll().size();
 
-        // Create the Teacher
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restTeacherMockMvc.perform(put("/api/teachers")
             .contentType(MediaType.APPLICATION_JSON)
@@ -275,10 +271,12 @@ public class TeacherResourceIT {
     @Test
     @Transactional
     public void searchTeacher() throws Exception {
+        // Configure the mock search repository
         // Initialize the database
         teacherRepository.saveAndFlush(teacher);
         when(mockTeacherSearchRepository.search(queryStringQuery("id:" + teacher.getId())))
             .thenReturn(Collections.singletonList(teacher));
+
         // Search the teacher
         restTeacherMockMvc.perform(get("/api/_search/teachers?query=id:" + teacher.getId()))
             .andExpect(status().isOk())

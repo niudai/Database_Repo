@@ -9,7 +9,6 @@ import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +17,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "student")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "student")
 public class Student implements Serializable {
 
@@ -37,26 +36,27 @@ public class Student implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "major")
-    private String major;
-
     @OneToMany(mappedBy = "student")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<JException> exceptions = new HashSet<>();
 
     @OneToMany(mappedBy = "student")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Record> records = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "students", allowSetters = true)
+    private Major major;
 
     @OneToOne(mappedBy = "student")
     @JsonIgnore
     private People people;
 
     @ManyToOne
-    @JsonIgnoreProperties("students")
+    @JsonIgnoreProperties(value = "students", allowSetters = true)
     private SchoolClass schoolClass;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -102,19 +102,6 @@ public class Student implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getMajor() {
-        return major;
-    }
-
-    public Student major(String major) {
-        this.major = major;
-        return this;
-    }
-
-    public void setMajor(String major) {
-        this.major = major;
     }
 
     public Set<JException> getExceptions() {
@@ -167,6 +154,19 @@ public class Student implements Serializable {
         this.records = records;
     }
 
+    public Major getMajor() {
+        return major;
+    }
+
+    public Student major(Major major) {
+        this.major = major;
+        return this;
+    }
+
+    public void setMajor(Major major) {
+        this.major = major;
+    }
+
     public People getPeople() {
         return people;
     }
@@ -192,7 +192,7 @@ public class Student implements Serializable {
     public void setSchoolClass(SchoolClass schoolClass) {
         this.schoolClass = schoolClass;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -210,6 +210,7 @@ public class Student implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Student{" +
@@ -217,7 +218,6 @@ public class Student implements Serializable {
             ", studentNumber='" + getStudentNumber() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", email='" + getEmail() + "'" +
-            ", major='" + getMajor() + "'" +
             "}";
     }
 }

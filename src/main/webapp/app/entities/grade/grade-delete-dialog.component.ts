@@ -6,7 +6,7 @@ import { IGrade } from 'app/shared/model/grade.model';
 import { GradeService } from './grade.service';
 
 @Component({
-  templateUrl: './grade-delete-dialog.component.html'
+  templateUrl: './grade-delete-dialog.component.html',
 })
 export class GradeDeleteDialogComponent {
   grade?: IGrade;

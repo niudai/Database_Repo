@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +16,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "major")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "major")
 public class Major implements Serializable {
 
@@ -31,22 +30,22 @@ public class Major implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "major")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<SchoolClass> schoolClasses = new HashSet<>();
 
     @OneToMany(mappedBy = "major")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Teacher> teachers = new HashSet<>();
 
     @OneToMany(mappedBy = "major")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Course> courses = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties("majors")
+    @JsonIgnoreProperties(value = "majors", allowSetters = true)
     private Campus campus;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -155,7 +154,7 @@ public class Major implements Serializable {
     public void setCampus(Campus campus) {
         this.campus = campus;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -173,6 +172,7 @@ public class Major implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Major{" +

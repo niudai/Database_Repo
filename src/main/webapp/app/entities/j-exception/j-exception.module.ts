@@ -11,6 +11,6 @@ import { jExceptionRoute } from './j-exception.route';
 @NgModule({
   imports: [JhipsterSharedModule, RouterModule.forChild(jExceptionRoute)],
   declarations: [JExceptionComponent, JExceptionDetailComponent, JExceptionUpdateComponent, JExceptionDeleteDialogComponent],
-  entryComponents: [JExceptionDeleteDialogComponent]
+  entryComponents: [JExceptionDeleteDialogComponent],
 })
 export class JhipsterJExceptionModule {}

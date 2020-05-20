@@ -5,7 +5,7 @@ import { IInterval } from 'app/shared/model/interval.model';
 
 @Component({
   selector: 'jhi-interval-detail',
-  templateUrl: './interval-detail.component.html'
+  templateUrl: './interval-detail.component.html',
 })
 export class IntervalDetailComponent implements OnInit {
   interval: IInterval | null = null;

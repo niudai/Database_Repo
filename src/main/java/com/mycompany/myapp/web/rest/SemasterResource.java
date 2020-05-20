@@ -122,6 +122,7 @@ public class SemasterResource {
     @DeleteMapping("/semasters/{id}")
     public ResponseEntity<Void> deleteSemaster(@PathVariable Long id) {
         log.debug("REST request to delete Semaster : {}", id);
+
         semasterRepository.deleteById(id);
         semasterSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
@@ -139,6 +140,6 @@ public class SemasterResource {
         log.debug("REST request to search Semasters for query {}", query);
         return StreamSupport
             .stream(semasterSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+        .collect(Collectors.toList());
     }
 }

@@ -5,7 +5,7 @@ import { ISemaster } from 'app/shared/model/semaster.model';
 
 @Component({
   selector: 'jhi-semaster-detail',
-  templateUrl: './semaster-detail.component.html'
+  templateUrl: './semaster-detail.component.html',
 })
 export class SemasterDetailComponent implements OnInit {
   semaster: ISemaster | null = null;

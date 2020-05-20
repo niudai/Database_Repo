@@ -59,7 +59,7 @@ export class PeopleService {
 
   protected convertDateFromClient(people: IPeople): IPeople {
     const copy: IPeople = Object.assign({}, people, {
-      birthDate: people.birthDate && people.birthDate.isValid() ? people.birthDate.format(DATE_FORMAT) : undefined
+      birthDate: people.birthDate && people.birthDate.isValid() ? people.birthDate.format(DATE_FORMAT) : undefined,
     });
     return copy;
   }

@@ -5,7 +5,7 @@ import { ISchoolClass } from 'app/shared/model/school-class.model';
 
 @Component({
   selector: 'jhi-school-class-detail',
-  templateUrl: './school-class-detail.component.html'
+  templateUrl: './school-class-detail.component.html',
 })
 export class SchoolClassDetailComponent implements OnInit {
   schoolClass: ISchoolClass | null = null;

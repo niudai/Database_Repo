@@ -1,81 +1,79 @@
 {
-    "name": "JException",
-    "fields": [
-        {
-            "fieldName": "date",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "isYouthLeague",
-            "fieldType": "Boolean"
-        },
-        {
-            "fieldName": "cause",
-            "fieldType": "String"
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "major",
-            "otherEntityRelationshipName": "jException",
-            "relationshipName": "originalMajor",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "major",
-            "otherEntityRelationshipName": "jException",
-            "relationshipName": "newMajor",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "schoolClass",
-            "otherEntityRelationshipName": "jException",
-            "relationshipName": "originalSchoolClass",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "schoolClass",
-            "otherEntityRelationshipName": "jException",
-            "relationshipName": "newSchoolClass",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "grade",
-            "otherEntityRelationshipName": "jException",
-            "relationshipName": "originalGrade",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "grade",
-            "otherEntityRelationshipName": "jException",
-            "relationshipName": "newGrade",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "student",
-            "otherEntityRelationshipName": "exceptions",
-            "relationshipName": "student",
-            "otherEntityField": "id"
-        }
-    ],
-    "changelogDate": "20200505101300",
-    "entityTableName": "j_exception",
-    "dto": "no",
-    "pagination": "no",
-    "service": "no",
-    "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "readOnly": false,
-    "embedded": false,
-    "clientRootFolder": "",
-    "applications": [
-        "jhipster"
-    ]
+  "name": "JException",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "isYouthLeague",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "cause",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "major",
+      "otherEntityRelationshipName": "jException",
+      "relationshipName": "originalMajor",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "major",
+      "otherEntityRelationshipName": "jException",
+      "relationshipName": "newMajor",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "schoolClass",
+      "otherEntityRelationshipName": "jException",
+      "relationshipName": "originalSchoolClass",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "schoolClass",
+      "otherEntityRelationshipName": "jException",
+      "relationshipName": "newSchoolClass",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "grade",
+      "otherEntityRelationshipName": "jException",
+      "relationshipName": "originalGrade",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "grade",
+      "otherEntityRelationshipName": "jException",
+      "relationshipName": "newGrade",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "student",
+      "otherEntityRelationshipName": "exceptions",
+      "relationshipName": "student",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200505101300",
+  "entityTableName": "j_exception",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["jhipster"]
 }

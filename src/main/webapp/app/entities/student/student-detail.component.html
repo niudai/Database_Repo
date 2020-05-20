@@ -22,7 +22,9 @@
                 </dd>
                 <dt><span jhiTranslate="jhipsterApp.student.major">Major</span></dt>
                 <dd>
-                    <span>{{ student.major }}</span>
+                    <div *ngIf="student.major">
+                        <a [routerLink]="['/major', student.major?.id, 'view']">{{ student.major?.id }}</a>
+                    </div>
                 </dd>
                 <dt><span jhiTranslate="jhipsterApp.student.schoolClass">School Class</span></dt>
                 <dd>

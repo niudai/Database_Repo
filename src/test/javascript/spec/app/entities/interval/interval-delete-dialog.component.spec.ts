@@ -20,7 +20,7 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [JhipsterTestModule],
-        declarations: [IntervalDeleteDialogComponent]
+        declarations: [IntervalDeleteDialogComponent],
       })
         .overrideTemplate(IntervalDeleteDialogComponent, '')
         .compileComponents();

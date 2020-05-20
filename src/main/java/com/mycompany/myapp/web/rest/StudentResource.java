@@ -130,6 +130,7 @@ public class StudentResource {
     @DeleteMapping("/students/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
         log.debug("REST request to delete Student : {}", id);
+
         studentRepository.deleteById(id);
         studentSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
@@ -147,6 +148,6 @@ public class StudentResource {
         log.debug("REST request to search Students for query {}", query);
         return StreamSupport
             .stream(studentSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+        .collect(Collectors.toList());
     }
 }

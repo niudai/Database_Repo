@@ -6,7 +6,7 @@ import { ICourse } from 'app/shared/model/course.model';
 import { CourseService } from './course.service';
 
 @Component({
-  templateUrl: './course-delete-dialog.component.html'
+  templateUrl: './course-delete-dialog.component.html',
 })
 export class CourseDeleteDialogComponent {
   course?: ICourse;

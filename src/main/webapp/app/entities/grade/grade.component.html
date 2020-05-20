@@ -36,7 +36,7 @@
         <span jhiTranslate="jhipsterApp.grade.home.notFound">No grades found</span>
     </div>
 
-    <div class="table-responsive" id="entities" *ngIf="grades?.length > 0">
+    <div class="table-responsive" id="entities" *ngIf="grades && grades.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>

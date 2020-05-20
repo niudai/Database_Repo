@@ -40,44 +40,44 @@ export const peopleRoute: Routes = [
     component: PeopleComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.people.home.title'
+      pageTitle: 'jhipsterApp.people.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: PeopleDetailComponent,
     resolve: {
-      people: PeopleResolve
+      people: PeopleResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.people.home.title'
+      pageTitle: 'jhipsterApp.people.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: PeopleUpdateComponent,
     resolve: {
-      people: PeopleResolve
+      people: PeopleResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.people.home.title'
+      pageTitle: 'jhipsterApp.people.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: PeopleUpdateComponent,
     resolve: {
-      people: PeopleResolve
+      people: PeopleResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.people.home.title'
+      pageTitle: 'jhipsterApp.people.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

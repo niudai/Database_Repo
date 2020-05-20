@@ -6,7 +6,7 @@ import { IStudent } from 'app/shared/model/student.model';
 import { StudentService } from './student.service';
 
 @Component({
-  templateUrl: './student-delete-dialog.component.html'
+  templateUrl: './student-delete-dialog.component.html',
 })
 export class StudentDeleteDialogComponent {
   student?: IStudent;

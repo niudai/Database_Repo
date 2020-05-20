@@ -2,11 +2,11 @@
   "jhipsterApp": {
     "course": {
       "home": {
-        "title": "课程",
-        "createLabel": "创建新课程",
-        "createOrEditLabel": "创建并编辑课程",
-        "notFound": "No Courses found",
-        "search": "搜索课程"
+        "title": "Courses",
+        "createLabel": "Create a new Course",
+        "createOrEditLabel": "Create or edit a Course",
+        "search": "Search for Course",
+        "notFound": "No Courses found"
       },
       "created": "A new Course is created with identifier {{ param }}",
       "updated": "A Course is updated with identifier {{ param }}",
@@ -15,14 +15,14 @@
         "question": "Are you sure you want to delete Course {{ id }}?"
       },
       "detail": {
-        "title": "课程"
+        "title": "Course"
       },
-      "name": "课程名",
-      "examType": "考试类型",
-      "time": "时间",
-      "semaster": "学期",
-      "major": "开课专业",
-      "teacher": "老师"
+      "name": "Name",
+      "examType": "Exam Type",
+      "time": "Time",
+      "semaster": "Semaster",
+      "major": "Major",
+      "teacher": "Teacher"
     }
   }
 }

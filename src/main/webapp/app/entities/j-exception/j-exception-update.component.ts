@@ -20,7 +20,7 @@ type SelectableEntity = IMajor | ISchoolClass | IGrade | IStudent;
 
 @Component({
   selector: 'jhi-j-exception-update',
-  templateUrl: './j-exception-update.component.html'
+  templateUrl: './j-exception-update.component.html',
 })
 export class JExceptionUpdateComponent implements OnInit {
   isSaving = false;
@@ -41,7 +41,7 @@ export class JExceptionUpdateComponent implements OnInit {
     newSchoolClass: [],
     originalGrade: [],
     newGrade: [],
-    student: []
+    student: [],
   });
 
   constructor(
@@ -80,7 +80,7 @@ export class JExceptionUpdateComponent implements OnInit {
       newSchoolClass: jException.newSchoolClass,
       originalGrade: jException.originalGrade,
       newGrade: jException.newGrade,
-      student: jException.student
+      student: jException.student,
     });
   }
 
@@ -111,7 +111,7 @@ export class JExceptionUpdateComponent implements OnInit {
       newSchoolClass: this.editForm.get(['newSchoolClass'])!.value,
       originalGrade: this.editForm.get(['originalGrade'])!.value,
       newGrade: this.editForm.get(['newGrade'])!.value,
-      student: this.editForm.get(['student'])!.value
+      student: this.editForm.get(['student'])!.value,
     };
   }
 

@@ -11,6 +11,6 @@ import { intervalRoute } from './interval.route';
 @NgModule({
   imports: [JhipsterSharedModule, RouterModule.forChild(intervalRoute)],
   declarations: [IntervalComponent, IntervalDetailComponent, IntervalUpdateComponent, IntervalDeleteDialogComponent],
-  entryComponents: [IntervalDeleteDialogComponent]
+  entryComponents: [IntervalDeleteDialogComponent],
 })
 export class JhipsterIntervalModule {}

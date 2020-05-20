@@ -103,7 +103,6 @@ public class JExceptionResourceIT {
     @Transactional
     public void createJException() throws Exception {
         int databaseSizeBeforeCreate = jExceptionRepository.findAll().size();
-
         // Create the JException
         restJExceptionMockMvc.perform(post("/api/j-exceptions")
             .contentType(MediaType.APPLICATION_JSON)
@@ -176,7 +175,6 @@ public class JExceptionResourceIT {
             .andExpect(jsonPath("$.isYouthLeague").value(DEFAULT_IS_YOUTH_LEAGUE.booleanValue()))
             .andExpect(jsonPath("$.cause").value(DEFAULT_CAUSE));
     }
-
     @Test
     @Transactional
     public void getNonExistingJException() throws Exception {
@@ -224,8 +222,6 @@ public class JExceptionResourceIT {
     public void updateNonExistingJException() throws Exception {
         int databaseSizeBeforeUpdate = jExceptionRepository.findAll().size();
 
-        // Create the JException
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restJExceptionMockMvc.perform(put("/api/j-exceptions")
             .contentType(MediaType.APPLICATION_JSON)
@@ -264,10 +260,12 @@ public class JExceptionResourceIT {
     @Test
     @Transactional
     public void searchJException() throws Exception {
+        // Configure the mock search repository
         // Initialize the database
         jExceptionRepository.saveAndFlush(jException);
         when(mockJExceptionSearchRepository.search(queryStringQuery("id:" + jException.getId())))
             .thenReturn(Collections.singletonList(jException));
+
         // Search the jException
         restJExceptionMockMvc.perform(get("/api/_search/j-exceptions?query=id:" + jException.getId()))
             .andExpect(status().isOk())

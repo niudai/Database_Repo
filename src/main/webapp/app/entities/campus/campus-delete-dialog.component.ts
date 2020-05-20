@@ -6,7 +6,7 @@ import { ICampus } from 'app/shared/model/campus.model';
 import { CampusService } from './campus.service';
 
 @Component({
-  templateUrl: './campus-delete-dialog.component.html'
+  templateUrl: './campus-delete-dialog.component.html',
 })
 export class CampusDeleteDialogComponent {
   campus?: ICampus;
