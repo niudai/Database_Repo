@@ -62,7 +62,7 @@
                     <td jhiTranslate="{{ 'jhipsterApp.IdType.' + people.idType }}">{{ people.idType }}</td>
                     <td>{{ people.chineseName }}</td>
                     <td>{{ people.englishName }}</td>
-                    <td>{{ people.gender }}</td>
+                    <td>{{ people.gender == 1 ? '男' : '女' }}</td>
                     <td>{{ people.birthDate | date:'mediumDate' }}</td>
                     <td>{{ people.race }}</td>
                     <td>{{ people.nation }}</td>

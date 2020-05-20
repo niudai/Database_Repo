@@ -45,7 +45,7 @@
                     <label class="form-control-label" jhiTranslate="jhipsterApp.teacher.major" for="field_major">Major</label>
                     <select class="form-control" id="field_major" name="major" formControlName="major">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="majorOption.id === editForm.get('major')!.value?.id ? editForm.get('major')!.value : majorOption" *ngFor="let majorOption of majors; trackBy: trackById">{{ majorOption.id }}</option>
+                        <option [ngValue]="majorOption.id === editForm.get('major')!.value?.id ? editForm.get('major')!.value : majorOption" *ngFor="let majorOption of majors; trackBy: trackById">{{ majorOption.name }}</option>
                     </select>
                 </div>
             </div>
