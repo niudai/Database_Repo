@@ -40,7 +40,7 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <!-- <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th> -->
                     <th scope="col" ><span jhiTranslate="jhipsterApp.interval.day">Day</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.interval.start">Start</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.interval.end">End</span></th>
@@ -50,7 +50,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let interval of intervals ;trackBy: trackId">
-                    <td><a [routerLink]="['/interval', interval.id, 'view']">{{ interval.id }}</a></td>
+                    <!-- <td><a [routerLink]="['/interval', interval.id, 'view']">{{ interval.id }}</a></td> -->
                     <td jhiTranslate="{{ 'jhipsterApp.WeekDay.' + interval.day }}">{{ interval.day }}</td>
                     <td>第 {{ interval.start }} 节</td>
                     <td>第 {{ interval.end }} 节</td>

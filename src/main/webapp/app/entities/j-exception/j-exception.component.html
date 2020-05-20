@@ -40,7 +40,7 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <!-- <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th> -->
                     <th scope="col" ><span jhiTranslate="jhipsterApp.jException.date">Date</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.jException.isYouthLeague">Is Youth League</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.jException.cause">Cause</span></th>
@@ -56,7 +56,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let jException of jExceptions ;trackBy: trackId">
-                    <td><a [routerLink]="['/j-exception', jException.id, 'view']">{{ jException.id }}</a></td>
+                    <!-- <td><a [routerLink]="['/j-exception', jException.id, 'view']">{{ jException.id }}</a></td> -->
                     <td>{{ jException.date | date:'mediumDate' }}</td>
                     <td>{{ jException.isYouthLeague }}</td>
                     <td>{{ jException.cause }}</td>

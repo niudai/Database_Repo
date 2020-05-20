@@ -31,7 +31,7 @@
                     <label class="form-control-label" jhiTranslate="jhipsterApp.schoolClass.master" for="field_master">Master</label>
                     <select class="form-control" id="field_master" name="master" formControlName="master">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="teacherOption.id === editForm.get('master')!.value?.id ? editForm.get('master')!.value : teacherOption" *ngFor="let teacherOption of masters; trackBy: trackById">{{ teacherOption.id }}</option>
+                        <option [ngValue]="teacherOption.id === editForm.get('master')!.value?.id ? editForm.get('master')!.value : teacherOption" *ngFor="let teacherOption of masters; trackBy: trackById">{{ teacherOption.people?.chineseName }}</option>
                     </select>
                 </div>
 
@@ -39,7 +39,7 @@
                     <label class="form-control-label" jhiTranslate="jhipsterApp.schoolClass.grade" for="field_grade">Grade</label>
                     <select class="form-control" id="field_grade" name="grade" formControlName="grade">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="gradeOption.id === editForm.get('grade')!.value?.id ? editForm.get('grade')!.value : gradeOption" *ngFor="let gradeOption of grades; trackBy: trackById">{{ gradeOption.id }}</option>
+                        <option [ngValue]="gradeOption.id === editForm.get('grade')!.value?.id ? editForm.get('grade')!.value : gradeOption" *ngFor="let gradeOption of grades; trackBy: trackById">{{ gradeOption.grade }}</option>
                     </select>
                 </div>
 
@@ -47,7 +47,7 @@
                     <label class="form-control-label" jhiTranslate="jhipsterApp.schoolClass.major" for="field_major">Major</label>
                     <select class="form-control" id="field_major" name="major" formControlName="major">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="majorOption.id === editForm.get('major')!.value?.id ? editForm.get('major')!.value : majorOption" *ngFor="let majorOption of majors; trackBy: trackById">{{ majorOption.id }}</option>
+                        <option [ngValue]="majorOption.id === editForm.get('major')!.value?.id ? editForm.get('major')!.value : majorOption" *ngFor="let majorOption of majors; trackBy: trackById">{{ majorOption.name }}</option>
                     </select>
                 </div>
             </div>

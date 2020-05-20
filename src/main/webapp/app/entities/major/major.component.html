@@ -40,7 +40,7 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <!-- <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th> -->
                     <th scope="col" ><span jhiTranslate="jhipsterApp.major.name">Name</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.major.campus">Campus</span></th>
                     <th scope="col"></th>
@@ -48,7 +48,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let major of majors ;trackBy: trackId">
-                    <td><a [routerLink]="['/major', major.id, 'view']">{{ major.id }}</a></td>
+                    <!-- <td><a [routerLink]="['/major', major.id, 'view']">{{ major.id }}</a></td> -->
                     <td>{{ major.name }}</td>
                     <td>
                         <div *ngIf="major.campus">

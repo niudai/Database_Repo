@@ -40,7 +40,7 @@
                     <label class="form-control-label" jhiTranslate="jhipsterApp.interval.course" for="field_course">Course</label>
                     <select class="form-control" id="field_course" name="course" formControlName="course">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="courseOption.id === editForm.get('course')!.value?.id ? editForm.get('course')!.value : courseOption" *ngFor="let courseOption of courses; trackBy: trackById">{{ courseOption.id }}</option>
+                        <option [ngValue]="courseOption.id === editForm.get('course')!.value?.id ? editForm.get('course')!.value : courseOption" *ngFor="let courseOption of courses; trackBy: trackById">{{ courseOption.name }}</option>
                     </select>
                 </div>
             </div>

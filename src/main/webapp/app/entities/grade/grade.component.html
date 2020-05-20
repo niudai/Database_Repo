@@ -40,14 +40,14 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <!-- <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th> -->
                     <th scope="col" ><span jhiTranslate="jhipsterApp.grade.grade">Grade</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let grade of grades ;trackBy: trackId">
-                    <td><a [routerLink]="['/grade', grade.id, 'view']">{{ grade.id }}</a></td>
+                    <!-- <td><a [routerLink]="['/grade', grade.id, 'view']">{{ grade.id }}</a></td> -->
                     <td>{{ grade.grade }}</td>
                     <td class="text-right">
                         <div class="btn-group">

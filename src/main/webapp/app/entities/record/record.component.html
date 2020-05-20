@@ -40,7 +40,7 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <!-- <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th> -->
                     <th scope="col" ><span jhiTranslate="jhipsterApp.record.date">Date</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.record.score">Score</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.record.semaster">Semaster</span></th>
@@ -51,7 +51,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let record of records ;trackBy: trackId">
-                    <td><a [routerLink]="['/record', record.id, 'view']">{{ record.id }}</a></td>
+                    <!-- <td><a [routerLink]="['/record', record.id, 'view']">{{ record.id }}</a></td> -->
                     <td>{{ record.date | date:'mediumDate' }}</td>
                     <td>{{ record.score }}</td>
                     <td>

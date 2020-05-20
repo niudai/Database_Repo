@@ -40,7 +40,7 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <!-- <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th> -->
                     <th scope="col" ><span jhiTranslate="jhipsterApp.people.idType">Id Type</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.people.chineseName">Chinese Name</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.people.englishName">English Name</span></th>
@@ -58,7 +58,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let people of people ;trackBy: trackId">
-                    <td><a [routerLink]="['/people', people.id, 'view']">{{ people.id }}</a></td>
+                    <!-- <td><a [routerLink]="['/people', people.id, 'view']">{{ people.id }}</a></td> -->
                     <td jhiTranslate="{{ 'jhipsterApp.IdType.' + people.idType }}">{{ people.idType }}</td>
                     <td>{{ people.chineseName }}</td>
                     <td>{{ people.englishName }}</td>
@@ -71,12 +71,12 @@
                     <td>{{ people.telephone }}</td>
                     <td>
                         <div *ngIf="people.teacher">
-                            <a [routerLink]="['/teacher', people.teacher?.id, 'view']" >{{ people.teacher?.id }}</a>
+                            <a [routerLink]="['/teacher', people.teacher?.id, 'view']" >{{ people.teacher?.workNumber }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="people.student">
-                            <a [routerLink]="['/student', people.student?.id, 'view']" >{{ people.student?.id }}</a>
+                            <a [routerLink]="['/student', people.student?.id, 'view']" >{{ people.student?.studentNumber }}</a>
                         </div>
                     </td>
                     <td class="text-right">

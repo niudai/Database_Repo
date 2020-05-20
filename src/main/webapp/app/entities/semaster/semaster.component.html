@@ -40,7 +40,7 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <!-- <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th> -->
                     <th scope="col" ><span jhiTranslate="jhipsterApp.semaster.year">Year</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.semaster.season">Season</span></th>
                     <th scope="col"></th>
@@ -48,7 +48,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let semaster of semasters ;trackBy: trackId">
-                    <td><a [routerLink]="['/semaster', semaster.id, 'view']">{{ semaster.id }}</a></td>
+                    <!-- <td><a [routerLink]="['/semaster', semaster.id, 'view']">{{ semaster.id }}</a></td> -->
                     <td>{{ semaster.year }}</td>
                     <td jhiTranslate="{{ 'jhipsterApp.Season.' + semaster.season }}">{{ semaster.season }}</td>
                     <td class="text-right">
