@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 import java.time.LocalDate;
 
 /**
@@ -16,7 +15,7 @@ import java.time.LocalDate;
  */
 @Entity
 @Table(name = "record")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "record")
 public class Record implements Serializable {
 
@@ -33,18 +32,18 @@ public class Record implements Serializable {
     private Integer score;
 
     @ManyToOne
-    @JsonIgnoreProperties("records")
+    @JsonIgnoreProperties(value = "records", allowSetters = true)
     private Semaster semaster;
 
     @ManyToOne
-    @JsonIgnoreProperties("records")
+    @JsonIgnoreProperties(value = "records", allowSetters = true)
     private Course course;
 
     @ManyToOne
-    @JsonIgnoreProperties("records")
+    @JsonIgnoreProperties(value = "records", allowSetters = true)
     private Student student;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -117,7 +116,7 @@ public class Record implements Serializable {
     public void setStudent(Student student) {
         this.student = student;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -135,6 +134,7 @@ public class Record implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Record{" +

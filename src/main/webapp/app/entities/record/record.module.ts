@@ -11,6 +11,6 @@ import { recordRoute } from './record.route';
 @NgModule({
   imports: [JhipsterSharedModule, RouterModule.forChild(recordRoute)],
   declarations: [RecordComponent, RecordDetailComponent, RecordUpdateComponent, RecordDeleteDialogComponent],
-  entryComponents: [RecordDeleteDialogComponent]
+  entryComponents: [RecordDeleteDialogComponent],
 })
 export class JhipsterRecordModule {}

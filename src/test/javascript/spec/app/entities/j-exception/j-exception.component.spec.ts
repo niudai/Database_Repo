@@ -16,7 +16,7 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [JhipsterTestModule],
-        declarations: [JExceptionComponent]
+        declarations: [JExceptionComponent],
       })
         .overrideTemplate(JExceptionComponent, '')
         .compileComponents();
@@ -33,7 +33,7 @@ describe('Component Tests', () => {
         of(
           new HttpResponse({
             body: [new JException(123)],
-            headers
+            headers,
           })
         )
       );

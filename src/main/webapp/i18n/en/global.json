@@ -1,25 +1,24 @@
 {
   "global": {
-    "title": "USTC信息管理",
+    "title": "Jhipster",
     "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
     "menu": {
-      "home": "主页",
+      "home": "Home",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
-        "main": "信息库",
-        "campus": "校区",
-        "major": "专业",
-        "record": "选课记录",
-        "schoolClass": "班级",
-        "grade": "年纪",
-        "people": "注册用户",
-        "student": "学生",
-        "teacher": "老师",
-        "course": "课程",
-        "interval": "上课时间",
-        "semaster": "学期",
-        "exception": "Exception",
-        "jException": "学籍异动",
+        "main": "Entities",
+        "campus": "Campus",
+        "major": "Major",
+        "record": "Record",
+        "schoolClass": "School Class",
+        "grade": "Grade",
+        "people": "People",
+        "student": "Student",
+        "teacher": "Teacher",
+        "course": "Course",
+        "interval": "Interval",
+        "semaster": "Semaster",
+        "jException": "J Exception",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -32,16 +31,16 @@
         "register": "Register"
       },
       "admin": {
-        "main": "管理",
-        "userManagement": "用户管理",
+        "main": "Administration",
+        "userManagement": "User management",
         "tracker": "User tracker",
         "metrics": "Metrics",
         "health": "Health",
         "configuration": "Configuration",
         "logs": "Logs",
         "audits": "Audits",
-        "apidocs": "API文档",
-        "database": "数据库",
+        "apidocs": "API",
+        "database": "Database",
         "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
       },
       "language": "Language"

@@ -1,28 +1,26 @@
 {
-    "name": "Semaster",
-    "fields": [
-        {
-            "fieldName": "year",
-            "fieldType": "Integer"
-        },
-        {
-            "fieldName": "season",
-            "fieldType": "Season",
-            "fieldValues": "Spring,Summer,Fall,Winter"
-        }
-    ],
-    "relationships": [],
-    "changelogDate": "20200503072800",
-    "entityTableName": "semaster",
-    "dto": "no",
-    "pagination": "no",
-    "service": "no",
-    "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "readOnly": false,
-    "embedded": false,
-    "clientRootFolder": "",
-    "applications": [
-        "jhipster"
-    ]
+  "name": "Semaster",
+  "fields": [
+    {
+      "fieldName": "year",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "season",
+      "fieldType": "Season",
+      "fieldValues": "Spring,Summer,Fall,Winter"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200503072800",
+  "entityTableName": "semaster",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["jhipster"]
 }

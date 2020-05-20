@@ -10,7 +10,7 @@ import { CampusService } from './campus.service';
 
 @Component({
   selector: 'jhi-campus-update',
-  templateUrl: './campus-update.component.html'
+  templateUrl: './campus-update.component.html',
 })
 export class CampusUpdateComponent implements OnInit {
   isSaving = false;
@@ -18,7 +18,7 @@ export class CampusUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     name: [],
-    address: []
+    address: [],
   });
 
   constructor(protected campusService: CampusService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -33,7 +33,7 @@ export class CampusUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: campus.id,
       name: campus.name,
-      address: campus.address
+      address: campus.address,
     });
   }
 
@@ -56,7 +56,7 @@ export class CampusUpdateComponent implements OnInit {
       ...new Campus(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
-      address: this.editForm.get(['address'])!.value
+      address: this.editForm.get(['address'])!.value,
     };
   }
 

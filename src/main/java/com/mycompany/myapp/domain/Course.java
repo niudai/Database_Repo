@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +18,7 @@ import com.mycompany.myapp.domain.enumeration.ExamType;
  */
 @Entity
 @Table(name = "course")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "course")
 public class Course implements Serializable {
 
@@ -37,22 +36,22 @@ public class Course implements Serializable {
     private ExamType examType;
 
     @OneToMany(mappedBy = "course")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Interval> times = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties("courses")
+    @JsonIgnoreProperties(value = "courses", allowSetters = true)
     private Semaster semaster;
 
     @ManyToOne
-    @JsonIgnoreProperties("courses")
+    @JsonIgnoreProperties(value = "courses", allowSetters = true)
     private Major major;
 
     @ManyToOne
-    @JsonIgnoreProperties("courses")
+    @JsonIgnoreProperties(value = "courses", allowSetters = true)
     private Teacher teacher;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -150,7 +149,7 @@ public class Course implements Serializable {
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -168,6 +167,7 @@ public class Course implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Course{" +

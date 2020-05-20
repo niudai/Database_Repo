@@ -5,7 +5,7 @@ import { IStudent } from 'app/shared/model/student.model';
 
 @Component({
   selector: 'jhi-student-detail',
-  templateUrl: './student-detail.component.html'
+  templateUrl: './student-detail.component.html',
 })
 export class StudentDetailComponent implements OnInit {
   student: IStudent | null = null;

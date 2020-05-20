@@ -2,13 +2,14 @@ import { Moment } from 'moment';
 import { ITeacher } from 'app/shared/model/teacher.model';
 import { IStudent } from 'app/shared/model/student.model';
 import { IdType } from 'app/shared/model/enumerations/id-type.model';
+import { Gender } from 'app/shared/model/enumerations/gender.model';
 
 export interface IPeople {
   id?: number;
   idType?: IdType;
   chineseName?: string;
   englishName?: string;
-  gender?: number;
+  gender?: Gender;
   birthDate?: Moment;
   race?: string;
   nation?: string;
@@ -25,7 +26,7 @@ export class People implements IPeople {
     public idType?: IdType,
     public chineseName?: string,
     public englishName?: string,
-    public gender?: number,
+    public gender?: Gender,
     public birthDate?: Moment,
     public race?: string,
     public nation?: string,

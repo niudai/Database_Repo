@@ -5,7 +5,7 @@ import { ICampus } from 'app/shared/model/campus.model';
 
 @Component({
   selector: 'jhi-campus-detail',
-  templateUrl: './campus-detail.component.html'
+  templateUrl: './campus-detail.component.html',
 })
 export class CampusDetailComponent implements OnInit {
   campus: ICampus | null = null;

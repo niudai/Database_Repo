@@ -7,15 +7,20 @@ import { Observable } from 'rxjs';
 
 import { IStudent, Student } from 'app/shared/model/student.model';
 import { StudentService } from './student.service';
+import { IMajor } from 'app/shared/model/major.model';
+import { MajorService } from 'app/entities/major/major.service';
 import { ISchoolClass } from 'app/shared/model/school-class.model';
 import { SchoolClassService } from 'app/entities/school-class/school-class.service';
 
+type SelectableEntity = IMajor | ISchoolClass;
+
 @Component({
   selector: 'jhi-student-update',
-  templateUrl: './student-update.component.html'
+  templateUrl: './student-update.component.html',
 })
 export class StudentUpdateComponent implements OnInit {
   isSaving = false;
+  majors: IMajor[] = [];
   schoolclasses: ISchoolClass[] = [];
 
   editForm = this.fb.group({
@@ -24,11 +29,12 @@ export class StudentUpdateComponent implements OnInit {
     startDate: [],
     email: [],
     major: [],
-    schoolClass: []
+    schoolClass: [],
   });
 
   constructor(
     protected studentService: StudentService,
+    protected majorService: MajorService,
     protected schoolClassService: SchoolClassService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -37,6 +43,8 @@ export class StudentUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ student }) => {
       this.updateForm(student);
+
+      this.majorService.query().subscribe((res: HttpResponse<IMajor[]>) => (this.majors = res.body || []));
 
       this.schoolClassService.query().subscribe((res: HttpResponse<ISchoolClass[]>) => (this.schoolclasses = res.body || []));
     });
@@ -49,7 +57,7 @@ export class StudentUpdateComponent implements OnInit {
       startDate: student.startDate,
       email: student.email,
       major: student.major,
-      schoolClass: student.schoolClass
+      schoolClass: student.schoolClass,
     });
   }
 
@@ -75,7 +83,7 @@ export class StudentUpdateComponent implements OnInit {
       startDate: this.editForm.get(['startDate'])!.value,
       email: this.editForm.get(['email'])!.value,
       major: this.editForm.get(['major'])!.value,
-      schoolClass: this.editForm.get(['schoolClass'])!.value
+      schoolClass: this.editForm.get(['schoolClass'])!.value,
     };
   }
 
@@ -95,7 +103,7 @@ export class StudentUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: ISchoolClass): any {
+  trackById(index: number, item: SelectableEntity): any {
     return item.id;
   }
 }

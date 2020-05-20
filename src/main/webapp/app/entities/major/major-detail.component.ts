@@ -5,7 +5,7 @@ import { IMajor } from 'app/shared/model/major.model';
 
 @Component({
   selector: 'jhi-major-detail',
-  templateUrl: './major-detail.component.html'
+  templateUrl: './major-detail.component.html',
 })
 export class MajorDetailComponent implements OnInit {
   major: IMajor | null = null;

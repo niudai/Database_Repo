@@ -11,7 +11,7 @@ import { MajorDeleteDialogComponent } from './major-delete-dialog.component';
 
 @Component({
   selector: 'jhi-major',
-  templateUrl: './major.component.html'
+  templateUrl: './major.component.html',
 })
 export class MajorComponent implements OnInit, OnDestroy {
   majors?: IMajor[];
@@ -34,7 +34,7 @@ export class MajorComponent implements OnInit, OnDestroy {
     if (this.currentSearch) {
       this.majorService
         .search({
-          query: this.currentSearch
+          query: this.currentSearch,
         })
         .subscribe((res: HttpResponse<IMajor[]>) => (this.majors = res.body || []));
       return;

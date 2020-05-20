@@ -5,7 +5,7 @@ import { IPeople } from 'app/shared/model/people.model';
 
 @Component({
   selector: 'jhi-people-detail',
-  templateUrl: './people-detail.component.html'
+  templateUrl: './people-detail.component.html',
 })
 export class PeopleDetailComponent implements OnInit {
   people: IPeople | null = null;

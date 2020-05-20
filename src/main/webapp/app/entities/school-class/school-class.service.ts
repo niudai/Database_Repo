@@ -59,7 +59,7 @@ export class SchoolClassService {
 
   protected convertDateFromClient(schoolClass: ISchoolClass): ISchoolClass {
     const copy: ISchoolClass = Object.assign({}, schoolClass, {
-      createdDate: schoolClass.createdDate && schoolClass.createdDate.isValid() ? schoolClass.createdDate.format(DATE_FORMAT) : undefined
+      createdDate: schoolClass.createdDate && schoolClass.createdDate.isValid() ? schoolClass.createdDate.format(DATE_FORMAT) : undefined,
     });
     return copy;
   }

@@ -12,7 +12,7 @@ import { MajorService } from 'app/entities/major/major.service';
 
 @Component({
   selector: 'jhi-teacher-update',
-  templateUrl: './teacher-update.component.html'
+  templateUrl: './teacher-update.component.html',
 })
 export class TeacherUpdateComponent implements OnInit {
   isSaving = false;
@@ -25,7 +25,7 @@ export class TeacherUpdateComponent implements OnInit {
     startDate: [],
     email: [],
     title: [],
-    major: []
+    major: [],
   });
 
   constructor(
@@ -50,7 +50,7 @@ export class TeacherUpdateComponent implements OnInit {
       startDate: teacher.startDate,
       email: teacher.email,
       title: teacher.title,
-      major: teacher.major
+      major: teacher.major,
     });
   }
 
@@ -76,7 +76,7 @@ export class TeacherUpdateComponent implements OnInit {
       startDate: this.editForm.get(['startDate'])!.value,
       email: this.editForm.get(['email'])!.value,
       title: this.editForm.get(['title'])!.value,
-      major: this.editForm.get(['major'])!.value
+      major: this.editForm.get(['major'])!.value,
     };
   }
 

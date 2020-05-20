@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +17,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "school_class")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "schoolclass")
 public class SchoolClass implements Serializable {
 
@@ -39,18 +38,18 @@ public class SchoolClass implements Serializable {
     private Teacher master;
 
     @OneToMany(mappedBy = "schoolClass")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Student> students = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties("schoolClasses")
+    @JsonIgnoreProperties(value = "schoolClasses", allowSetters = true)
     private Grade grade;
 
     @ManyToOne
-    @JsonIgnoreProperties("schoolClasses")
+    @JsonIgnoreProperties(value = "schoolClasses", allowSetters = true)
     private Major major;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -148,7 +147,7 @@ public class SchoolClass implements Serializable {
     public void setMajor(Major major) {
         this.major = major;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -166,6 +165,7 @@ public class SchoolClass implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "SchoolClass{" +

@@ -19,7 +19,7 @@ type SelectableEntity = ITeacher | IGrade | IMajor;
 
 @Component({
   selector: 'jhi-school-class-update',
-  templateUrl: './school-class-update.component.html'
+  templateUrl: './school-class-update.component.html',
 })
 export class SchoolClassUpdateComponent implements OnInit {
   isSaving = false;
@@ -34,7 +34,7 @@ export class SchoolClassUpdateComponent implements OnInit {
     createdDate: [],
     master: [],
     grade: [],
-    major: []
+    major: [],
   });
 
   constructor(
@@ -85,7 +85,7 @@ export class SchoolClassUpdateComponent implements OnInit {
       createdDate: schoolClass.createdDate,
       master: schoolClass.master,
       grade: schoolClass.grade,
-      major: schoolClass.major
+      major: schoolClass.major,
     });
   }
 
@@ -111,7 +111,7 @@ export class SchoolClassUpdateComponent implements OnInit {
       createdDate: this.editForm.get(['createdDate'])!.value,
       master: this.editForm.get(['master'])!.value,
       grade: this.editForm.get(['grade'])!.value,
-      major: this.editForm.get(['major'])!.value
+      major: this.editForm.get(['major'])!.value,
     };
   }
 

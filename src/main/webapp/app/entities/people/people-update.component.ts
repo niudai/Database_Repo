@@ -17,7 +17,7 @@ type SelectableEntity = ITeacher | IStudent;
 
 @Component({
   selector: 'jhi-people-update',
-  templateUrl: './people-update.component.html'
+  templateUrl: './people-update.component.html',
 })
 export class PeopleUpdateComponent implements OnInit {
   isSaving = false;
@@ -38,7 +38,7 @@ export class PeopleUpdateComponent implements OnInit {
     postcode: [],
     telephone: [],
     teacher: [],
-    student: []
+    student: [],
   });
 
   constructor(
@@ -113,7 +113,7 @@ export class PeopleUpdateComponent implements OnInit {
       postcode: people.postcode,
       telephone: people.telephone,
       teacher: people.teacher,
-      student: people.student
+      student: people.student,
     });
   }
 
@@ -146,7 +146,7 @@ export class PeopleUpdateComponent implements OnInit {
       postcode: this.editForm.get(['postcode'])!.value,
       telephone: this.editForm.get(['telephone'])!.value,
       teacher: this.editForm.get(['teacher'])!.value,
-      student: this.editForm.get(['student'])!.value
+      student: this.editForm.get(['student'])!.value,
     };
   }
 

@@ -11,6 +11,6 @@ import { schoolClassRoute } from './school-class.route';
 @NgModule({
   imports: [JhipsterSharedModule, RouterModule.forChild(schoolClassRoute)],
   declarations: [SchoolClassComponent, SchoolClassDetailComponent, SchoolClassUpdateComponent, SchoolClassDeleteDialogComponent],
-  entryComponents: [SchoolClassDeleteDialogComponent]
+  entryComponents: [SchoolClassDeleteDialogComponent],
 })
 export class JhipsterSchoolClassModule {}

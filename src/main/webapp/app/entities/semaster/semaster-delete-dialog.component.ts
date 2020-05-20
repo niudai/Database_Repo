@@ -6,7 +6,7 @@ import { ISemaster } from 'app/shared/model/semaster.model';
 import { SemasterService } from './semaster.service';
 
 @Component({
-  templateUrl: './semaster-delete-dialog.component.html'
+  templateUrl: './semaster-delete-dialog.component.html',
 })
 export class SemasterDeleteDialogComponent {
   semaster?: ISemaster;

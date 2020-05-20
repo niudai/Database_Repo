@@ -91,7 +91,6 @@ public class MajorResourceIT {
     @Transactional
     public void createMajor() throws Exception {
         int databaseSizeBeforeCreate = majorRepository.findAll().size();
-
         // Create the Major
         restMajorMockMvc.perform(post("/api/majors")
             .contentType(MediaType.APPLICATION_JSON)
@@ -158,7 +157,6 @@ public class MajorResourceIT {
             .andExpect(jsonPath("$.id").value(major.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
-
     @Test
     @Transactional
     public void getNonExistingMajor() throws Exception {
@@ -202,8 +200,6 @@ public class MajorResourceIT {
     public void updateNonExistingMajor() throws Exception {
         int databaseSizeBeforeUpdate = majorRepository.findAll().size();
 
-        // Create the Major
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restMajorMockMvc.perform(put("/api/majors")
             .contentType(MediaType.APPLICATION_JSON)
@@ -242,10 +238,12 @@ public class MajorResourceIT {
     @Test
     @Transactional
     public void searchMajor() throws Exception {
+        // Configure the mock search repository
         // Initialize the database
         majorRepository.saveAndFlush(major);
         when(mockMajorSearchRepository.search(queryStringQuery("id:" + major.getId())))
             .thenReturn(Collections.singletonList(major));
+
         // Search the major
         restMajorMockMvc.perform(get("/api/_search/majors?query=id:" + major.getId()))
             .andExpect(status().isOk())

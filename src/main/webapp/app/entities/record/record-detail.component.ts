@@ -5,7 +5,7 @@ import { IRecord } from 'app/shared/model/record.model';
 
 @Component({
   selector: 'jhi-record-detail',
-  templateUrl: './record-detail.component.html'
+  templateUrl: './record-detail.component.html',
 })
 export class RecordDetailComponent implements OnInit {
   record: IRecord | null = null;

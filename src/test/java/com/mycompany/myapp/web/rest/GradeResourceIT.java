@@ -91,7 +91,6 @@ public class GradeResourceIT {
     @Transactional
     public void createGrade() throws Exception {
         int databaseSizeBeforeCreate = gradeRepository.findAll().size();
-
         // Create the Grade
         restGradeMockMvc.perform(post("/api/grades")
             .contentType(MediaType.APPLICATION_JSON)
@@ -158,7 +157,6 @@ public class GradeResourceIT {
             .andExpect(jsonPath("$.id").value(grade.getId().intValue()))
             .andExpect(jsonPath("$.grade").value(DEFAULT_GRADE));
     }
-
     @Test
     @Transactional
     public void getNonExistingGrade() throws Exception {
@@ -202,8 +200,6 @@ public class GradeResourceIT {
     public void updateNonExistingGrade() throws Exception {
         int databaseSizeBeforeUpdate = gradeRepository.findAll().size();
 
-        // Create the Grade
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restGradeMockMvc.perform(put("/api/grades")
             .contentType(MediaType.APPLICATION_JSON)
@@ -242,10 +238,12 @@ public class GradeResourceIT {
     @Test
     @Transactional
     public void searchGrade() throws Exception {
+        // Configure the mock search repository
         // Initialize the database
         gradeRepository.saveAndFlush(grade);
         when(mockGradeSearchRepository.search(queryStringQuery("id:" + grade.getId())))
             .thenReturn(Collections.singletonList(grade));
+
         // Search the grade
         restGradeMockMvc.perform(get("/api/_search/grades?query=id:" + grade.getId()))
             .andExpect(status().isOk())

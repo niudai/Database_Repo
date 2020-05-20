@@ -18,7 +18,7 @@ describe('Component Tests', () => {
       TestBed.configureTestingModule({
         imports: [JhipsterTestModule],
         declarations: [PeopleUpdateComponent],
-        providers: [FormBuilder]
+        providers: [FormBuilder],
       })
         .overrideTemplate(PeopleUpdateComponent, '')
         .compileComponents();

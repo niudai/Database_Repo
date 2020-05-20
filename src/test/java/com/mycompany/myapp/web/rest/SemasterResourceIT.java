@@ -97,7 +97,6 @@ public class SemasterResourceIT {
     @Transactional
     public void createSemaster() throws Exception {
         int databaseSizeBeforeCreate = semasterRepository.findAll().size();
-
         // Create the Semaster
         restSemasterMockMvc.perform(post("/api/semasters")
             .contentType(MediaType.APPLICATION_JSON)
@@ -167,7 +166,6 @@ public class SemasterResourceIT {
             .andExpect(jsonPath("$.year").value(DEFAULT_YEAR))
             .andExpect(jsonPath("$.season").value(DEFAULT_SEASON.toString()));
     }
-
     @Test
     @Transactional
     public void getNonExistingSemaster() throws Exception {
@@ -213,8 +211,6 @@ public class SemasterResourceIT {
     public void updateNonExistingSemaster() throws Exception {
         int databaseSizeBeforeUpdate = semasterRepository.findAll().size();
 
-        // Create the Semaster
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSemasterMockMvc.perform(put("/api/semasters")
             .contentType(MediaType.APPLICATION_JSON)
@@ -253,10 +249,12 @@ public class SemasterResourceIT {
     @Test
     @Transactional
     public void searchSemaster() throws Exception {
+        // Configure the mock search repository
         // Initialize the database
         semasterRepository.saveAndFlush(semaster);
         when(mockSemasterSearchRepository.search(queryStringQuery("id:" + semaster.getId())))
             .thenReturn(Collections.singletonList(semaster));
+
         // Search the semaster
         restSemasterMockMvc.perform(get("/api/_search/semasters?query=id:" + semaster.getId()))
             .andExpect(status().isOk())

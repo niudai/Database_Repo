@@ -1,23 +1,21 @@
 {
-    "name": "Grade",
-    "fields": [
-        {
-            "fieldName": "grade",
-            "fieldType": "Integer"
-        }
-    ],
-    "relationships": [],
-    "changelogDate": "20200503072200",
-    "entityTableName": "grade",
-    "dto": "no",
-    "pagination": "no",
-    "service": "no",
-    "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "readOnly": false,
-    "embedded": false,
-    "clientRootFolder": "",
-    "applications": [
-        "jhipster"
-    ]
+  "name": "Grade",
+  "fields": [
+    {
+      "fieldName": "grade",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200503072200",
+  "entityTableName": "grade",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["jhipster"]
 }

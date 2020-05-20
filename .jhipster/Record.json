@@ -1,49 +1,47 @@
 {
-    "name": "Record",
-    "fields": [
-        {
-            "fieldName": "date",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "score",
-            "fieldType": "Integer"
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "semaster",
-            "otherEntityRelationshipName": "record",
-            "relationshipName": "semaster",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "course",
-            "otherEntityRelationshipName": "record",
-            "relationshipName": "course",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "student",
-            "otherEntityRelationshipName": "record",
-            "relationshipName": "student",
-            "otherEntityField": "id"
-        }
-    ],
-    "changelogDate": "20200503072000",
-    "entityTableName": "record",
-    "dto": "no",
-    "pagination": "no",
-    "service": "no",
-    "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "readOnly": false,
-    "embedded": false,
-    "clientRootFolder": "",
-    "applications": [
-        "jhipster"
-    ]
+  "name": "Record",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "score",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "semaster",
+      "otherEntityRelationshipName": "record",
+      "relationshipName": "semaster",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "course",
+      "otherEntityRelationshipName": "record",
+      "relationshipName": "course",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "student",
+      "otherEntityRelationshipName": "record",
+      "relationshipName": "student",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200503072000",
+  "entityTableName": "record",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["jhipster"]
 }

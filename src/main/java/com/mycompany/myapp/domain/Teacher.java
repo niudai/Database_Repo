@@ -9,7 +9,6 @@ import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +20,7 @@ import com.mycompany.myapp.domain.enumeration.Title;
  */
 @Entity
 @Table(name = "teacher")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "teacher")
 public class Teacher implements Serializable {
 
@@ -45,7 +44,7 @@ public class Teacher implements Serializable {
     private Title title;
 
     @OneToMany(mappedBy = "teacher")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Course> courses = new HashSet<>();
 
     @OneToOne(mappedBy = "master")
@@ -57,10 +56,10 @@ public class Teacher implements Serializable {
     private People people;
 
     @ManyToOne
-    @JsonIgnoreProperties("teachers")
+    @JsonIgnoreProperties(value = "teachers", allowSetters = true)
     private Major major;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -184,7 +183,7 @@ public class Teacher implements Serializable {
     public void setMajor(Major major) {
         this.major = major;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -202,6 +201,7 @@ public class Teacher implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Teacher{" +

@@ -122,6 +122,7 @@ public class SchoolClassResource {
     @DeleteMapping("/school-classes/{id}")
     public ResponseEntity<Void> deleteSchoolClass(@PathVariable Long id) {
         log.debug("REST request to delete SchoolClass : {}", id);
+
         schoolClassRepository.deleteById(id);
         schoolClassSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
@@ -139,6 +140,6 @@ public class SchoolClassResource {
         log.debug("REST request to search SchoolClasses for query {}", query);
         return StreamSupport
             .stream(schoolClassSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+        .collect(Collectors.toList());
     }
 }

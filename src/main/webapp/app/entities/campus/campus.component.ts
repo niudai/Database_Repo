@@ -11,7 +11,7 @@ import { CampusDeleteDialogComponent } from './campus-delete-dialog.component';
 
 @Component({
   selector: 'jhi-campus',
-  templateUrl: './campus.component.html'
+  templateUrl: './campus.component.html',
 })
 export class CampusComponent implements OnInit, OnDestroy {
   campuses?: ICampus[];
@@ -34,7 +34,7 @@ export class CampusComponent implements OnInit, OnDestroy {
     if (this.currentSearch) {
       this.campusService
         .search({
-          query: this.currentSearch
+          query: this.currentSearch,
         })
         .subscribe((res: HttpResponse<ICampus[]>) => (this.campuses = res.body || []));
       return;

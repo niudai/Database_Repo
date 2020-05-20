@@ -5,7 +5,7 @@ import { IGrade } from 'app/shared/model/grade.model';
 
 @Component({
   selector: 'jhi-grade-detail',
-  templateUrl: './grade-detail.component.html'
+  templateUrl: './grade-detail.component.html',
 })
 export class GradeDetailComponent implements OnInit {
   grade: IGrade | null = null;

@@ -102,7 +102,6 @@ public class IntervalResourceIT {
     @Transactional
     public void createInterval() throws Exception {
         int databaseSizeBeforeCreate = intervalRepository.findAll().size();
-
         // Create the Interval
         restIntervalMockMvc.perform(post("/api/intervals")
             .contentType(MediaType.APPLICATION_JSON)
@@ -175,7 +174,6 @@ public class IntervalResourceIT {
             .andExpect(jsonPath("$.start").value(DEFAULT_START))
             .andExpect(jsonPath("$.end").value(DEFAULT_END));
     }
-
     @Test
     @Transactional
     public void getNonExistingInterval() throws Exception {
@@ -223,8 +221,6 @@ public class IntervalResourceIT {
     public void updateNonExistingInterval() throws Exception {
         int databaseSizeBeforeUpdate = intervalRepository.findAll().size();
 
-        // Create the Interval
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restIntervalMockMvc.perform(put("/api/intervals")
             .contentType(MediaType.APPLICATION_JSON)
@@ -263,10 +259,12 @@ public class IntervalResourceIT {
     @Test
     @Transactional
     public void searchInterval() throws Exception {
+        // Configure the mock search repository
         // Initialize the database
         intervalRepository.saveAndFlush(interval);
         when(mockIntervalSearchRepository.search(queryStringQuery("id:" + interval.getId())))
             .thenReturn(Collections.singletonList(interval));
+
         // Search the interval
         restIntervalMockMvc.perform(get("/api/_search/intervals?query=id:" + interval.getId()))
             .andExpect(status().isOk())

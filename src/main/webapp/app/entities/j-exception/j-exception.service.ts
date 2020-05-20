@@ -59,7 +59,7 @@ export class JExceptionService {
 
   protected convertDateFromClient(jException: IJException): IJException {
     const copy: IJException = Object.assign({}, jException, {
-      date: jException.date && jException.date.isValid() ? jException.date.format(DATE_FORMAT) : undefined
+      date: jException.date && jException.date.isValid() ? jException.date.format(DATE_FORMAT) : undefined,
     });
     return copy;
   }

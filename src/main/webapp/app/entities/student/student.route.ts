@@ -40,44 +40,44 @@ export const studentRoute: Routes = [
     component: StudentComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.student.home.title'
+      pageTitle: 'jhipsterApp.student.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: StudentDetailComponent,
     resolve: {
-      student: StudentResolve
+      student: StudentResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.student.home.title'
+      pageTitle: 'jhipsterApp.student.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: StudentUpdateComponent,
     resolve: {
-      student: StudentResolve
+      student: StudentResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.student.home.title'
+      pageTitle: 'jhipsterApp.student.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: StudentUpdateComponent,
     resolve: {
-      student: StudentResolve
+      student: StudentResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.student.home.title'
+      pageTitle: 'jhipsterApp.student.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

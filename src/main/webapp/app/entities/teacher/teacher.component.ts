@@ -11,7 +11,7 @@ import { TeacherDeleteDialogComponent } from './teacher-delete-dialog.component'
 
 @Component({
   selector: 'jhi-teacher',
-  templateUrl: './teacher.component.html'
+  templateUrl: './teacher.component.html',
 })
 export class TeacherComponent implements OnInit, OnDestroy {
   teachers?: ITeacher[];
@@ -34,7 +34,7 @@ export class TeacherComponent implements OnInit, OnDestroy {
     if (this.currentSearch) {
       this.teacherService
         .search({
-          query: this.currentSearch
+          query: this.currentSearch,
         })
         .subscribe((res: HttpResponse<ITeacher[]>) => (this.teachers = res.body || []));
       return;

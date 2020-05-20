@@ -11,7 +11,7 @@ import { IntervalDeleteDialogComponent } from './interval-delete-dialog.componen
 
 @Component({
   selector: 'jhi-interval',
-  templateUrl: './interval.component.html'
+  templateUrl: './interval.component.html',
 })
 export class IntervalComponent implements OnInit, OnDestroy {
   intervals?: IInterval[];
@@ -34,7 +34,7 @@ export class IntervalComponent implements OnInit, OnDestroy {
     if (this.currentSearch) {
       this.intervalService
         .search({
-          query: this.currentSearch
+          query: this.currentSearch,
         })
         .subscribe((res: HttpResponse<IInterval[]>) => (this.intervals = res.body || []));
       return;

@@ -11,6 +11,6 @@ import { gradeRoute } from './grade.route';
 @NgModule({
   imports: [JhipsterSharedModule, RouterModule.forChild(gradeRoute)],
   declarations: [GradeComponent, GradeDetailComponent, GradeUpdateComponent, GradeDeleteDialogComponent],
-  entryComponents: [GradeDeleteDialogComponent]
+  entryComponents: [GradeDeleteDialogComponent],
 })
 export class JhipsterGradeModule {}

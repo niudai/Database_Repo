@@ -38,7 +38,7 @@ entity People {
 	idType IdType
     chineseName String
     englishName String
-    gender 	Integer
+    gender 	Gender
     birthDate LocalDate
     race String
     nation String
@@ -47,11 +47,15 @@ entity People {
     telephone String
 }
 
+enum Gender {
+	Male,
+    Female
+}
+
 entity Student {
 	studentNumber	String
     startDate String
     email String
-    major String
 }
 
 entity Teacher {
@@ -132,6 +136,7 @@ relationship ManyToOne {
     Record{course} to Course,
 	Course{semaster} to Semaster,
 	SchoolClass{grade} to Grade,
+    Student{major} to Major
 }
 
 relationship OneToMany {

@@ -122,6 +122,7 @@ public class PeopleResource {
     @DeleteMapping("/people/{id}")
     public ResponseEntity<Void> deletePeople(@PathVariable Long id) {
         log.debug("REST request to delete People : {}", id);
+
         peopleRepository.deleteById(id);
         peopleSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
@@ -139,6 +140,6 @@ public class PeopleResource {
         log.debug("REST request to search People for query {}", query);
         return StreamSupport
             .stream(peopleSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+        .collect(Collectors.toList());
     }
 }

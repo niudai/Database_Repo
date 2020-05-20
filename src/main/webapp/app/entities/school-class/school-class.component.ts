@@ -11,7 +11,7 @@ import { SchoolClassDeleteDialogComponent } from './school-class-delete-dialog.c
 
 @Component({
   selector: 'jhi-school-class',
-  templateUrl: './school-class.component.html'
+  templateUrl: './school-class.component.html',
 })
 export class SchoolClassComponent implements OnInit, OnDestroy {
   schoolClasses?: ISchoolClass[];
@@ -34,7 +34,7 @@ export class SchoolClassComponent implements OnInit, OnDestroy {
     if (this.currentSearch) {
       this.schoolClassService
         .search({
-          query: this.currentSearch
+          query: this.currentSearch,
         })
         .subscribe((res: HttpResponse<ISchoolClass[]>) => (this.schoolClasses = res.body || []));
       return;

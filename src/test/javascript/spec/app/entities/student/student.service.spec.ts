@@ -13,14 +13,14 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule]
+        imports: [HttpClientTestingModule],
       });
       expectedResult = null;
       injector = getTestBed();
       service = injector.get(StudentService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Student(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new Student(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -37,7 +37,7 @@ describe('Service Tests', () => {
       it('should create a Student', () => {
         const returnedFromService = Object.assign(
           {
-            id: 0
+            id: 0,
           },
           elemDefault
         );
@@ -57,7 +57,6 @@ describe('Service Tests', () => {
             studentNumber: 'BBBBBB',
             startDate: 'BBBBBB',
             email: 'BBBBBB',
-            major: 'BBBBBB'
           },
           elemDefault
         );
@@ -77,7 +76,6 @@ describe('Service Tests', () => {
             studentNumber: 'BBBBBB',
             startDate: 'BBBBBB',
             email: 'BBBBBB',
-            major: 'BBBBBB'
           },
           elemDefault
         );

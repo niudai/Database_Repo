@@ -122,6 +122,7 @@ public class IntervalResource {
     @DeleteMapping("/intervals/{id}")
     public ResponseEntity<Void> deleteInterval(@PathVariable Long id) {
         log.debug("REST request to delete Interval : {}", id);
+
         intervalRepository.deleteById(id);
         intervalSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
@@ -139,6 +140,6 @@ public class IntervalResource {
         log.debug("REST request to search Intervals for query {}", query);
         return StreamSupport
             .stream(intervalSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+        .collect(Collectors.toList());
     }
 }

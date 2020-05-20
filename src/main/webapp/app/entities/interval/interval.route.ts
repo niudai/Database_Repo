@@ -40,44 +40,44 @@ export const intervalRoute: Routes = [
     component: IntervalComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.interval.home.title'
+      pageTitle: 'jhipsterApp.interval.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: IntervalDetailComponent,
     resolve: {
-      interval: IntervalResolve
+      interval: IntervalResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.interval.home.title'
+      pageTitle: 'jhipsterApp.interval.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: IntervalUpdateComponent,
     resolve: {
-      interval: IntervalResolve
+      interval: IntervalResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.interval.home.title'
+      pageTitle: 'jhipsterApp.interval.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: IntervalUpdateComponent,
     resolve: {
-      interval: IntervalResolve
+      interval: IntervalResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.interval.home.title'
+      pageTitle: 'jhipsterApp.interval.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

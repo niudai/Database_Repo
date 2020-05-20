@@ -97,7 +97,6 @@ public class CourseResourceIT {
     @Transactional
     public void createCourse() throws Exception {
         int databaseSizeBeforeCreate = courseRepository.findAll().size();
-
         // Create the Course
         restCourseMockMvc.perform(post("/api/courses")
             .contentType(MediaType.APPLICATION_JSON)
@@ -167,7 +166,6 @@ public class CourseResourceIT {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.examType").value(DEFAULT_EXAM_TYPE.toString()));
     }
-
     @Test
     @Transactional
     public void getNonExistingCourse() throws Exception {
@@ -213,8 +211,6 @@ public class CourseResourceIT {
     public void updateNonExistingCourse() throws Exception {
         int databaseSizeBeforeUpdate = courseRepository.findAll().size();
 
-        // Create the Course
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restCourseMockMvc.perform(put("/api/courses")
             .contentType(MediaType.APPLICATION_JSON)
@@ -253,10 +249,12 @@ public class CourseResourceIT {
     @Test
     @Transactional
     public void searchCourse() throws Exception {
+        // Configure the mock search repository
         // Initialize the database
         courseRepository.saveAndFlush(course);
         when(mockCourseSearchRepository.search(queryStringQuery("id:" + course.getId())))
             .thenReturn(Collections.singletonList(course));
+
         // Search the course
         restCourseMockMvc.perform(get("/api/_search/courses?query=id:" + course.getId()))
             .andExpect(status().isOk())

@@ -5,7 +5,7 @@ import { ICourse } from 'app/shared/model/course.model';
 
 @Component({
   selector: 'jhi-course-detail',
-  templateUrl: './course-detail.component.html'
+  templateUrl: './course-detail.component.html',
 })
 export class CourseDetailComponent implements OnInit {
   course: ICourse | null = null;

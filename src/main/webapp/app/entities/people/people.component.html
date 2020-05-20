@@ -36,7 +36,7 @@
         <span jhiTranslate="jhipsterApp.people.home.notFound">No people found</span>
     </div>
 
-    <div class="table-responsive" id="entities" *ngIf="people?.length > 0">
+    <div class="table-responsive" id="entities" *ngIf="people && people.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>
@@ -62,7 +62,7 @@
                     <td jhiTranslate="{{ 'jhipsterApp.IdType.' + people.idType }}">{{ people.idType }}</td>
                     <td>{{ people.chineseName }}</td>
                     <td>{{ people.englishName }}</td>
-                    <td>{{ people.gender }}</td>
+                    <td jhiTranslate="{{ 'jhipsterApp.Gender.' + people.gender }}">{{ people.gender }}</td>
                     <td>{{ people.birthDate | date:'mediumDate' }}</td>
                     <td>{{ people.race }}</td>
                     <td>{{ people.nation }}</td>

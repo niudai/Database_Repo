@@ -40,44 +40,44 @@ export const gradeRoute: Routes = [
     component: GradeComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.grade.home.title'
+      pageTitle: 'jhipsterApp.grade.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: GradeDetailComponent,
     resolve: {
-      grade: GradeResolve
+      grade: GradeResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.grade.home.title'
+      pageTitle: 'jhipsterApp.grade.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: GradeUpdateComponent,
     resolve: {
-      grade: GradeResolve
+      grade: GradeResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.grade.home.title'
+      pageTitle: 'jhipsterApp.grade.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: GradeUpdateComponent,
     resolve: {
-      grade: GradeResolve
+      grade: GradeResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.grade.home.title'
+      pageTitle: 'jhipsterApp.grade.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

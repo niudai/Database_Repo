@@ -16,7 +16,7 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [JhipsterTestModule],
-        declarations: [MajorComponent]
+        declarations: [MajorComponent],
       })
         .overrideTemplate(MajorComponent, '')
         .compileComponents();
@@ -33,7 +33,7 @@ describe('Component Tests', () => {
         of(
           new HttpResponse({
             body: [new Major(123)],
-            headers
+            headers,
           })
         )
       );

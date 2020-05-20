@@ -11,6 +11,6 @@ import { campusRoute } from './campus.route';
 @NgModule({
   imports: [JhipsterSharedModule, RouterModule.forChild(campusRoute)],
   declarations: [CampusComponent, CampusDetailComponent, CampusUpdateComponent, CampusDeleteDialogComponent],
-  entryComponents: [CampusDeleteDialogComponent]
+  entryComponents: [CampusDeleteDialogComponent],
 })
 export class JhipsterCampusModule {}

@@ -59,7 +59,7 @@ export class TeacherService {
 
   protected convertDateFromClient(teacher: ITeacher): ITeacher {
     const copy: ITeacher = Object.assign({}, teacher, {
-      startDate: teacher.startDate && teacher.startDate.isValid() ? teacher.startDate.format(DATE_FORMAT) : undefined
+      startDate: teacher.startDate && teacher.startDate.isValid() ? teacher.startDate.format(DATE_FORMAT) : undefined,
     });
     return copy;
   }

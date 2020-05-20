@@ -59,7 +59,7 @@ export class RecordService {
 
   protected convertDateFromClient(record: IRecord): IRecord {
     const copy: IRecord = Object.assign({}, record, {
-      date: record.date && record.date.isValid() ? record.date.format(DATE_FORMAT) : undefined
+      date: record.date && record.date.isValid() ? record.date.format(DATE_FORMAT) : undefined,
     });
     return copy;
   }

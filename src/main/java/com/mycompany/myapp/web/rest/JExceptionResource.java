@@ -122,6 +122,7 @@ public class JExceptionResource {
     @DeleteMapping("/j-exceptions/{id}")
     public ResponseEntity<Void> deleteJException(@PathVariable Long id) {
         log.debug("REST request to delete JException : {}", id);
+
         jExceptionRepository.deleteById(id);
         jExceptionSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
@@ -139,6 +140,6 @@ public class JExceptionResource {
         log.debug("REST request to search JExceptions for query {}", query);
         return StreamSupport
             .stream(jExceptionSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+        .collect(Collectors.toList());
     }
 }

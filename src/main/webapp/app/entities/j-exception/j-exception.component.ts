@@ -11,7 +11,7 @@ import { JExceptionDeleteDialogComponent } from './j-exception-delete-dialog.com
 
 @Component({
   selector: 'jhi-j-exception',
-  templateUrl: './j-exception.component.html'
+  templateUrl: './j-exception.component.html',
 })
 export class JExceptionComponent implements OnInit, OnDestroy {
   jExceptions?: IJException[];
@@ -34,7 +34,7 @@ export class JExceptionComponent implements OnInit, OnDestroy {
     if (this.currentSearch) {
       this.jExceptionService
         .search({
-          query: this.currentSearch
+          query: this.currentSearch,
         })
         .subscribe((res: HttpResponse<IJException[]>) => (this.jExceptions = res.body || []));
       return;

@@ -6,7 +6,7 @@ import { IJException } from 'app/shared/model/j-exception.model';
 import { JExceptionService } from './j-exception.service';
 
 @Component({
-  templateUrl: './j-exception-delete-dialog.component.html'
+  templateUrl: './j-exception-delete-dialog.component.html',
 })
 export class JExceptionDeleteDialogComponent {
   jException?: IJException;

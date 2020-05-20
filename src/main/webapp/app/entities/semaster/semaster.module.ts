@@ -11,6 +11,6 @@ import { semasterRoute } from './semaster.route';
 @NgModule({
   imports: [JhipsterSharedModule, RouterModule.forChild(semasterRoute)],
   declarations: [SemasterComponent, SemasterDetailComponent, SemasterUpdateComponent, SemasterDeleteDialogComponent],
-  entryComponents: [SemasterDeleteDialogComponent]
+  entryComponents: [SemasterDeleteDialogComponent],
 })
 export class JhipsterSemasterModule {}

@@ -11,7 +11,7 @@ import { CourseDeleteDialogComponent } from './course-delete-dialog.component';
 
 @Component({
   selector: 'jhi-course',
-  templateUrl: './course.component.html'
+  templateUrl: './course.component.html',
 })
 export class CourseComponent implements OnInit, OnDestroy {
   courses?: ICourse[];
@@ -34,7 +34,7 @@ export class CourseComponent implements OnInit, OnDestroy {
     if (this.currentSearch) {
       this.courseService
         .search({
-          query: this.currentSearch
+          query: this.currentSearch,
         })
         .subscribe((res: HttpResponse<ICourse[]>) => (this.courses = res.body || []));
       return;

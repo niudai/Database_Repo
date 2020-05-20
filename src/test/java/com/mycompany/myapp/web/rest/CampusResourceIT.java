@@ -96,7 +96,6 @@ public class CampusResourceIT {
     @Transactional
     public void createCampus() throws Exception {
         int databaseSizeBeforeCreate = campusRepository.findAll().size();
-
         // Create the Campus
         restCampusMockMvc.perform(post("/api/campuses")
             .contentType(MediaType.APPLICATION_JSON)
@@ -166,7 +165,6 @@ public class CampusResourceIT {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS));
     }
-
     @Test
     @Transactional
     public void getNonExistingCampus() throws Exception {
@@ -212,8 +210,6 @@ public class CampusResourceIT {
     public void updateNonExistingCampus() throws Exception {
         int databaseSizeBeforeUpdate = campusRepository.findAll().size();
 
-        // Create the Campus
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restCampusMockMvc.perform(put("/api/campuses")
             .contentType(MediaType.APPLICATION_JSON)
@@ -252,10 +248,12 @@ public class CampusResourceIT {
     @Test
     @Transactional
     public void searchCampus() throws Exception {
+        // Configure the mock search repository
         // Initialize the database
         campusRepository.saveAndFlush(campus);
         when(mockCampusSearchRepository.search(queryStringQuery("id:" + campus.getId())))
             .thenReturn(Collections.singletonList(campus));
+
         // Search the campus
         restCampusMockMvc.perform(get("/api/_search/campuses?query=id:" + campus.getId()))
             .andExpect(status().isOk())

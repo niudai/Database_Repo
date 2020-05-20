@@ -11,7 +11,7 @@ import { RecordDeleteDialogComponent } from './record-delete-dialog.component';
 
 @Component({
   selector: 'jhi-record',
-  templateUrl: './record.component.html'
+  templateUrl: './record.component.html',
 })
 export class RecordComponent implements OnInit, OnDestroy {
   records?: IRecord[];
@@ -34,7 +34,7 @@ export class RecordComponent implements OnInit, OnDestroy {
     if (this.currentSearch) {
       this.recordService
         .search({
-          query: this.currentSearch
+          query: this.currentSearch,
         })
         .subscribe((res: HttpResponse<IRecord[]>) => (this.records = res.body || []));
       return;

@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 
 import com.mycompany.myapp.domain.enumeration.WeekDay;
 
@@ -17,7 +16,7 @@ import com.mycompany.myapp.domain.enumeration.WeekDay;
  */
 @Entity
 @Table(name = "jhi_interval")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "interval")
 public class Interval implements Serializable {
 
@@ -38,10 +37,10 @@ public class Interval implements Serializable {
     private Integer end;
 
     @ManyToOne
-    @JsonIgnoreProperties("times")
+    @JsonIgnoreProperties(value = "times", allowSetters = true)
     private Course course;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -101,7 +100,7 @@ public class Interval implements Serializable {
     public void setCourse(Course course) {
         this.course = course;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -119,6 +118,7 @@ public class Interval implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Interval{" +

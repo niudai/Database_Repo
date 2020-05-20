@@ -18,7 +18,7 @@ type SelectableEntity = ISemaster | ICourse | IStudent;
 
 @Component({
   selector: 'jhi-record-update',
-  templateUrl: './record-update.component.html'
+  templateUrl: './record-update.component.html',
 })
 export class RecordUpdateComponent implements OnInit {
   isSaving = false;
@@ -33,7 +33,7 @@ export class RecordUpdateComponent implements OnInit {
     score: [],
     semaster: [],
     course: [],
-    student: []
+    student: [],
   });
 
   constructor(
@@ -64,7 +64,7 @@ export class RecordUpdateComponent implements OnInit {
       score: record.score,
       semaster: record.semaster,
       course: record.course,
-      student: record.student
+      student: record.student,
     });
   }
 
@@ -90,7 +90,7 @@ export class RecordUpdateComponent implements OnInit {
       score: this.editForm.get(['score'])!.value,
       semaster: this.editForm.get(['semaster'])!.value,
       course: this.editForm.get(['course'])!.value,
-      student: this.editForm.get(['student'])!.value
+      student: this.editForm.get(['student'])!.value,
     };
   }
 

@@ -40,44 +40,44 @@ export const semasterRoute: Routes = [
     component: SemasterComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.semaster.home.title'
+      pageTitle: 'jhipsterApp.semaster.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: SemasterDetailComponent,
     resolve: {
-      semaster: SemasterResolve
+      semaster: SemasterResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.semaster.home.title'
+      pageTitle: 'jhipsterApp.semaster.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: SemasterUpdateComponent,
     resolve: {
-      semaster: SemasterResolve
+      semaster: SemasterResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.semaster.home.title'
+      pageTitle: 'jhipsterApp.semaster.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: SemasterUpdateComponent,
     resolve: {
-      semaster: SemasterResolve
+      semaster: SemasterResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'jhipsterApp.semaster.home.title'
+      pageTitle: 'jhipsterApp.semaster.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

@@ -11,7 +11,7 @@ import { PeopleDeleteDialogComponent } from './people-delete-dialog.component';
 
 @Component({
   selector: 'jhi-people',
-  templateUrl: './people.component.html'
+  templateUrl: './people.component.html',
 })
 export class PeopleComponent implements OnInit, OnDestroy {
   people?: IPeople[];
@@ -34,7 +34,7 @@ export class PeopleComponent implements OnInit, OnDestroy {
     if (this.currentSearch) {
       this.peopleService
         .search({
-          query: this.currentSearch
+          query: this.currentSearch,
         })
         .subscribe((res: HttpResponse<IPeople[]>) => (this.people = res.body || []));
       return;

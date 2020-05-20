@@ -10,7 +10,7 @@ import { SemasterService } from './semaster.service';
 
 @Component({
   selector: 'jhi-semaster-update',
-  templateUrl: './semaster-update.component.html'
+  templateUrl: './semaster-update.component.html',
 })
 export class SemasterUpdateComponent implements OnInit {
   isSaving = false;
@@ -18,7 +18,7 @@ export class SemasterUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     year: [],
-    season: []
+    season: [],
   });
 
   constructor(protected semasterService: SemasterService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -33,7 +33,7 @@ export class SemasterUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: semaster.id,
       year: semaster.year,
-      season: semaster.season
+      season: semaster.season,
     });
   }
 
@@ -56,7 +56,7 @@ export class SemasterUpdateComponent implements OnInit {
       ...new Semaster(),
       id: this.editForm.get(['id'])!.value,
       year: this.editForm.get(['year'])!.value,
-      season: this.editForm.get(['season'])!.value
+      season: this.editForm.get(['season'])!.value,
     };
   }
 

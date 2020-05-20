@@ -7,17 +7,18 @@ import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 import java.time.LocalDate;
 
 import com.mycompany.myapp.domain.enumeration.IdType;
+
+import com.mycompany.myapp.domain.enumeration.Gender;
 
 /**
  * A People.
  */
 @Entity
 @Table(name = "people")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "people")
 public class People implements Serializable {
 
@@ -37,8 +38,9 @@ public class People implements Serializable {
     @Column(name = "english_name")
     private String englishName;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "gender")
-    private Integer gender;
+    private Gender gender;
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
@@ -66,7 +68,7 @@ public class People implements Serializable {
     @JoinColumn(unique = true)
     private Student student;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -114,16 +116,16 @@ public class People implements Serializable {
         this.englishName = englishName;
     }
 
-    public Integer getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public People gender(Integer gender) {
+    public People gender(Gender gender) {
         this.gender = gender;
         return this;
     }
 
-    public void setGender(Integer gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -230,7 +232,7 @@ public class People implements Serializable {
     public void setStudent(Student student) {
         this.student = student;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -248,6 +250,7 @@ public class People implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "People{" +
@@ -255,7 +258,7 @@ public class People implements Serializable {
             ", idType='" + getIdType() + "'" +
             ", chineseName='" + getChineseName() + "'" +
             ", englishName='" + getEnglishName() + "'" +
-            ", gender=" + getGender() +
+            ", gender='" + getGender() + "'" +
             ", birthDate='" + getBirthDate() + "'" +
             ", race='" + getRace() + "'" +
             ", nation='" + getNation() + "'" +
