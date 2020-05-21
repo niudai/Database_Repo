@@ -3,7 +3,7 @@
     "jException": {
       "home": {
         "title": "学籍异动",
-        "createLabel": "Create a new 学籍异动",
+        "createLabel": "创建新学籍异动",
         "createOrEditLabel": "Create or edit a 学籍异动",
         "notFound": "No 学籍异动 found",
         "search": "搜索学籍异动"
@@ -24,8 +24,8 @@
       "newMajor": "新专业",
       "originalSchoolClass": "原班级",
       "newSchoolClass": "新班级",
-      "originalGrade": "原年纪",
-      "newGrade": "新年纪",
+      "originalGrade": "原年级",
+      "newGrade": "新年级",
       "student": "学生"
     }
   }

@@ -81,7 +81,7 @@
                     <label class="form-control-label" jhiTranslate="jhipsterApp.people.teacher" for="field_teacher">Teacher</label>
                     <select class="form-control" id="field_teacher" name="teacher" formControlName="teacher">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="teacherOption.id === editForm.get('teacher')!.value?.id ? editForm.get('teacher')!.value : teacherOption" *ngFor="let teacherOption of teachers; trackBy: trackById">{{ teacherOption.id }}</option>
+                        <option [ngValue]="teacherOption.id === editForm.get('teacher')!.value?.id ? editForm.get('teacher')!.value : teacherOption" *ngFor="let teacherOption of teachers; trackBy: trackById">{{ teacherOption.workNumber }}</option>
                     </select>
                 </div>
 
@@ -89,7 +89,7 @@
                     <label class="form-control-label" jhiTranslate="jhipsterApp.people.student" for="field_student">Student</label>
                     <select class="form-control" id="field_student" name="student" formControlName="student">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="studentOption.id === editForm.get('student')!.value?.id ? editForm.get('student')!.value : studentOption" *ngFor="let studentOption of students; trackBy: trackById">{{ studentOption.id }}</option>
+                        <option [ngValue]="studentOption.id === editForm.get('student')!.value?.id ? editForm.get('student')!.value : studentOption" *ngFor="let studentOption of students; trackBy: trackById">{{ studentOption.studentNumber }}</option>
                     </select>
                 </div>
             </div>

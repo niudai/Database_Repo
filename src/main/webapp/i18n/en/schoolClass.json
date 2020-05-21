@@ -3,7 +3,7 @@
     "schoolClass": {
       "home": {
         "title": "班级",
-        "createLabel": "Create a new 班级",
+        "createLabel": "创建新班级",
         "createOrEditLabel": "Create or edit a 班级",
         "notFound": "No 班级es found",
         "search": "搜索班级"
@@ -21,7 +21,7 @@
       "createdDate": "创建日期",
       "master": "班主任",
       "students": "学生",
-      "grade": "年纪",
+      "grade": "年级",
       "major": "专业"
     }
   }

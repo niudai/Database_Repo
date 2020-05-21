@@ -27,9 +27,16 @@
                 <dt><span jhiTranslate="jhipsterApp.student.schoolClass">School Class</span></dt>
                 <dd>
                     <div *ngIf="student.schoolClass">
-                        <a [routerLink]="['/school-class', student.schoolClass?.id, 'view']">{{ student.schoolClass?.id }}</a>
+                        <a [routerLink]="['/school-class', student.schoolClass?.id, 'view']">{{ student.schoolClass?.name }}</a>
                     </div>
                 </dd>
+                <dt><span>基本信息</span></dt>
+                <dd>
+                    <div *ngIf="student.schoolClass">
+                        <a [routerLink]="['/school-class', student.schoolClass?.id, 'view']">{{ student.people?.chineseName }}</a>
+                    </div>
+                </dd>
+
             </dl>
 
             <button type="submit"

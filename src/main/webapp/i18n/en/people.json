@@ -3,7 +3,7 @@
     "people": {
       "home": {
         "title": "用户",
-        "createLabel": "Create a new 用户",
+        "createLabel": "创建新用户",
         "createOrEditLabel": "Create or edit a 用户",
         "notFound": "No 用户 found",
         "people": "搜索在校人员",

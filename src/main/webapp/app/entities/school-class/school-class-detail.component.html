@@ -19,19 +19,19 @@
                 <dt><span jhiTranslate="jhipsterApp.schoolClass.master">Master</span></dt>
                 <dd>
                     <div *ngIf="schoolClass.master">
-                        <a [routerLink]="['/teacher', schoolClass.master?.id, 'view']">{{ schoolClass.master?.id }}</a>
+                        <a [routerLink]="['/teacher', schoolClass.master?.id, 'view']">{{ schoolClass.master?.people?.chineseName }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="jhipsterApp.schoolClass.grade">Grade</span></dt>
                 <dd>
                     <div *ngIf="schoolClass.grade">
-                        <a [routerLink]="['/grade', schoolClass.grade?.id, 'view']">{{ schoolClass.grade?.id }}</a>
+                        <a [routerLink]="['/grade', schoolClass.grade?.id, 'view']">{{ schoolClass.grade?.grade }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="jhipsterApp.schoolClass.major">Major</span></dt>
                 <dd>
                     <div *ngIf="schoolClass.major">
-                        <a [routerLink]="['/major', schoolClass.major?.id, 'view']">{{ schoolClass.major?.id }}</a>
+                        <a [routerLink]="['/major', schoolClass.major?.id, 'view']">{{ schoolClass.major?.name }}</a>
                     </div>
                 </dd>
             </dl>

@@ -51,13 +51,13 @@
                 <dt><span jhiTranslate="jhipsterApp.people.teacher">Teacher</span></dt>
                 <dd>
                     <div *ngIf="people.teacher">
-                        <a [routerLink]="['/teacher', people.teacher?.id, 'view']">{{ people.teacher?.id }}</a>
+                        <a [routerLink]="['/teacher', people.teacher?.id, 'view']">{{ people.teacher?.people?.chineseName }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="jhipsterApp.people.student">Student</span></dt>
                 <dd>
                     <div *ngIf="people.student">
-                        <a [routerLink]="['/student', people.student?.id, 'view']">{{ people.student?.id }}</a>
+                        <a [routerLink]="['/student', people.student?.id, 'view']">{{ people.student?.people?.chineseName }}</a>
                     </div>
                 </dd>
             </dl>

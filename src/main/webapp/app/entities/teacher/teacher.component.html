@@ -40,7 +40,8 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <!-- <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th> -->
+                    <th scope="col" ><span>姓名</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.teacher.workNumber">Work Number</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.teacher.startDate">Start Date</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.teacher.email">Email</span></th>
@@ -51,14 +52,15 @@
             </thead>
             <tbody>
                 <tr *ngFor="let teacher of teachers ;trackBy: trackId">
-                    <td><a [routerLink]="['/teacher', teacher.id, 'view']">{{ teacher.id }}</a></td>
+                    <!-- <td><a [routerLink]="['/teacher', teacher.id, 'view']">{{ teacher.id }}</a></td> -->
+                    <td>{{ teacher.people?.chineseName }}</td>
                     <td>{{ teacher.workNumber }}</td>
                     <td>{{ teacher.startDate | date:'mediumDate' }}</td>
                     <td>{{ teacher.email }}</td>
                     <td jhiTranslate="{{ 'jhipsterApp.Title.' + teacher.title }}">{{ teacher.title }}</td>
                     <td>
                         <div *ngIf="teacher.major">
-                            <a [routerLink]="['/major', teacher.major?.id, 'view']" >{{ teacher.major?.id }}</a>
+                            <a [routerLink]="['/major', teacher.major?.id, 'view']" >{{ teacher.major?.name }}</a>
                         </div>
                     </td>
                     <td class="text-right">

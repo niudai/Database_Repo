@@ -53,7 +53,8 @@ public class Teacher implements Serializable {
     private SchoolClass schoolClass;
 
     @OneToOne(mappedBy = "teacher")
-    @JsonIgnore
+    // @JsonIgnore
+    @JsonIgnoreProperties("teacher")
     private People people;
 
     @ManyToOne

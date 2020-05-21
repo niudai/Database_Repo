@@ -3,7 +3,7 @@
     "semaster": {
       "home": {
         "title": "学期",
-        "createLabel": "Create a new 学期",
+        "createLabel": "创建新学期",
         "createOrEditLabel": "Create or edit a 学期",
         "notFound": "No 学期s found",
         "search": "搜索学期"

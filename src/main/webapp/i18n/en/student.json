@@ -3,7 +3,7 @@
     "student": {
       "home": {
         "title": "学生",
-        "createLabel": "Create a new Student",
+        "createLabel": "创建新Student",
         "createOrEditLabel": "Create or edit a Student",
         "notFound": "No 学生 found",
         "search": "搜索学生"

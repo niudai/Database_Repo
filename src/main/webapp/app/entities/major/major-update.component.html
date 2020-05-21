@@ -21,7 +21,7 @@
                     <label class="form-control-label" jhiTranslate="jhipsterApp.major.campus" for="field_campus">Campus</label>
                     <select class="form-control" id="field_campus" name="campus" formControlName="campus">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="campusOption.id === editForm.get('campus')!.value?.id ? editForm.get('campus')!.value : campusOption" *ngFor="let campusOption of campuses; trackBy: trackById">{{ campusOption.id }}</option>
+                        <option [ngValue]="campusOption.id === editForm.get('campus')!.value?.id ? editForm.get('campus')!.value : campusOption" *ngFor="let campusOption of campuses; trackBy: trackById">{{ campusOption.name }}</option>
                     </select>
                 </div>
             </div>

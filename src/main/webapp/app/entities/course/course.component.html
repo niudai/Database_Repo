@@ -40,7 +40,7 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <!-- <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th> -->
                     <th scope="col" ><span jhiTranslate="jhipsterApp.course.name">Name</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.course.examType">Exam Type</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.course.semaster">Semaster</span></th>
@@ -51,22 +51,22 @@
             </thead>
             <tbody>
                 <tr *ngFor="let course of courses ;trackBy: trackId">
-                    <td><a [routerLink]="['/course', course.id, 'view']">{{ course.id }}</a></td>
+                    <!-- <td><a [routerLink]="['/course', course.id, 'view']">{{ course.id }}</a></td> -->
                     <td>{{ course.name }}</td>
                     <td jhiTranslate="{{ 'jhipsterApp.ExamType.' + course.examType }}">{{ course.examType }}</td>
                     <td>
                         <div *ngIf="course.semaster">
-                            <a [routerLink]="['/semaster', course.semaster?.id, 'view']" >{{ course.semaster?.id }}</a>
+                            <a [routerLink]="['/semaster', course.semaster?.id, 'view']" >{{ course.semaster?.year }} {{ course.semaster?.season}} </a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="course.major">
-                            <a [routerLink]="['/major', course.major?.id, 'view']" >{{ course.major?.id }}</a>
+                            <a [routerLink]="['/major', course.major?.id, 'view']" >{{ course.major?.name }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="course.teacher">
-                            <a [routerLink]="['/teacher', course.teacher?.id, 'view']" >{{ course.teacher?.id }}</a>
+                            <a [routerLink]="['/teacher', course.teacher?.id, 'view']" >{{ course.teacher?.people?.chineseName }}</a>
                         </div>
                     </td>
                     <td class="text-right">

@@ -2,9 +2,9 @@
   "jhipsterApp": {
     "grade": {
       "home": {
-        "title": "年纪",
-        "createLabel": "添加新年纪",
-        "createOrEditLabel": "编辑年纪",
+        "title": "年级",
+        "createLabel": "添加新年级",
+        "createOrEditLabel": "编辑年级",
         "notFound": "No Grades found",
         "search": "搜索年级"
       },
@@ -15,9 +15,9 @@
         "question": "Are you sure you want to delete Grade {{ id }}?"
       },
       "detail": {
-        "title": "年纪"
+        "title": "年级"
       },
-      "grade": "年纪"
+      "grade": "年级"
     }
   }
 }
