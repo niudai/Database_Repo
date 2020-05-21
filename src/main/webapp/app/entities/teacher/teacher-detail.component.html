@@ -27,7 +27,7 @@
                 <dt><span jhiTranslate="jhipsterApp.teacher.major">Major</span></dt>
                 <dd>
                     <div *ngIf="teacher.major">
-                        <a [routerLink]="['/major', teacher.major?.id, 'view']">{{ teacher.major?.id }}</a>
+                        <a [routerLink]="['/major', teacher.major?.id, 'view']">{{ teacher.major?.name }}</a>
                     </div>
                 </dd>
             </dl>

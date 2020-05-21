@@ -19,19 +19,19 @@
                 <dt><span jhiTranslate="jhipsterApp.course.semaster">Semaster</span></dt>
                 <dd>
                     <div *ngIf="course.semaster">
-                        <a [routerLink]="['/semaster', course.semaster?.id, 'view']">{{ course.semaster?.id }}</a>
+                        <a [routerLink]="['/semaster', course.semaster?.id, 'view']">{{ course.semaster?.year }} {{course.semaster?.season}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="jhipsterApp.course.major">Major</span></dt>
                 <dd>
                     <div *ngIf="course.major">
-                        <a [routerLink]="['/major', course.major?.id, 'view']">{{ course.major?.id }}</a>
+                        <a [routerLink]="['/major', course.major?.id, 'view']">{{ course.major?.name }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="jhipsterApp.course.teacher">Teacher</span></dt>
                 <dd>
                     <div *ngIf="course.teacher">
-                        <a [routerLink]="['/teacher', course.teacher?.id, 'view']">{{ course.teacher?.id }}</a>
+                        <a [routerLink]="['/teacher', course.teacher?.id, 'view']">{{ course.teacher?.people?.chineseName }}</a>
                     </div>
                 </dd>
                 <dt><span>上课时间</span></dt>
