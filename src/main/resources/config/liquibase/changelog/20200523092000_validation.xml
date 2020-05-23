@@ -17,7 +17,7 @@
                     constraintName="student_number_unique"  
                     tableName="student"/>
         <addUniqueConstraint
-                    columnNames="word_number"  
+                    columnNames="work_number"  
                     constraintName="teacher_number_unique"  
                     tableName="teacher"/>
                     
