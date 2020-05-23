@@ -162,7 +162,9 @@ Campus 关联到 Major
 
 ```java
 @OneToMany(mappedBy = "campus")
+
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+
 private Set<Major> majors = new HashSet<>();
 ```
 
@@ -215,7 +217,14 @@ private Campus campus;
 ![image](https://user-images.githubusercontent.com/45042260/82552027-eef8c500-9b93-11ea-944f-67612ac6ed19.png)
 
 ```java
+  @Column(name = "name")
+  private String name;
+
+  @Column(name = "created_date")
+  private LocalDate createdDate;
+}
 @Table(name = "school_class")
+
 public class SchoolClass implements Serializable {
   private static final long serialVersionUID = 1L;
 
@@ -237,7 +246,9 @@ SchoolClass 关联到 Student，Grage，Major
 
 ```java
 @OneToOne
+
  @JoinColumn(unique = true)
+
 private Teacher master;
 
 @OneToMany(mappedBy = "schoolClass")
@@ -342,6 +353,8 @@ private Semaster semaster;
 @JsonIgnoreProperties("courses")
 private Major major;
 
+
+
 @ManyToOne
 @JsonIgnoreProperties("courses")
 private Teacher teacher;
@@ -410,6 +423,7 @@ private Set<Record> records = new HashSet<>();
 private People people;
 
 @ManyToOne
+
 @JsonIgnoreProperties("students")
 private SchoolClass schoolClass;
 ```
@@ -477,6 +491,7 @@ Record 关联到 Semaster，Course，Student
 ```java
 @ManyToOne
 @JsonIgnoreProperties("records")
+
 private Semaster semaster;
 
 @ManyToOne
@@ -530,7 +545,9 @@ private Major newMajor;
 private SchoolClass originalSchoolClass;
 
 @ManyToOne
+
 @JsonIgnoreProperties("jExceptions")
+
 private SchoolClass newSchoolClass;
 
 @ManyToOne
@@ -598,6 +615,8 @@ public class People implements Serializable {
   private LocalDate birthDate;
 
   @Column(name = "race")
+  private final Logger log = LoggerFactory.getLogger(AuditEventService.class);
+
   private String race;
 
   @Column(name = "nation")
@@ -702,7 +721,9 @@ public class MailService {
 
     private final Logger log = LoggerFactory.getLogger(MailService.class);
 
+
     private static final String USER = "user";
+
 
     private static final String BASE_URL = "baseUrl";
 
@@ -964,6 +985,7 @@ public class UserService {
 > > 1.在图 1 中对应项点击删除后,在 course.component.ts 中调用
 
 ```javascript
+
 delete(course: ICourse): void {
     const modalRef = this.modalService.open(CourseDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.course = course;
@@ -994,6 +1016,8 @@ delete(id: number): Observable<HttpResponse<{}>> {
 > 下面通过流程图来展示各个功能模块的处理过程
 > ![F_INF.png](https://i.loli.net/2020/05/20/wBLStsXrMiHK2Up.png)
 >
+> >
+>
 > <center style="font-size:14px;color:#C0C0C0;text-decoration:underline">图5.信息显示流程</center>
 
 ![F_Del.png](https://i.loli.net/2020/05/20/hMIQkgPVriAxzJY.png)
@@ -1005,6 +1029,8 @@ delete(id: number): Observable<HttpResponse<{}>> {
 > <center style="font-size:14px;color:#C0C0C0;text-decoration:underline">图7.详细信息显示流程</center>
 
 ![FCorE.PNG](https://i.loli.net/2020/05/20/A1pYZdI3NDxyJoC.png)
+
+> >
 
 > <center style="font-size:14px;color:#C0C0C0;text-decoration:underline">图8.信息创建或编辑流程</center>
 
@@ -1066,8 +1092,10 @@ delete(id: number): Observable<HttpResponse<{}>> {
 >
 > > _shared_
 > >
-> > > alert //alert 设置  
-> > > login //登录模块界面设置  
+> > > alert //alert 设置
+
+> > > login //登录模块界面设置
+
 > > > user //用户 model
 > > > ... //各类实体的 model 设置等杂类文件
 
@@ -1080,6 +1108,9 @@ delete(id: number): Observable<HttpResponse<{}>> {
 
     <div class="alert alert-success" *ngIf="success">
     ...
+
+>
+
     </div>
     <div class="alert alert-danger" *ngIf="error"
     jhiTranslate="activate.messages.error">
@@ -1099,6 +1130,7 @@ delete(id: number): Observable<HttpResponse<{}>> {
 ### password-reset 密码重设模块
 
 用户忘记密码可以在登录页面点击忘记密码来重新设置密码
+
 ![register.png](https://i.loli.net/2020/05/21/tMewlK7huiAojFG.png)
 
 <center style="font-size:14px;color:#C0C0C0;text-decoration:underline">图4.忘记密码页面</center>

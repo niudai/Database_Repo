@@ -36,6 +36,13 @@
                         <a [routerLink]="['/school-class', student.schoolClass?.id, 'view']">{{ student.people?.chineseName }}</a>
                     </div>
                 </dd>
+                <dt><span>选课信息</span></dt>
+                <dd>
+                    <div *ngFor="let r of student.records">
+                        {{ r.course?.name }}
+                    </div>
+                </dd>
+
 
             </dl>
 

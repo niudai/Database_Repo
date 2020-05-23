@@ -44,7 +44,7 @@ public class Student implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<JException> exceptions = new HashSet<>();
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Record> records = new HashSet<>();
 
